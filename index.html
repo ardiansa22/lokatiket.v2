@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ $wisata->nama }}</title>
+</head>
+<body>
+    <h1>{{ $wisata->nama }}</h1>
+    <img src="{{ asset('storage/' . $wisata->gambar) }}" alt="{{ $wisata->nama }}">
+    <p>{{ $wisata->deskripsi }}</p>
+    <p>{{ $wisata->fasilitas }}</p>
+
+    <h2>Pesan Tiket</h2>
+    @if(session('success'))
+        <p>{{ session('success') }}</p>
+    @endif
+    <form action="{{ route('pesanan.store') }}" method="POST">
+        @csrf
+        <input type="hidden" name="wisata_id" value="{{ $wisata->id }}">
+        <label for="tanggal">Tanggal:</label>
+        <input type="date" name="tanggal" required><br>
+
+        <label for="jumlah_tiket">Jumlah Tiket:</label>
+        <input type="number" name="jumlah_tiket" min="1" required><br>
+
+        <label for="metode_pembayaran">Metode Pembayaran:</label>
+        <select name="metode_pembayaran" required>
+            <option value="transfer_bank">Transfer Bank</option>
+            <option value="kartu_kredit">Kartu Kredit</option>
+            <option value="ovo">OVO</option>
+            <option value="gopay">GoPay</option>
+        </select><br>
+
+        <button type="submit">Beli</button>
+    </form>
+</body>
+</html>

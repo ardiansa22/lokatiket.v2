@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <title>LokaTiket</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-woox-travel.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+<!--
+
+TemplateMo 580 Woox Travel
+
+https://templatemo.com/tm-580-woox-travel
+
+-->
+
+  </head>
+
+<body>
+
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+  <div class="preloader-inner">
+    <img class="dot" src="assets/images/logo.png" alt="dot">
+    <div class="dots">
+      <img src="assets/images/logo.png" alt="dot">
+      <img src="assets/images/logo.png" alt="dot">
+      <img src="assets/images/logo.png" alt="dot">
+    </div>
+  </div>
+</div>
+
+  <!-- ***** Preloader End ***** -->
+
+  <!-- ***** Header Area Start ***** -->
+  <nav class="navbar navbar-expand fixed-bottom" style="background-color: white;">
+      <ul class="navbar-nav nav-justified w-100" >
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fa-solid fa-house-chimney" style="font-size: 26px;">
+          </i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fa-solid fa-compass" style="font-size: 26px;"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">
+            <i class="fa-solid fa-bell" style="font-size: 26px;">
+          </i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">
+            <i class="fa-solid fa-user" style="font-size: 26px;">
+          </i></a>
+        </li>
+      </ul>
+</nav>
+  <!-- ***** Header Area End ***** -->
+
+  <!-- ***** Main Banner Area Start ***** -->
+  <section id="section-1">
+    <div class="search-container">
+      <input type="text" placeholder="Cari tempat favorit kamu disini....">
+      <button type="button">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </div>
+  </section>
+  <!-- ***** Main Banner Area End ***** -->
+
+  <div class="menu">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="more-info">
+            <div class="row">
+              <p class="mb-3" style="text-align: left; font-size: 20px; color:black;">Kategori</p>
+              <div class="col-lg-3 col-sm-6 col-6">
+                <i class="fa-solid fa-tree"></i>
+                <h4><span>Alam</span></h4>
+              </div>
+              <div class="col-lg-3 col-sm-6 col-6">
+                <i class="fa-solid fa-umbrella-beach"></i>
+                <h4><span>Pantai</span></h4>
+              </div>
+              <div class="col-lg-3 col-sm-6 col-6">
+                <i class="fa-solid fa-mountain" ></i>
+                <h4><span>Gunung</span></h4>
+              </div>
+              <div class="col-lg-3 col-sm-6 col-6">
+                <i class="fa-solid fa-water"></i>
+                <h4><span>Lake</span></h4>
+              </div>
+              <div class="col-lg-3 col-sm-6 col-6">
+                <i class="fa fa-building"></i>
+                <h4><span>Hotel</span></h4>
+              </div>
+              <div class="col-lg-3 col-sm-6 col-6">
+                <i class="fa fa-building"></i>
+                <h4><span>Hotel</span></h4>
+              </div>
+              <div class="col-lg-3 col-sm-6 col-6">
+                <i class="fa fa-building"></i>
+                <h4><span>Hotel</span></h4>
+              </div>
+              <div class="col-lg-3 col-sm-6 col-6">
+                <i class="fa fa-building"></i>
+                <h4><span>Hotel</span></h4>
+              </div>
+              <div class="col-lg-3 col-sm-6 col-6">
+                <i class="fa fa-building"></i>
+                <h4><span>Hotel</span></h4>
+              </div>
+              <div class="col-lg-3 col-sm-6 col-6">
+                <i class="fa fa-building"></i>
+                <h4><span>Hotel</span></h4>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cities-town">
+    <div class="container">
+      <div class="row">
+      
+        <div class="col-lg-12">
+        <p class="mb-3" style="text-align: left; font-size: 20px; color:black; margin-left:15px;">Rekomendasi</p>
+        </div>
+        <div class="slider-content">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="owl-cites-town owl-carousel">
+                @foreach($wisatas as $wisata)
+                <div class="item">
+                  <div class="thumb">
+                    <img src="assets/images/cities-01.jpg" alt="">
+                  </div>
+                  <h1>{{$wisata->name}}</h1>
+                  <span>⭐ 5.0 (770K)</span>
+                </div>
+                @endforeach
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+  <div class="visit-country">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <p class="mb-3" style="text-align: left; font-size: 20px; color:black; margin-left:15px;">Explore More</p>
+        </div>
+        <div class="col-lg-12">
+          <div class="items">
+            <div class="row">
+              @foreach($wisatas as $wisata)
+                <div class="col-lg-6 col-md-12 mb-4">
+                  <div class="item">
+                    <div class="row">
+                      <div class="col-lg-4 col-sm-5">
+                        <div class="image-slider">
+                          @foreach(json_decode($wisata->images) as $image)
+                            <div class="slide">
+                              <img src="{{ asset('storage/images/' . $image) }}" alt="">
+                            </div>
+                          @endforeach
+                        </div>
+                      </div>
+                      <div class="col-lg-8 col-sm-7">
+                        <div class="right-content">
+                          <h4>{{$wisata->name}}</h4>
+                          <span>{{$wisata->kategori}}</span>
+                          <div class="main-button">
+                            <a href="{{ route('customer.show', $wisata) }}">Explore More</a>
+                          </div>
+                          <p>{{$wisata->description}}</p>
+                          <ul class="info">
+                            <li><i class="fa-solid fa-square-check" style="color: #5D71C9;"></i>Toilet</li>
+                            <li><i class="fa-solid fa-square-check" style="color: #5D71C9;"></i>Mushola</li>
+                            <li><i class="fa-solid fa-square-check" style="color: #5D71C9;"></i>Kantin</li>
+                          </ul>
+                          <ul class="info">
+                            <li><i class="fa fa-star" style="color: orange;"></i> 5.0</li>
+                            <li><i class="fa fa-heart" style="color: red;"></i> 41</li>
+                            <li><i class="fa fa-money-check"></i>{{$wisata->price}}</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              @endforeach
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Copyright © 2024 <a href="#">FSAJ</a> Company. All rights reserved. 
+          <br>Design: <a href="https://templatemo.com" target="_blank" title="free CSS templates">TemplateMo</a> Distribution: <a href="https://themewagon.com target="_blank" >ThemeWagon</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+  <script src="assets/js/isotope.min.js"></script>
+  <script src="assets/js/owl-carousel.js"></script>
+  <script src="assets/js/wow.js"></script>
+  <script src="assets/js/tabs.js"></script>
+  <script src="assets/js/popup.js"></script>
+  <script src="assets/js/custom.js"></script>
+
+  <script>
+    function bannerSwitcher() {
+      next = $('.sec-1-input').filter(':checked').next('.sec-1-input');
+      if (next.length) next.prop('checked', true);
+      else $('.sec-1-input').first().prop('checked', true);
+    }
+
+    var bannerTimer = setInterval(bannerSwitcher, 5000);
+
+    $('nav .controls label').click(function() {
+      clearInterval(bannerTimer);
+      bannerTimer = setInterval(bannerSwitcher, 5000)
+    });
+  </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $('.image-slider').slick({
+            infinite: true,
+            slidesToShow: 1,
+            slidesToScroll: 1
+        });
+    });
+</script>
+  </body>
+
+</html>
