@@ -182,32 +182,45 @@ https://templatemo.com/tm-580-woox-travel
                   <div class="item">
                     <div class="row">
                       <div class="col-lg-4 col-sm-5">
-                        <div class="image-slider">
-                          @foreach(json_decode($wisata->images) as $image)
-                            <div class="slide">
-                              <img src="{{ asset('storage/images/' . $image) }}" alt="">
-                            </div>
-                          @endforeach
-                        </div>
+                      <div id="carousel-{{$wisata->id}}" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    @foreach(json_decode($wisata->images) as $index => $image)
+      <div class="carousel-item @if($loop->first) active @endif">
+        <img src="{{ asset('storage/images/' . $image) }}" class="d-block w-100" alt="..." style="border-radius: 15px;">
+      </div>
+    @endforeach
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{{$wisata->id}}" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carousel-{{$wisata->id}}" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
                       </div>
                       <div class="col-lg-8 col-sm-7">
                         <div class="right-content">
                           <h4>{{$wisata->name}}</h4>
                           <span>{{$wisata->kategori}}</span>
-                          <div class="main-button">
-                            <a href="{{ route('customer.show', $wisata) }}">Explore More</a>
-                          </div>
+                          
                           <p>{{$wisata->description}}</p>
-                          <ul class="info">
+                          <ul>
                             <li><i class="fa-solid fa-square-check" style="color: #5D71C9;"></i>Toilet</li>
                             <li><i class="fa-solid fa-square-check" style="color: #5D71C9;"></i>Mushola</li>
                             <li><i class="fa-solid fa-square-check" style="color: #5D71C9;"></i>Kantin</li>
                           </ul>
-                          <ul class="info">
+                          <ul>
                             <li><i class="fa fa-star" style="color: orange;"></i> 5.0</li>
                             <li><i class="fa fa-heart" style="color: red;"></i> 41</li>
                             <li><i class="fa fa-money-check"></i>{{$wisata->price}}</li>
                           </ul>
+                          <a href="{{ route('customer.show', $wisata) }}">
+                            <button class="btn ms-2 " style="color: white; background-color:#5D71C9;">Explore More</button>
+                          </a>
                         </div>
                       </div>
                     </div>

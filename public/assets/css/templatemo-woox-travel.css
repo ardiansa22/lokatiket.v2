@@ -104,7 +104,7 @@ ul {
 p {
   font-size: 15px;
   line-height: 30px;
-  color: #afafaf;
+  color: black;
 }
 
 img {
@@ -710,7 +710,7 @@ Banner Style
 #section-1 {
   margin-top: 0px;
   height: 50vh;
-  background: url('../images/background.jpg') no-repeat center center;
+  background: url('../images/background1.jpg') no-repeat center center;
   background-size: cover;
   position: relative;
   border-radius: 23px;
@@ -782,7 +782,7 @@ Visit Country Style
   position: relative;
   margin-bottom: 30px;
   padding-bottom: 30px;
-  border-bottom: 1px solid #eee;
+  /* border-bottom: 1px solid #eee; */
 }
 
 .visit-country .last-item {
@@ -802,8 +802,11 @@ Visit Country Style
 
 .visit-country .item .right-content span {
   font-size: 15px;
-  color: #afafaf;
+  color: black;
   display: block;
+}
+.visit-country .item .right-content p {
+  text-align: justify;
 }
 
 .visit-country .item .right-content .main-button {
@@ -824,15 +827,15 @@ Visit Country Style
 }
 
 .visit-country .item .right-content ul {
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
+  /* border-top: 1px solid #eee; */
+  /* border-bottom: 1px solid #eee; */
   padding: 15px 0px;
 }
 
 .visit-country .item .right-content ul li {
   display: inline-block;
   width: 32%;
-  color: #afafaf;
+  color: black;
   font-size: 14px;
 }
 
@@ -1166,7 +1169,7 @@ About Page Style
 .weekly-offers .item .thumb .text h4 span,
 .weekly-offers .item .thumb .text h6 span {
   font-size: 15px;
-  color: #afafaf;
+  color: black;
   font-weight: 400;
 }
 
@@ -1177,7 +1180,7 @@ About Page Style
 }
 
 .weekly-offers .item .thumb .text ul li {
-  color: #afafaf;
+  color: black;
   font-size: 14px;
   margin-bottom: 10px;
 }
@@ -1800,7 +1803,7 @@ Deals Page Style
 
 .amazing-deals .item span.list {
   font-size: 15px;
-  color: #afafaf;
+  color: black;
   font-weight: 500;
 }
 
@@ -1944,7 +1947,7 @@ Reservation Page Style
 
 .reservation-form #reservation-form label {
   font-size: 15px;
-  color: #afafaf;
+  color: black;
 }
 
 .reservation-form #reservation-form input,
@@ -2230,7 +2233,10 @@ body {
 
 .menu .more-info h4 span {
   font-size: 15px;
-  color: #afafaf;
+  color: black;
   font-weight: 400;
 }
 
+.carousel-image {
+  border-radius: 24px;
+}
