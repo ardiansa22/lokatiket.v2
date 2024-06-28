@@ -35,7 +35,7 @@ https://templatemo.com/tm-580-woox-travel
 <body>
 
   <!-- ***** Header Area Start ***** -->
-  <nav class="navbar navbar-expand fixed-bottom" style="background-color: white;">
+  <nav id ="navbar1" class="navbar navbar-expand fixed-bottom" style="background-color: white;">
       <ul class="navbar-nav nav-justified w-100" >
         <li class="nav-item">
           <a class="nav-link" href="{{route('customer.index')}}">

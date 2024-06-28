@@ -1,7 +1,40 @@
 @extends('customer.layouts.app')
 
 @section('content')
-<div class="container py-2">
+<div class="container py-2" style="text-align: center; ">
+    <div class="card" style="background-color:#5D71C9;">
+    <div class="card-body">
+        <h5 class="card-text" ><p style="color:white; font-size:20px;">Explore</p ></h5>
+    </div>
+    </div>
+</div>
+<div class="container">
+<nav id ="navbar2" class="navbar navbar-expand" style="background-color: white;">
+      <ul class="navbar-nav nav-justified w-100" >
+        <li class="nav-item">
+          <a class="nav-link active" href="{{route('customer.index')}}">
+           Alam</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{route('customer.explore')}}">
+          Pantai
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">
+            Gunung
+          </i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">
+            Situ
+          </i></a>
+        </li>
+      </ul>
+</nav>
+</nav>
+</div>
+<div class="container">
     <div class="row mb-5">
         @foreach($wisatas as $wisata)
         <div class="col-md-4">

@@ -2133,18 +2133,19 @@ body {
 }
 
 /* Gaya dasar navbar */
-.navbar {
+#navbar1 {
   position: relative;
   width: 100%;
   z-index: 100;
 }
-.navbar-nav .nav-item a i {
+
+#navbar1 .navbar-nav .nav-item a i {
   font-size: 24px; /* Ukuran ikon */
   color: #5D71C9;
 }
 
 @media screen and (max-width: 768px) {
-  .navbar {
+  #navbar1 {
     position: fixed;
     bottom: -5px;
     left: 0;
@@ -2157,7 +2158,7 @@ body {
     padding: 10px 0;
   }
 
-.navbar-nav {
+  #navbar1 .navbar-nav {
     display: flex;
     justify-content: center; /* Tengah secara horizontal */
     align-items: center; /* Tengah secara vertikal */
@@ -2165,26 +2166,26 @@ body {
     margin: 0;
     padding: 0;
     list-style: none;
-}
+  }
 
-.navbar-nav .nav-item {
+  #navbar1 .navbar-nav .nav-item {
     margin: 0 10px; /* Jarak antar item */
-}
+  }
 
-.navbar-nav .nav-item a {
+  #navbar1 .navbar-nav .nav-item a {
     display: flex;
     justify-content: center;
     align-items: center;
     text-decoration: none;
     color: #000; /* Warna ikon */
-}
+  }
 
-.navbar-nav .nav-item a i {
+  #navbar1 .navbar-nav .nav-item a i {
     font-size: 24px; /* Ukuran ikon */
     color: #5D71C9;
+  }
 }
 
-}
 
 .main-content {
   padding-bottom: 70px; /* Sesuaikan nilai ini sesuai dengan tinggi navbar Anda */

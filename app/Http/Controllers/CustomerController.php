@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Models\Wisata;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
 
@@ -26,6 +27,13 @@ class CustomerController extends Controller
     {
         $wisatas = Wisata::all();
         return view('customer.explore', compact('wisatas'));
+    }
+
+    public function summary(Request $request)
+    {
+        $wisata = Wisata::find($request->wisata_id);
+        $quantity = $request->quantity;
+        return view('customer.order_summary', compact('wisata', 'quantity'));
     }
 
     

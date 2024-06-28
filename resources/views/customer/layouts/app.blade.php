@@ -17,18 +17,24 @@
     <link rel="stylesheet" href="../../../assets/css/fontawesome.css">
     <link rel="stylesheet" href="../../../assets/css/templatemo-woox-travel.css">
     <link rel="stylesheet" href="../../../assets/css/show.css">
+    <link rel="stylesheet" href="../../../assets/css/summary.css">
     
     <link rel="stylesheet" href="../assets/css/card.css">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    
   </head>
 
 <body>
 
 
   <!-- ***** Header Area Start ***** -->
-  <nav class="navbar navbar-expand fixed-bottom" style="background-color: white;">
+  <nav id ="navbar1" class="navbar navbar-expand fixed-bottom" style="background-color: white;">
       <ul class="navbar-nav nav-justified w-100" >
         <li class="nav-item">
           <a class="nav-link" href="{{route('customer.index')}}">
@@ -94,6 +100,12 @@
             slidesToScroll: 1
         });
     });
+</script>
+<script>
+    $('#bologna-list a').on('click', function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
 </script>
   </body>
 
