@@ -35,6 +35,7 @@ Route::middleware(['role:customer', 'verified'])->group(function () {
         Route::name('customer.')->group(function(){
         Route::get('/', [CustomerController::class, 'index'])->name('index');
         Route::get('/wisata/{wisata}', [CustomerController::class, 'tampilkan'])->name('show');
+        Route::get('/explore', [CustomerController::class, 'explore'])->name('explore');
         
             });
         });

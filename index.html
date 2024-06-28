@@ -1,36 +1,50 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ $wisata->nama }}</title>
-</head>
-<body>
-    <h1>{{ $wisata->nama }}</h1>
-    <img src="{{ asset('storage/' . $wisata->gambar) }}" alt="{{ $wisata->nama }}">
-    <p>{{ $wisata->deskripsi }}</p>
-    <p>{{ $wisata->fasilitas }}</p>
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <h2>Pesan Tiket</h2>
-    @if(session('success'))
-        <p>{{ session('success') }}</p>
-    @endif
-    <form action="{{ route('pesanan.store') }}" method="POST">
-        @csrf
-        <input type="hidden" name="wisata_id" value="{{ $wisata->id }}">
-        <label for="tanggal">Tanggal:</label>
-        <input type="date" name="tanggal" required><br>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="public/assets/css/card.css">
 
-        <label for="jumlah_tiket">Jumlah Tiket:</label>
-        <input type="number" name="jumlah_tiket" min="1" required><br>
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <div class="container">
+		<div class="row mb-5">
+			<div class="col-md-4">
+                <div class="card">
+                    <img src="public/assets/images/background.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <a href="#" class="btn btn-sm btn-primary float-end">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+			<div class="col-md-4">
+                <div class="card">
+                    <img src="public/assets/images/background1.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <a href="#" class="btn btn-sm btn-primary flex flex-end">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+			<div class="col-md-4">
+                <div class="card">
+                    <img src="public/assets/images/country-01.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <a href="#" class="btn btn-sm btn-primary float-end">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+		</div>
+	</div>
 
-        <label for="metode_pembayaran">Metode Pembayaran:</label>
-        <select name="metode_pembayaran" required>
-            <option value="transfer_bank">Transfer Bank</option>
-            <option value="kartu_kredit">Kartu Kredit</option>
-            <option value="ovo">OVO</option>
-            <option value="gopay">GoPay</option>
-        </select><br>
-
-        <button type="submit">Beli</button>
-    </form>
-</body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  </body>
 </html>

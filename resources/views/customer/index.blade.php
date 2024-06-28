@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="assets/css/templatemo-woox-travel.css">
     <link rel="stylesheet" href="assets/css/owl.css">
     <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="assets/css/card.css">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
@@ -33,30 +34,16 @@ https://templatemo.com/tm-580-woox-travel
 
 <body>
 
-  <!-- ***** Preloader Start ***** -->
-  <div id="js-preloader" class="js-preloader">
-  <div class="preloader-inner">
-    <img class="dot" src="assets/images/logo.png" alt="dot">
-    <div class="dots">
-      <img src="assets/images/logo.png" alt="dot">
-      <img src="assets/images/logo.png" alt="dot">
-      <img src="assets/images/logo.png" alt="dot">
-    </div>
-  </div>
-</div>
-
-  <!-- ***** Preloader End ***** -->
-
   <!-- ***** Header Area Start ***** -->
   <nav class="navbar navbar-expand fixed-bottom" style="background-color: white;">
       <ul class="navbar-nav nav-justified w-100" >
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="{{route('customer.index')}}">
             <i class="fa-solid fa-house-chimney" style="font-size: 26px;">
           </i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="{{route('customer.explore')}}">
             <i class="fa-solid fa-compass" style="font-size: 26px;"></i>
           </a>
         </li>
@@ -72,8 +59,8 @@ https://templatemo.com/tm-580-woox-travel
         </li>
       </ul>
 </nav>
-  <!-- ***** Header Area End ***** -->
-
+<div class="main-content">
+  <!-- Konten utama di sini -->
   <!-- ***** Main Banner Area Start ***** -->
   <section id="section-1">
     <div class="search-container">
@@ -84,7 +71,7 @@ https://templatemo.com/tm-580-woox-travel
     </div>
   </section>
   <!-- ***** Main Banner Area End ***** -->
-
+  
   <div class="menu">
     <div class="container">
       <div class="row">
@@ -168,7 +155,9 @@ https://templatemo.com/tm-580-woox-travel
     </div>
     
   </div>
-  <div class="visit-country">
+</div>
+
+  <!-- <div class="visit-country">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
@@ -183,24 +172,22 @@ https://templatemo.com/tm-580-woox-travel
                     <div class="row">
                       <div class="col-lg-4 col-sm-5">
                       <div id="carousel-{{$wisata->id}}" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    @foreach(json_decode($wisata->images) as $index => $image)
-      <div class="carousel-item @if($loop->first) active @endif">
-        <img src="{{ asset('storage/images/' . $image) }}" class="d-block w-100" alt="..." style="border-radius: 15px;">
-      </div>
-    @endforeach
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{{$wisata->id}}" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carousel-{{$wisata->id}}" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-
-
+                        <div class="carousel-inner">
+                          @foreach(json_decode($wisata->images) as $index => $image)
+                            <div class="carousel-item @if($loop->first) active @endif">
+                              <img src="{{ asset('storage/images/' . $image) }}" class="d-block w-100" alt="..." style="border-radius: 15px;">
+                            </div>
+                          @endforeach
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{{$wisata->id}}" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel-{{$wisata->id}}" data-bs-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                      </div>
                       </div>
                       <div class="col-lg-8 col-sm-7">
                         <div class="right-content">
@@ -232,18 +219,9 @@ https://templatemo.com/tm-580-woox-travel
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <p>Copyright © 2024 <a href="#">FSAJ</a> Company. All rights reserved. 
-          <br>Design: <a href="https://templatemo.com" target="_blank" title="free CSS templates">TemplateMo</a> Distribution: <a href="https://themewagon.com target="_blank" >ThemeWagon</a></p>
-        </div>
-      </div>
-    </div>
-  </footer>
+ 
 
 
   <!-- Scripts -->

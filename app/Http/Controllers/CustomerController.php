@@ -22,6 +22,11 @@ class CustomerController extends Controller
     {
         return view('customer.show', compact('wisata'));
     }
+    public function explore()
+    {
+        $wisatas = Wisata::all();
+        return view('customer.explore', compact('wisatas'));
+    }
 
     
 
