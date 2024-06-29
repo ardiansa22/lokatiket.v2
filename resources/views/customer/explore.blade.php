@@ -16,12 +16,12 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">
-          Pantai
+          Situ
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">
-          Pantai
+          Gunung
           </a>
         </li>
         
