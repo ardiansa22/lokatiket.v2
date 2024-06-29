@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../../../assets/css/fontawesome.css">
     <link rel="stylesheet" href="../../../assets/css/templatemo-woox-travel.css">
     <link rel="stylesheet" href="../../../assets/css/show.css">
-    <link rel="stylesheet" href="../../../assets/css/summary.css">
+
     
     <link rel="stylesheet" href="../assets/css/card.css">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>

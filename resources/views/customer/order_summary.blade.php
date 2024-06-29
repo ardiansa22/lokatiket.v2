@@ -1,6 +1,15 @@
 @extends('customer.layouts.app')
 
 @section('content')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../../assets/css/summary.css">
+</head>
+
 <div class="container mt-5 p-3 rounded cart">
         <div class="row no-gutters">
             <div class="col-md-8">
@@ -47,4 +56,4 @@
     </div>
 @endsection
 
-
+</html>

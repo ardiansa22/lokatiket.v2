@@ -79,47 +79,26 @@ https://templatemo.com/tm-580-woox-travel
           <div class="more-info">
             <div class="row">
               <p class="mb-3" style="text-align: left; font-size: 20px; color:black;">Kategori</p>
-              <div class="col-lg-3 col-sm-6 col-6">
+              <div class="col-lg-4 col-sm-6 col-6">
                 <i class="fa-solid fa-tree"></i>
                 <h4><span>Alam</span></h4>
               </div>
-              <div class="col-lg-3 col-sm-6 col-6">
+              <div class="col-lg-4 col-sm-6 col-6">
                 <i class="fa-solid fa-umbrella-beach"></i>
                 <h4><span>Pantai</span></h4>
               </div>
-              <div class="col-lg-3 col-sm-6 col-6">
+              <div class="col-lg-4 col-sm-6 col-6">
                 <i class="fa-solid fa-mountain" ></i>
                 <h4><span>Gunung</span></h4>
               </div>
-              <div class="col-lg-3 col-sm-6 col-6">
+              <div class="col-lg-4 col-sm-6 col-6">
                 <i class="fa-solid fa-water"></i>
                 <h4><span>Lake</span></h4>
               </div>
-              <div class="col-lg-3 col-sm-6 col-6">
-                <i class="fa fa-building"></i>
-                <h4><span>Hotel</span></h4>
+              <div class="col-lg-4 col-sm-6 col-6">
+                <i class="fa-solid fa-water"></i>
+                <h4><span>Lake</span></h4>
               </div>
-              <div class="col-lg-3 col-sm-6 col-6">
-                <i class="fa fa-building"></i>
-                <h4><span>Hotel</span></h4>
-              </div>
-              <div class="col-lg-3 col-sm-6 col-6">
-                <i class="fa fa-building"></i>
-                <h4><span>Hotel</span></h4>
-              </div>
-              <div class="col-lg-3 col-sm-6 col-6">
-                <i class="fa fa-building"></i>
-                <h4><span>Hotel</span></h4>
-              </div>
-              <div class="col-lg-3 col-sm-6 col-6">
-                <i class="fa fa-building"></i>
-                <h4><span>Hotel</span></h4>
-              </div>
-              <div class="col-lg-3 col-sm-6 col-6">
-                <i class="fa fa-building"></i>
-                <h4><span>Hotel</span></h4>
-              </div>
-              
             </div>
           </div>
         </div>

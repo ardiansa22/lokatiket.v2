@@ -47,7 +47,7 @@
                                                         <i class="fas fa-plus"></i>
                                                     </button>
                                                     <a href="{{ route('customer.summary', ['wisata_id' => $wisata->id, 'quantity' => '1']) }}"
-                                                       class="btn btn-primary ms-2" style="color: white; background-color:#A16CE6;" id="orderButton">Order</a>
+                                                       class="btn btn-primary ms-2" style="color: white; background-color:#A16CE6;" id="orderButton">Order Now</a>
                                                 </div>
                                             </div>
                                         </div>

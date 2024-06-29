@@ -713,7 +713,7 @@ Banner Style
   background: url('../images/background1.jpg') no-repeat center center;
   background-size: cover;
   position: relative;
-  border-radius: 23px;
+  /* border-radius: 23px; */
   display: flex;
   justify-content: center;
   align-items: center;
