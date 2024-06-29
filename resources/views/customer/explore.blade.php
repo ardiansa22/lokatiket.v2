@@ -1,38 +1,43 @@
 @extends('customer.layouts.app')
 
 @section('content')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../../../assets/css/card.css">
+</head>
+<body>
+    
+
 
 <div class="container">
-<nav id ="navbar2" class="navbar navbar-expand" style="background-color: white;">
-      <ul class="navbar-nav nav-justified w-100" >
-        <li class="nav-item">
-          <a class="nav-link active" href="#">
-           Alam</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-          Pantai
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-          Situ
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-          Gunung
-          </a>
-        </li>
-        
-</nav>
+    <nav id="navbar2" class="navbar navbar-expand" style="background-color: white;">
+        <ul class="navbar-nav nav-justified w-100">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('customer.wisata.filter', 'Alam') }}">Alam</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('customer.wisata.filter', 'Pantai') }}">Pantai</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('customer.wisata.filter', 'Situ') }}">Situ</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('customer.wisata.filter', 'Gunung') }}">Gunung</a>
+            </li>
+        </ul>
+    </nav>
 </div>
 <div class="container">
     <div class="row mb-5">
         @foreach($wisatas as $wisata)
         <div class="col-md-4">
             <div class="card">
-            <img src="../../assets/images/background1.jpg" class="card-img-top" alt="...">
+            <img src="{{ asset('storage/images/' . json_decode($wisata->images)[0]) }}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h3 class="card-title" style="font-size:20px;">{{$wisata->name}}</h3>
                     <p class="card-text" style="font-size: 14px;">{{$wisata->kategori}}</p>
@@ -49,4 +54,6 @@
         @endforeach
     </div>
 </div>
+</body>
+</html>
 @endsection

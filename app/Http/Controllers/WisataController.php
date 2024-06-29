@@ -12,15 +12,7 @@ class WisataController extends Controller
     {
          $this->middleware('permission:vendor-any', ['any']);
     }
-
     
-
-    
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('vendor.produk.create');

@@ -1,5 +1,5 @@
 .card-img-top {
-  height: 200px;
+  height: 250px ;
   object-fit: cover;
 }
 
@@ -40,6 +40,6 @@
 }
 
 .btn {
-  background-color: #5D71C9;
+  background-color: #007BFF;
   color: white;
 }

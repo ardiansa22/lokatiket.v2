@@ -34,30 +34,35 @@
 
 
   <!-- ***** Header Area Start ***** -->
-  <nav id ="navbar1" class="navbar navbar-expand fixed-bottom" style="background-color: white;">
-      <ul class="navbar-nav nav-justified w-100" >
-        <li class="nav-item">
-          <a class="nav-link" href="{{route('customer.index')}}">
-            <i class="fa-solid fa-house-chimney" style="font-size: 26px;">
-          </i></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{route('customer.explore')}}">
-            <i class="fa-solid fa-compass" style="font-size: 26px;"></i>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link">
-            <i class="fa-solid fa-bell" style="font-size: 26px;">
-          </i></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link">
-            <i class="fa-solid fa-user" style="font-size: 26px;">
-          </i></a>
-        </li>
-      </ul>
+  <nav id="navbar1" class="navbar navbar-expand fixed-bottom" style="background-color: white;">
+  <ul class="navbar-nav nav-justified w-100">
+    <li class="nav-item">
+      <a class="nav-link" href="{{route('customer.index')}}">
+        <i class="fa-solid fa-house-chimney" style="font-size: 26px;"></i>
+        <span>Home</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{route('customer.explore')}}">
+        <i class="fa-solid fa-compass" style="font-size: 26px;"></i>
+        <span>Explore</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link">
+        <i class="fa-solid fa-bell" style="font-size: 26px;"></i>
+        <span>Notifications</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link">
+        <i class="fa-solid fa-user" style="font-size: 26px;"></i>
+        <span>Profile</span>
+      </a>
+    </li>
+  </ul>
 </nav>
+
 <div class="main-content">
   @yield('content')
 </div>
@@ -106,6 +111,13 @@
   e.preventDefault()
   $(this).tab('show')
 })
+</script>
+<script>
+    // Add active class to the current button (highlight it)
+    var url = window.location.href;
+    $('#navbar2 .nav-link').filter(function() {
+        return this.href === url;
+    }).addClass('active');
 </script>
   </body>
 

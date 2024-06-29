@@ -28,7 +28,11 @@ class CustomerController extends Controller
         $wisatas = Wisata::all();
         return view('customer.explore', compact('wisatas'));
     }
-
+    public function filterByCategory($kategori)
+    {
+        $wisatas = Wisata::where('kategori', $kategori)->get();
+        return view('customer.explore', compact('wisatas'));
+    }
     public function summary(Request $request)
     {
         $wisata = Wisata::find($request->wisata_id);

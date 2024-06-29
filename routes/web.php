@@ -37,6 +37,8 @@ Route::middleware(['role:customer', 'verified'])->group(function () {
         Route::get('/wisata/{wisata}', [CustomerController::class, 'tampilkan'])->name('show');
         Route::get('/explore', [CustomerController::class, 'explore'])->name('explore');
         Route::get('/order', [CustomerController::class, 'summary'])->name('summary');
+        Route::get('/kategori/{kategori}', [CustomerController::class, 'filterByCategory'])->name('wisata.filter');
+
         
             });
         });
@@ -64,6 +66,7 @@ Route::group(['middleware' => ['role:vendor']],function(){
             Route::post('/store', [WisataController::class, 'store'])->name('store');
             Route::get('/profil', [VendorController::class, 'profil'])->name('profil');
             Route::get('/wisata/{wisata}', [WisataController::class, 'tampilkan'])->name('show');
+            
            
         });
     });
