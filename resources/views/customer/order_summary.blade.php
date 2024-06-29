@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../../../assets/css/summary.css">
 </head>
 
-<div class="container mt-5 p-3 rounded cart">
+<div class="container p-3 cart">
         <div class="row no-gutters">
             <div class="col-md-8">
                 <div class="product-details mr-2">
@@ -23,35 +23,60 @@
                         </div>
                     </div>
                     <div class="d-flex flex-row align-items-center">
-                        <span class="d-block" style="color: black;">Quantity  {{$quantity}}</span>
-                        <span class="d-block ml-5 font-weight-bold" style="color: black;">Total Price  {{ $quantity * $wisata->price }}</span>
+                        <span class="d-block" style="color: black;">{{$quantity}}</span>
+                        <span class="d-block ml-5 font-weight-bold" style="color: black;">{{ $quantity * $wisata->price }}</span>
                         <!-- <i class="fa fa-trash-o ml-3 text-white-50"></i> -->
                     </div>
                 </div>
 
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="payment-info">
-                    <span class="type d-block mt-3 mb-1">Card type</span><label class="radio"> <input type="radio" name="card" value="payment" checked> <span><img width="30" src="https://img.icons8.com/color/48/000000/mastercard.png"/></span> </label>
-
-                    <label class="radio"> <input type="radio" name="card" value="payment"> <span><img width="30" src="https://img.icons8.com/officel/48/000000/visa.png"/></span> </label>
-
-                    <label class="radio"> <input type="radio" name="card" value="payment"> <span><img width="30" src="https://img.icons8.com/ultraviolet/48/000000/amex.png"/></span> </label>
-
-
-                    <label class="radio"> <input type="radio" name="card" value="payment"> <span><img width="30" src="https://img.icons8.com/officel/48/000000/paypal.png"/></span> </label>
-                    <div><label class="credit-card-label">Name on card</label><input type="text" class="form-control credit-inputs" placeholder="Name"></div>
-                    <div><label class="credit-card-label">Card number</label><input type="text" class="form-control credit-inputs" placeholder="0000 0000 0000 0000"></div>
-                    <div class="row">
-                        <div class="col-md-6"><label class="credit-card-label">Date</label><input type="text" class="form-control credit-inputs" placeholder="12/24"></div>
-                        <div class="col-md-6"><label class="credit-card-label">CVV</label><input type="text" class="form-control credit-inputs" placeholder="342"></div>
-                    </div>
-                    <hr class="line">
-                    <div class="d-flex justify-content-between information"><span>Quantity</span><span>{{ $quantity }}</span></div>
-                    <div class="d-flex justify-content-between information"><span>Subtotal</span><span>Rp. {{ $quantity * $wisata->price }}</span></div>
-                    <div class="d-flex justify-content-between information"><span>Total(Incl. taxes)</span><span>Rp. {{ $quantity * $wisata->price }}</span></div><button class="btn btn-primary btn-block d-flex justify-content-between mt-3" type="button"><span>Rp. {{ $quantity * $wisata->price }}</span><span>Checkout<i class="fa fa-long-arrow-right ml-1"></i></span></button></div>
-            </div>
+         <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-header py-3">
+            <h5 class="mb-0">Customer Detail</h5>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                Name
+                <span>{{ Auth::user()->name }}</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                Email
+                <span>{{ Auth::user()->email }}</span>
+              </li>
+            </ul>
+          </div>
+          <div class="card-header py-3">
+            <h5 class="mb-0">Produk Detail</h5>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                Products
+                <span>{{ $quantity * $wisata->price }}</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                Quantity
+                <span>{{$quantity}}</span>
+              </li>
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                <div>
+                  <strong>Total amount</strong>
+                </div>
+                <span><strong>{{ $quantity * $wisata->price }}</strong></span>
+              </li>
+            </ul>
+            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block">
+              Go to checkout
+            </button>
+          </div>
+        </div>
+      </div>
         </div>
     </div>
 @endsection
