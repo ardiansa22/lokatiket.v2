@@ -95,30 +95,29 @@
     });
   </script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-
-<script>
-    $(document).ready(function(){
-        $('.image-slider').slick({
-            infinite: true,
-            slidesToShow: 1,
-            slidesToScroll: 1
-        });
-    });
-</script>
-<script>
-    $('#bologna-list a').on('click', function (e) {
-  e.preventDefault()
-  $(this).tab('show')
-})
-</script>
-<script>
-    // Add active class to the current button (highlight it)
-    var url = window.location.href;
-    $('#navbar2 .nav-link').filter(function() {
-        return this.href === url;
-    }).addClass('active');
-</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+  <script>
+      $(document).ready(function(){
+          $('.image-slider').slick({
+              infinite: true,
+              slidesToShow: 1,
+              slidesToScroll: 1
+          });
+      });
+  </script>
+  <script>
+      $('#bologna-list a').on('click', function (e) {
+    e.preventDefault()
+    $(this).tab('show')
+  })
+  </script>
+  <script>
+      // Add active class to the current button (highlight it)
+      var url = window.location.href;
+      $('#navbar2 .nav-link').filter(function() {
+          return this.href === url;
+      }).addClass('active');
+  </script>
+    @yield('script')
   </body>
-
 </html>

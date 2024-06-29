@@ -38,7 +38,8 @@ Route::middleware(['role:customer', 'verified'])->group(function () {
         Route::get('/explore', [CustomerController::class, 'explore'])->name('explore');
         Route::get('/order', [CustomerController::class, 'summary'])->name('summary');
         Route::get('/kategori/{kategori}', [CustomerController::class, 'filterByCategory'])->name('wisata.filter');
-
+        Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout');
+        
         
             });
         });
