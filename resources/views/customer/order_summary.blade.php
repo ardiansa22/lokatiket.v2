@@ -6,25 +6,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- @TODO: replace SET_YOUR_CLIENT_KEY_HERE with your client key -->
+    <script type="text/javascript"
+            src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="{{config('midtrans.client_key')}}">
+    </script>
+    <!-- Note: replace with src="https://app.midtrans.com/snap/snap.js" for Production environment -->
     <title>Lokatiket</title>
     <link rel="stylesheet" href="../../../assets/css/summary.css">
 </head>
-
 <div class="container p-3 cart">
         <div class="row no-gutters">
             <div class="col-md-8">
                 <div class="product-details mr-2">
                     <div class="d-flex justify-content-between align-items-center mt-3 p-2 items rounded">
                     <div class="d-flex flex-row">
-                        <img class="rounded" src="{{ asset('storage/images/' . json_decode($wisata->images)[0]) }}" alt="{{ $wisata->name }}" style="width: 50px;" width="10px">
                         <div class="ml-2">
-                            <span class="font-weight-bold d-block" style="color: black;">{{ $wisata->name }}&nbsp;</span>
-                            <span class="spec" style="color: black;">{{ $wisata->kategori }}</span>
+                            <span class="font-weight-bold d-block" style="color: black;">{{ $order->wisata_id }}&nbsp;</span>
+                            
                         </div>
                     </div>
                     <div class="d-flex flex-row align-items-center">
-                        <span class="d-block" style="color: black;">{{$quantity}}</span>
-                        <span class="d-block ml-5 font-weight-bold" style="color: black;">{{ $quantity * $wisata->price }}</span>
+                        <span class="d-block" style="color: black;">{{$order->quantity}}</span>
+                        <span class="d-block ml-5 font-weight-bold" style="color: black;">{{ $order->total_price}}</span>
                         <!-- <i class="fa fa-trash-o ml-3 text-white-50"></i> -->
                     </div>
                 </div>
@@ -57,36 +61,54 @@
               <li
                 class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                 Products
-                <span>{{ $quantity * $wisata->price }}</span>
+                <span>{{ $order->total_price }}</span>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                 Quantity
-                <span>{{$quantity}}</span>
+                <span>{{$order->quantity}}</span>
               </li>
               <li
                 class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                 <div>
                   <strong>Total amount</strong>
                 </div>
-                <span><strong>{{ $quantity * $wisata->price }}</strong></span>
+                <span><strong>{{ $order->total_price }}</strong></span>
               </li>
             </ul>
-            <form action="{{route('customer.checkout')}}" method="POST">
-                    @csrf
-                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                    <input type="hidden" name="wisata_id" value="{{ $wisata->id }}">
-                    <input type="hidden" name="quantity" value="{{ $quantity }}">
-                    <input type="date" name="visit_date">
-                    <input type="hidden" name="total_price" value="{{ $quantity * $wisata->price }}">
-                    <div style = "margin-top:10px;">
-                      <button type="submit" class="btn btn-primary">Checkout</button>
-                    </div>
-                </form>
+            <button type="btn btn-primary mt3" class="btn btn-primary" id="pay-button">Bayar Sekarang</button>
           </div>
         </div>
       </div>
         </div>
     </div>
 @endsection
-
+@section('script')
+<script type="text/javascript">
+    // For example trigger on button clicked, or any time you need
+    var payButton = document.getElementById('pay-button');
+    payButton.addEventListener('click', function () {
+      // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token.
+      // Also, use the embedId that you defined in the div above, here.
+      window.snap.pay('{{$snapToken}}', {
+       
+        onSuccess: function (result) {
+          /* You may add your own implementation here */
+          alert("payment success!"); console.log(result);
+        },
+        onPending: function (result) {
+          /* You may add your own implementation here */
+          alert("wating your payment!"); console.log(result);
+        },
+        onError: function (result) {
+          /* You may add your own implementation here */
+          alert("payment failed!"); console.log(result);
+        },
+        onClose: function () {
+          /* You may add your own implementation here */
+          alert('you closed the popup without finishing the payment');
+        }
+      });
+    });
+  </script>
+@endsection
 </html>

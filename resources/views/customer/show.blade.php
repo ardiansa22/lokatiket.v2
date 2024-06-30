@@ -46,9 +46,16 @@
                                                         onclick="document.getElementById('quantity').stepUp()">
                                                         <i class="fas fa-plus"></i>
                                                     </button>
-                                                    <a href="{{ route('customer.summary', ['wisata_id' => $wisata->id, 'quantity' => '1']) }}"
-                                                       class="btn btn-primary ms-2" style="color: white; background-color:#A16CE6;" id="orderButton">Order Now</a>
                                                 </div>
+                                                <form id="checkout-form" action="{{route('customer.checkout')}}" method="POST" style="margin-top: 10px;">
+                                                    @csrf
+                                                    <input type="text" name="user_id" value="{{ Auth::user()->id }}">
+                                                    <input type="text" name="wisata_id" value="{{ $wisata->id }}">
+                                                    <input type="hidden" name="quantity" id="hiddenQuantity" value="1">
+                                                    <input type="date" name="visit_date">
+                                                    <input type="hidden" name="total_price" id="total_price" value="{{ $wisata->price }}">
+                                                    <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Checkout</button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -63,11 +70,14 @@
 </div>
 
 <script>
-    document.getElementById('orderButton').addEventListener('click', function(event) {
-        event.preventDefault();
-        var quantity = document.getElementById('quantity').value;
-        var url = this.href + '&quantity=' + quantity;
-        window.location.href = url;
+    document.getElementById('quantity').addEventListener('change', function() {
+        document.getElementById('hiddenQuantity').value = this.value;
+        document.getElementById('total_price').value = this.value * {{ $wisata->price }};
+    });
+
+    document.getElementById('checkout-form').addEventListener('submit', function() {
+        document.getElementById('hiddenQuantity').value = document.getElementById('quantity').value;
+        document.getElementById('total_price').value = document.getElementById('quantity').value * {{ $wisata->price }};
     });
 </script>
 @endsection
