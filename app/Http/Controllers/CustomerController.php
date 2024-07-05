@@ -25,7 +25,7 @@ class CustomerController extends Controller
     }
     public function explore()
     {
-        $wisatas = Wisata::all();
+       $wisatas = Wisata::with('ulasans')->get();
         return view('customer.explore', compact('wisatas'));
     }
     public function filterByCategory($kategori)

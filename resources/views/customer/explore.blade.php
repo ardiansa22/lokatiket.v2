@@ -43,8 +43,9 @@
                     <p class="card-text" style="font-size: 16px;">Garut ,Jawabarat</p>
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="rating">
-                            <span class="badge bg-warning text-dark" style="font-size: 14px;"></i> 5.0</span>
-                            <span>{{$wisata->rating_text}}</span>
+                            <span class="badge bg-warning text-dark" style="font-size: 14px;">
+                                {{$wisata->rating_text}}
+                            </span>
                         </div>
                         <a href="{{ route('customer.show', $wisata) }}" class="btn" style="background-color: #007BFF;">View Detail</a>
                     </div>
@@ -54,6 +55,7 @@
         @endforeach
     </div>
 </div>
+
 </body>
 </html>
 @endsection

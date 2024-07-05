@@ -7,7 +7,7 @@
          <div class="col-md-4">
         <div class="card mb-4">
           <div class="card-body">
-            <img src="../../assets/images/logo.png" style ="height:300px" alt="">
+            <img src="../../assets/images/logo.png" alt="">
           <h6 class="card-subtitle mb-2 text-muted" style="font-size :14px; font-weigth:bold;">Hai {{ Auth::user()->name }},</h6>
           <h5  style="font-size :18px;"><b>Selamat, Pembelian tiket wisata kamu berhasil !</b></h5>
           <p class="text-muted">Terimakasih telah mempercayakan Lokatiket untuk memenuhi kebutuhanmu. Berikut detail transaksimu:</p>
@@ -33,7 +33,12 @@
                 Status
                 <span>{{$order->status}}</span>
               </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                <h5  style="font-size :18px;"><b>Tiket Anda</b></h5>
+              </li>
             </ul>
+            
+            <img src="../../assets/images/barcode.png" alt="" >
           </div>
         </div>
       </div>

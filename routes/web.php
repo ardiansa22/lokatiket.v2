@@ -9,6 +9,7 @@ use App\Http\Controllers\PesananController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\WisataController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\UlasanController;
 use App\Models\Customer;
 
 /*
@@ -42,6 +43,8 @@ Route::middleware(['role:customer', 'verified'])->group(function () {
         // Route::get('/detail', [CustomerController::class, 'riwayat'])->name('riwayat');
         Route::get('/invoice/{id}', [OrderController::class, 'invoice'])->name('riwayat');
         Route::get('/history', [OrderController::class, 'history'])->name('riwayat');
+        Route::get('/ulasan/{wisataId}', [UlasanController::class, 'create'])->name('ulasan');
+        Route::post('/ulasan', [UlasanController::class, 'store'])->name('ulasanstore');
         
         
             });

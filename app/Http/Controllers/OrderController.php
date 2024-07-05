@@ -66,7 +66,7 @@ class OrderController extends Controller
         $hashed = hash("sha512", $request->order_id . $request->status_code . $request->gross_amount . $serverKey);
     
         if ($hashed == $request->signature_key) {
-            if ($request->transaction_status == 'settlement') {
+            if ($request->transaction_status == 'settlement' | $request->transaction_status == 'capture') {
                 $order = Order::find($request->order_id);
     
                 // Handle payment status based on payment type

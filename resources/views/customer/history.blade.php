@@ -3,26 +3,38 @@
 @section('content')
 <div class="container py-3 text-center">
     <h5>Riwayat Tiket</h5>
+    <h1>Tambah Ulasan</h1>
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 </div>
-    <div class="container">
-        @if($order->isEmpty())
-            <p class="text-center">Tidak ada riwayat pesanan yang ditemukan.</p>
-        @else
-            <table class="table">
-                <tbody>
-                    @foreach($order as $key => $item)
-                        <tr> 
-                            <td ><i class="fa-solid fa-tree"></i></td>
-                            <td style="font-size:18px;"><b>{{ $item->wisata->name }}</b>
-                                <span class ="text-muted"style="display: block; margin-top: 5px; font-size:12px;">{{$item->created_at}}</span>
-                            </td>
-                            <td class="text-end">-Rp. {{ $item->total_price }}</td>
-                            <td class="text-end"><a href="/customer/invoice/{{$item->id}}">Tiket</a></td>
-                            <td class="text-end"><a href="">Ulasan</a></td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        @endif
-    </div>
+<div class="container">
+    @if($order->isEmpty())
+        <p class="text-center">Tidak ada riwayat pesanan yang ditemukan.</p>
+    @else
+        <table class="table">
+            <tbody>
+                @foreach($order as $key => $item)
+                    <tr>
+                        <td><i class="fa-solid fa-tree"></i></td>
+                        <td style="font-size:18px;"><b>{{ $item->wisata->name }}</b>
+                            <span class="text-muted" style="display: block; margin-top: 5px; font-size:12px;">{{ $item->created_at }}</span>
+                        </td>
+                        <td class="text-end">-Rp. {{ $item->total_price }}</td>
+                        <td class="text-end"><a href="/customer/invoice/{{ $item->id }}">Tiket</a></td>
+                        <td class="text-end"><a href="{{ route('customer.ulasan', $item->wisata_id) }}">Ulasan</a></td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @endif
+</div>
 @endsection

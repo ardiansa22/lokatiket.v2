@@ -18,8 +18,23 @@ class Wisata extends Model
     {
         return $this->hasMany(Order::class);
     }
-    public function ulasans(): HasMany
+    public function ulasans()
     {
         return $this->hasMany(Ulasan::class);
+    }
+
+    public function getAverageRatingAttribute()
+    {
+        return $this->ulasans()->avg('rating');
+    }
+
+    // Method to format average rating text
+    public function getRatingTextAttribute()
+    {
+        $averageRating = $this->average_rating;
+        if ($averageRating === null) {
+            return 'Belum ada ulasan';
+        }
+        return number_format($averageRating, 1);
     }
 }
