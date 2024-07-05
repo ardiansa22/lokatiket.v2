@@ -49,9 +49,9 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link">
-        <i class="fa-solid fa-bell" style="font-size: 26px;"></i>
-        <span>Notifications</span>
+      <a class="nav-link" href="{{route('customer.riwayat')}}">
+        <i class="fa-solid fa-ticket" style="font-size: 26px;"></i>
+        <span>Orders</span>
       </a>
     </li>
     <li class="nav-item">

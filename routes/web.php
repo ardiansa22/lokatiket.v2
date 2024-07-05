@@ -39,6 +39,9 @@ Route::middleware(['role:customer', 'verified'])->group(function () {
         Route::get('/order', [CustomerController::class, 'summary'])->name('summary');
         Route::get('/kategori/{kategori}', [CustomerController::class, 'filterByCategory'])->name('wisata.filter');
         Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout');
+        // Route::get('/detail', [CustomerController::class, 'riwayat'])->name('riwayat');
+        Route::get('/invoice/{id}', [OrderController::class, 'invoice'])->name('riwayat');
+        Route::get('/history', [OrderController::class, 'history'])->name('riwayat');
         
         
             });

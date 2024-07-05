@@ -40,13 +40,13 @@
             <img src="{{ asset('storage/images/' . json_decode($wisata->images)[0]) }}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h3 class="card-title" style="font-size:20px;">{{$wisata->name}}</h3>
-                    <p class="card-text" style="font-size: 14px;">{{$wisata->kategori}}</p>
+                    <p class="card-text" style="font-size: 16px;">Garut ,Jawabarat</p>
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="rating">
-                            <span class="badge bg-warning text-dark" style="font-size: 12px;"><i class="fa fa-star" style="color: orange;"></i> 5.0</span>
+                            <span class="badge bg-warning text-dark" style="font-size: 14px;"></i> 5.0</span>
                             <span>{{$wisata->rating_text}}</span>
                         </div>
-                        <a href="{{ route('customer.show', $wisata) }}" class="btn" style="background-color: #5D71C9;">View Detail</a>
+                        <a href="{{ route('customer.show', $wisata) }}" class="btn" style="background-color: #007BFF;">View Detail</a>
                     </div>
                 </div>
             </div>

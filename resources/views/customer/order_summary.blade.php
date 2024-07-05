@@ -93,7 +93,9 @@
        
         onSuccess: function (result) {
           /* You may add your own implementation here */
-          alert("payment success!"); console.log(result);
+          // alert("payment success!"); 
+          window.location.href = '/customer/invoice/{{$order->id}}'
+          console.log(result);
         },
         onPending: function (result) {
           /* You may add your own implementation here */

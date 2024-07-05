@@ -50,10 +50,10 @@ https://templatemo.com/tm-580-woox-travel
         <span>Explore</span>
       </a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link">
-        <i class="fa-solid fa-bell" style="font-size: 26px;"></i>
-        <span>Notifications</span>
+    <li class="nav-item" >
+      <a class="nav-link" href="{{route('customer.riwayat')}}">
+        <i class="fa-solid fa-ticket" style="font-size: 26px;"></i>
+        <span>Orders</span>
       </a>
     </li>
     <li class="nav-item">
@@ -98,11 +98,11 @@ https://templatemo.com/tm-580-woox-travel
               </div>
               <div class="col-lg-4 col-sm-6 col-6">
                 <i class="fa-solid fa-water"></i>
-                <h4><span>Lake</span></h4>
+                <h4><span>Situ</span></h4>
               </div>
               <div class="col-lg-4 col-sm-6 col-6">
-                <i class="fa-solid fa-water"></i>
-                <h4><span>Lake</span></h4>
+              <i class="fa-solid fa-border-all"></i>
+                <h4><span>Semua</span></h4>
               </div>
             </div>
           </div>

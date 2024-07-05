@@ -12,4 +12,14 @@ class Wisata extends Model
     protected $casts = [
         'images' => 'array',
     ];
+    use HasFactory;
+    // Relasi One to Many
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+    public function ulasans(): HasMany
+    {
+        return $this->hasMany(Ulasan::class);
+    }
 }

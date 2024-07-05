@@ -25,35 +25,36 @@
                                                 <h4>{{ $wisata->name }}</h4>
                                                 <span>{{ $wisata->kategori }}</span>
                                                 <ul class="info">
-                                                    <li><i class="fa fa-money-check" style="color: #A16CE6;"></i> {{ $wisata->price }}</li>
-                                                    <li><i class="fa fa-heart" style="color: red;"></i> 41</li>
+                                                    <li><i class="fa fa-money-check" style="color: #007BFF;"></i> {{ $wisata->price }}</li>
                                                     <li><i class="fa fa-star" style="color: orange;"></i> 5.0</li>
                                                 </ul>
                                                 <p>{{ $wisata->description }}</p>
                                                 <ul class="info">
-                                                    <li><i class="fa-solid fa-square-check" style="color: #A16CE6;"></i>Toilet</li>
-                                                    <li><i class="fa-solid fa-square-check" style="color: #A16CE6;"></i>Mushola</li>
-                                                    <li><i class="fa-solid fa-square-check" style="color: #A16CE6;"></i>Kantin</li>
+                                                    <li><i class="fa-solid fa-square-check" style="color: #007BFF;"></i>Toilet</li>
+                                                    <li><i class="fa-solid fa-square-check" style="color: #007BFF;"></i>Mushola</li>
+                                                    <li><i class="fa-solid fa-square-check" style="color: #007BFF;"></i>Kantin</li>
                                                 </ul>
                                                 <div class="d-flex align-items-center" style="margin-top: 20px;">
-                                                    <button class="btn btn-primary px-3 me-2" style="color: white; background-color:#A16CE6;"
+                                                    <button class="btn btn-primary px-3 me-2" style="color: white; background-color:#007BFF;"
                                                         onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                                                         <i class="fas fa-minus"></i>
                                                     </button>
                                                     <input id="quantity" min="0" name="quantity" value="1" type="number"
                                                         class="form-control text-center" style="width: 60px; margin-top:1px;" />
-                                                    <button class="btn btn-primary px-3 ms-2" style="color: white; background-color:#A16CE6;"
+                                                    <button class="btn btn-primary px-3 ms-2" style="color: white; background-color:#007BFF;"
                                                         onclick="document.getElementById('quantity').stepUp()">
                                                         <i class="fas fa-plus"></i>
                                                     </button>
                                                 </div>
                                                 <form id="checkout-form" action="{{route('customer.checkout')}}" method="POST" style="margin-top: 10px;">
                                                     @csrf
-                                                    <input type="text" name="user_id" value="{{ Auth::user()->id }}">
-                                                    <input type="text" name="wisata_id" value="{{ $wisata->id }}">
+                                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                                    <input type="hidden" name="wisata_id" value="{{ $wisata->id }}">
                                                     <input type="hidden" name="quantity" id="hiddenQuantity" value="1">
-                                                    <input type="date" name="visit_date">
                                                     <input type="hidden" name="total_price" id="total_price" value="{{ $wisata->price }}">
+                                                    <div class="">
+                                                    <input type="date" name="visit_date">
+                                                    </div>
                                                     <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Checkout</button>
                                                 </form>
                                             </div>

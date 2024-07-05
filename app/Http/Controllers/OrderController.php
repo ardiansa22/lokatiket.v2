@@ -42,10 +42,19 @@ class OrderController extends Controller
                 'gross_amount' => $order->total_price,
             ),
             'customer_details' => array(
-                'first_name' => $order->user_id,
-                'phone' => 'Auth::user()->email',
+                'first_name' => $order->user->name,
+                'email' => Auth::user()->email,
+            ),
+            'item_details' => array(
+                array(
+                    'id' => $order->wisata_id,
+                    'name' => $order->wisata->name,
+                    'quantity' => $order->quantity,
+                    'price' => $order->wisata->price,
+                )
             ),
         );
+        
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
         return view('customer.order_summary', compact('snapToken','order'));
@@ -82,7 +91,19 @@ class OrderController extends Controller
             }
         }
     }
-    
+    public function history()
+    {
+        $order = Order::where('user_id', Auth::id())
+                    ->where('status', 'paid')
+                    ->get();
+        return view('customer.history', compact('order'));
+    }
+
+    public function invoice($id)
+    {
+        $order = Order::find($id);
+        return view('customer.order_detail',compact('order'));
+    }
     public function show($id)
     {
         //
