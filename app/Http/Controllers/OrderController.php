@@ -77,7 +77,7 @@ class OrderController extends Controller
                         break;
                     case 'bank_transfer':
                         // Handle bank transfer payment status
-                        $order->update(['status' => 'Pending']); // Update status as pending, for example
+                        $order->update(['status' => 'Paid']); // Update status as pending, for example
                         break;
                     case 'qris':
                         // Handle QRIS payment status

@@ -3,7 +3,6 @@
 @section('content')
 <div class="container py-3 text-center">
     <h5>Riwayat Tiket</h5>
-    <h1>Tambah Ulasan</h1>
     @if (session('error'))
         <div class="alert alert-danger">
             {{ session('error') }}
