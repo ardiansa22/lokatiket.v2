@@ -57,7 +57,7 @@ https://templatemo.com/tm-580-woox-travel
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link">
+      <a class="nav-link" href="{{route('customer.profile')}}">
         <i class="fa-solid fa-user" style="font-size: 26px;"></i>
         <span>Profile</span>
       </a>
@@ -85,23 +85,33 @@ https://templatemo.com/tm-580-woox-travel
             <div class="row">
               <p class="mb-3" style="text-align: left; font-size: 20px; color:black;">Kategori</p>
               <div class="col-lg-4 col-sm-6 col-6">
+                <a href="">
                 <i class="fa-solid fa-tree"></i>
+                </a>
                 <h4><span>Alam</span></h4>
               </div>
               <div class="col-lg-4 col-sm-6 col-6">
+                <a href="{{ route('customer.wisata.filter', 'Pantai') }}">
                 <i class="fa-solid fa-umbrella-beach"></i>
+                </a>
                 <h4><span>Pantai</span></h4>
               </div>
               <div class="col-lg-4 col-sm-6 col-6">
+                <a href="{{ route('customer.wisata.filter', 'Gunung') }}">
                 <i class="fa-solid fa-mountain" ></i>
+                </a>
                 <h4><span>Gunung</span></h4>
               </div>
               <div class="col-lg-4 col-sm-6 col-6">
+                <a href="{{ route('customer.wisata.filter', 'Situ') }}">
                 <i class="fa-solid fa-water"></i>
+                </a>
                 <h4><span>Situ</span></h4>
               </div>
               <div class="col-lg-4 col-sm-6 col-6">
+                <a href="{{route('customer.explore')}}">
               <i class="fa-solid fa-border-all"></i>
+              </a>
                 <h4><span>Semua</span></h4>
               </div>
             </div>

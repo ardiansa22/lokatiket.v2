@@ -23,7 +23,8 @@
             <tbody>
                 @foreach($order as $key => $item)
                     <tr>
-                        <td><i class="fa-solid fa-tree"></i></td>
+                        <td style="font-size: 32px;
+  height: 30px;background-color:#0046BF ;color : #FFCB05; text-align:center;"><i class="fa-solid fa-tree"></i></td>
                         <td style="font-size:18px;"><b>{{ $item->wisata->name }}</b>
                             <span class="text-muted" style="display: block; margin-top: 5px; font-size:12px;">{{ $item->created_at }}</span>
                         </td>

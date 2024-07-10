@@ -39,11 +39,11 @@ class CustomerController extends Controller
         $quantity = $request->quantity;
         return view('customer.order_summary', compact('wisata', 'quantity'));
     }
-    // public function riwayat()
-    // {
+    public function profil()
+    {
         
-    //     return view('customer.order_detail');
-    // }
+        return view('customer.profile');
+    }
 
     
 

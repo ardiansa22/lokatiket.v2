@@ -1,0 +1,129 @@
+.profile-section {
+    padding: 20px 0;
+}
+
+
+.profile-item {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-item h4 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #333;
+}
+
+.profile-item p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.btn-primary {
+    background-color: #A17851;
+    border-color: #A17851;
+    color: white;
+    border-radius: 5px;
+}
+
+.btn-primary:hover {
+    background-color: #8C643B;
+    border-color: #8C643B;
+}
+
+.profile-section {
+padding: 20px 0;
+}
+
+
+.profile-item {
+    /* background-color: white; */
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-item h4 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #333;
+}
+
+.profile-item p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.btn-primary {
+    background-color: #A17851;
+    border-color: #A17851;
+    color: white;
+    border-radius: 5px;
+}
+
+.btn-primary:hover {
+    background-color: #8C643B;
+    border-color: #8C643B;
+}
+
+.profile-section {
+    padding: 20px 0;
+}
+
+.card-1 {
+    /* background-color: #F3E9DD; */
+    border: none;
+}
+
+.card-body-1 {
+    border-radius: 15px; /* Membuat sudut tumpul */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Menambahkan bayangan */
+    padding: 20px; /* Menambahkan padding */
+    background-color: #F3E9DD;
+}
+.card {
+    /* background-color: #F3E9DD; */
+    border: none;
+}
+
+.card-body {
+    border-radius: 15px; /* Membuat sudut tumpul */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Menambahkan bayangan */
+    padding: 20px; /* Menambahkan padding */
+}
+
+
+.profile-item {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-item h4 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #333;
+}
+
+.profile-item p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.btn-primary {
+    background-color: #A17851;
+    border-color: #A17851;
+    color: white;
+    border-radius: 5px;
+}
+
+.btn-primary:hover {
+    background-color: #8C643B;
+    border-color: #8C643B;
+}

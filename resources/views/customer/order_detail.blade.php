@@ -7,15 +7,15 @@
          <div class="col-md-4">
         <div class="card mb-4">
           <div class="card-body">
-            <img src="../../assets/images/logo.png" alt="">
-          <h6 class="card-subtitle mb-2 text-muted" style="font-size :14px; font-weigth:bold;">Hai {{ Auth::user()->name }},</h6>
+            <img src="../../assets/images/logolk.png" alt="">
+          <h6 class="card-subtitle py-4 text-muted" style="font-size :14px; font-weigth:bold;">Hai {{ Auth::user()->name }},</h6>
           <h5  style="font-size :18px;"><b>Selamat, Pembelian tiket wisata kamu berhasil !</b></h5>
           <p class="text-muted">Terimakasih telah mempercayakan Lokatiket untuk memenuhi kebutuhanmu. Berikut detail transaksimu:</p>
           <h5  style="font-size :18px;"><b>Detail transaksimu</b></h5>
           <ul class="list-group list-group-flush">
               <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                 Nomor Pesanan
-                <span>220102{{$order->id}}</span>
+                <span>220102{{$order->id}}LKTKT</span>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                 Waktu
@@ -27,7 +27,7 @@
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                 Harga
-                <span>{{$order->total_price}}</span>
+                <span>Rp. {{$order->total_price}}</span>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                 Status
