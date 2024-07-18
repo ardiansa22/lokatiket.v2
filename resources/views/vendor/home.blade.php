@@ -12,14 +12,14 @@
             <div class="col-xxl-4 col-md-6">
               <div class="card info-card sales-card">
                 <div class="card-body">
-                  <h5 class="card-title">Customers</h5>
+                  <h5 class="card-title">Pesanan</h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                       <i class="bi bi-people"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>1244</h6>
+                      <h6>{{$totalOrder}}</h6>
                     </div>
                   </div>
 
@@ -32,14 +32,14 @@
             <div class="col-xxl-4 col-md-6">
               <div class="card info-card revenue-card">
                 <div class="card-body">
-                  <h5 class="card-title">Revenue</h5>
+                  <h5 class="card-title">Penhasilan</h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                       <i class="bi bi-currency-dollar"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>$3,264</h6>
+                      <h6>{{$totalPrice}}</h6>
                     </div>
                   </div>
                 </div>
@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Penjualan Tekini <span>| Today</span></h5>
+                  <h5 class="card-title">Pembelian Tekini <span>| Today</span></h5>
 
                   <table class="table table-borderless datatable">
                     <thead>
@@ -74,6 +74,7 @@
                         <th scope="col">Jumlah</th>
                         <th scope="col">Price</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Tanggal Pesanan</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -83,7 +84,10 @@
                         <td>{{$order->wisata->name}}</td>
                         <td>{{$order->quantity}}</td>
                         <td>{{$order->total_price}}</td>
-                        <td>{{$order->status}}</td>
+                        <td> <span class="badge {{ $order->status === 'unpaid' ? 'bg-danger' : 'bg-success' }}">
+                                                    {{ $order->status }}
+                                                </span></td>
+                        <td>{{$order->created_at}}</td>
                       </tr>
                     </tbody>
                     @endforeach

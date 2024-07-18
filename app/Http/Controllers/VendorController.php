@@ -19,12 +19,30 @@ class VendorController extends Controller
     public function index()
     {
         $userId = Auth::id();
+        
+        // Ambil semua wisata yang dikelola oleh pengelola yang sedang login
+        $all = Wisata::where('user_id', $userId)->pluck('id');
+        // Ambil semua pesanan yang terkait dengan wisata yang dikelola oleh pengelola
+        $orders = Order::whereIn('wisata_id', $all)->get(); 
+        $totalPrice = $orders->sum('total_price');
+        $totalOrder = $orders->count('id');
+        $paidOrders = $orders->where('status', 'paid');
+        $wisatas = Wisata::where('user_id', $userId)->get();
+        return view('vendor.home',compact('wisatas','orders','totalPrice','totalOrder','paidOrders'))
+        ->with('i', (request()->input('page', 1) - 1) * 5);
+        // return view('vendor.home');
+    }
+    public function pesanan()
+    {
+        $userId = Auth::id();
+        
         // Ambil semua wisata yang dikelola oleh pengelola yang sedang login
         $all = Wisata::where('user_id', $userId)->pluck('id');
         // Ambil semua pesanan yang terkait dengan wisata yang dikelola oleh pengelola
         $orders = Order::whereIn('wisata_id', $all)->get();
+        $paidOrders = $orders->where('status', 'paid');
         $wisatas = Wisata::where('user_id', $userId)->get();
-        return view('vendor.home',compact('wisatas','orders'))
+        return view('vendor.pesanan.index',compact('wisatas','orders','paidOrders'))
         ->with('i', (request()->input('page', 1) - 1) * 5);
         // return view('vendor.home');
     }
