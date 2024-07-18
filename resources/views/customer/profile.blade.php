@@ -22,17 +22,17 @@
                 <div class="mb-3">
                     <input class="form-control" type="file" name="profile_photo" id="profile-photo-input">
                 </div>
-                <button class="btn btn-gradient-primary btn-sm" type="submit">Upload new image</button>
+                <button class="btn btn-gradient-primary btn-sm" type="submit" style="background-color:#0046BF; color:white;">Upload new image</button>
             </div>
         </div>
     </div>
                 <div class="col-xl-8">
-                    <div class="card mb-4">
+                    <div class="card">
                         <div class="card-body">
                             <form method="POST" action="">
                                 @csrf
                                 @method('PUT')
-                                <div class="mb-3">
+                                <div class="">
                                     <label class="small mb-1" for="inputFullName">Nama
                                         Vendor</label>
                                     <input class="form-control" id="inputFullName" type="text" name="name"
@@ -46,22 +46,7 @@
                                         placeholder="Enter your email address"
                                         value="{{ Auth::user()->email }}" readonly>
                                 </div>
-                              
-                                <div class="mb-3">
-
-                                    <label class="small mb-1" for="inputPhone">Phone
-                                        number</label>
-                                    <input class="form-control" id="inputPhone" type="tel" name="phone"
-                                        placeholder="Masukan nomor telepon Anda"
-                                        value=>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="small mb-1" for="inputAddress">Alamat</label>
-                                    <input class="form-control" id="inputAddress" type="text" name="address"
-                                        placeholder="Masukan alamat lengkap Anda"
-                                        value="">
-                                </div>
-                                <button class="btn btn-gradient-primary btn-sm" style="" type="submit">Save
+                                <button class="btn" style="background-color:#0046BF; color:white;" type="submit">Save
                                     changes</button>
                             </form>
                         </div>

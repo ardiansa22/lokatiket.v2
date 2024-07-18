@@ -41,25 +41,25 @@ https://templatemo.com/tm-580-woox-travel
     <li class="nav-item">
       <a class="nav-link" href="{{route('customer.index')}}">
         <i class="fa-solid fa-house-chimney" style="font-size: 26px;"></i>
-        <span>Home</span>
+        <span>Beranda</span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="{{route('customer.explore')}}">
         <i class="fa-solid fa-compass" style="font-size: 26px;"></i>
-        <span>Explore</span>
+        <span>Jelajah</span>
       </a>
     </li>
     <li class="nav-item" >
       <a class="nav-link" href="{{route('customer.riwayat')}}">
         <i class="fa-solid fa-ticket" style="font-size: 26px;"></i>
-        <span>Orders</span>
+        <span>Pesanan</span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="{{route('customer.profile')}}">
         <i class="fa-solid fa-user" style="font-size: 26px;"></i>
-        <span>Profile</span>
+        <span>Profil</span>
       </a>
     </li>
   </ul>
@@ -68,13 +68,17 @@ https://templatemo.com/tm-580-woox-travel
   <!-- Konten utama di sini -->
   <!-- ***** Main Banner Area Start ***** -->
   <section id="section-1">
+  <div class="content">
+
     <div class="search-container">
       <input type="text" placeholder="Cari tempat favorit kamu disini....">
       <button type="button">
-      <i class="fa-solid fa-magnifying-glass"></i>
+        <i class="fa-solid fa-magnifying-glass"></i>
       </button>
     </div>
-  </section>
+  </div>
+</section>
+
   <!-- ***** Main Banner Area End ***** -->
   
   <div class="menu">
@@ -134,10 +138,10 @@ https://templatemo.com/tm-580-woox-travel
                 @foreach($wisatas as $wisata)
                 <div class="item">
                   <div class="thumb">
-                    <img src="assets/images/cities-01.jpg" alt="">
+                    <img src="{{ asset('storage/images/' . json_decode($wisata->images)[0]) }}" alt="">
                   </div>
                   <h1>{{$wisata->name}}</h1>
-                  <span>⭐ 5.0 (770K)</span>
+                  <span class="badge text-dark">⭐ {{$wisata->rating_text}}</span>
                 </div>
                 @endforeach
               </div>

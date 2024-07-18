@@ -15,6 +15,7 @@ class CreateWisatasTable extends Migration
     {
         Schema::create('wisatas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->text('description');
             $table->decimal('price', 10, 2); // adjust precision and scale as needed
@@ -22,6 +23,9 @@ class CreateWisatasTable extends Migration
             $table->text('facilities')->nullable();
             $table->enum('kategori', ['Gunung', 'Pantai', 'Kawah']);
             $table->timestamps();
+
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

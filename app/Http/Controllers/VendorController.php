@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vendor;
+use App\Models\Order;
+use App\Models\wisata;
 use App\Http\Requests\StoreVendorRequest;
 use App\Http\Requests\UpdateVendorRequest;
 use Illuminate\Http\Request;
@@ -16,7 +18,24 @@ class VendorController extends Controller
     }
     public function index()
     {
-        return view('vendor.home');
+        $userId = Auth::id();
+        // Ambil semua wisata yang dikelola oleh pengelola yang sedang login
+        $all = Wisata::where('user_id', $userId)->pluck('id');
+        // Ambil semua pesanan yang terkait dengan wisata yang dikelola oleh pengelola
+        $orders = Order::whereIn('wisata_id', $all)->get();
+        $wisatas = Wisata::where('user_id', $userId)->get();
+        return view('vendor.home',compact('wisatas','orders'))
+        ->with('i', (request()->input('page', 1) - 1) * 5);
+        // return view('vendor.home');
+    }
+    public function produk()
+    {
+        $userId = Auth::id();
+        
+        $wisatas = Wisata::where('user_id', $userId)->get();
+        return view('vendor.produk.index',compact('wisatas'))
+        ->with('i', (request()->input('page', 1) - 1) * 5);
+        // return view('vendor.home');
     }
 
 

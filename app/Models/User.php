@@ -55,4 +55,9 @@ public function ulasans(): HasMany
         return $this->hasMany(Ulasan::class);
     }
 
+    public function wisatas()
+    {
+        return $this->hasMany(Wisata::class);
+    }
+
 }

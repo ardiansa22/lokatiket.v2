@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../../../assets/css/fontawesome.css">
     <link rel="stylesheet" href="../../../assets/css/templatemo-woox-travel.css">
     <link rel="stylesheet" href="../../../assets/css/show.css">
-    <link rel="stylesheet" href="../../../assets/css/profile.css">
+    <link rel="stylesheet" href="../../../assets/css/profil.css">
 
     
     <link rel="stylesheet" href="../assets/css/card.css">
@@ -40,25 +40,25 @@
     <li class="nav-item">
       <a class="nav-link" href="{{route('customer.index')}}">
         <i class="fa-solid fa-house-chimney" style="font-size: 26px;"></i>
-        <span>Home</span>
+        <span>Beranda</span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="{{route('customer.explore')}}">
         <i class="fa-solid fa-compass" style="font-size: 26px;"></i>
-        <span>Explore</span>
+        <span>Jelajah</span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="{{route('customer.riwayat')}}">
         <i class="fa-solid fa-ticket" style="font-size: 26px;"></i>
-        <span>Orders</span>
+        <span>Pesanan</span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="{{route('customer.profile')}}">
         <i class="fa-solid fa-user" style="font-size: 26px;"></i>
-        <span>Profile</span>
+        <span>Profil</span>
       </a>
     </li>
   </ul>

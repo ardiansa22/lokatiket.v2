@@ -709,14 +709,51 @@ Banner Style
 
 #section-1 {
   margin-top: 0px;
-  height: 100%;
-  background: url('../images/background1.jpg') no-repeat center center;
+  height: 100vh;
+  background: url('../images/country-02.jpg') no-repeat center center;
   background-size: cover;
-  position: relative;
-  /* border-radius: 23px; */
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  /* color: #fff; */
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 40px;
+  border-radius: 10px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.text-container {
+  margin-bottom: 20px;
+}
+
+.text-container h1 {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.text-container p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.text-container button {
+  padding: 10px 20px;
+  background-color: #ffd700;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #000;
+  font-size: 16px;
 }
 
 .search-container {
@@ -725,7 +762,8 @@ Banner Style
   background: rgba(255, 255, 255, 0.8);
   border-radius: 50px;
   padding: 10px 20px;
-  margin-top: 150px;
+  /* margin-top: 50px; */
+  width: 100%;
 }
 
 .search-container input {
@@ -745,9 +783,9 @@ Banner Style
   padding: 10px;
 }
 
-.search-container button img {
-  width: 20px;
-  height: 20px;
+.search-container button i {
+  font-size: 20px;
+  color: #000;
 }
 
 

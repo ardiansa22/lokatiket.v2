@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Wisata extends Model
 {
-    protected $fillable = ['name', 'description', 'price', 'kategori', 'facilities', 'images'];
+    protected $fillable = ['user_id','name', 'description', 'price', 'kategori', 'facilities', 'images'];
 
     protected $casts = [
         'images' => 'array',
@@ -26,6 +26,11 @@ class Wisata extends Model
     public function getAverageRatingAttribute()
     {
         return $this->ulasans()->avg('rating');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     // Method to format average rating text

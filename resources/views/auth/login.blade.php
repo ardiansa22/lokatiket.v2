@@ -13,10 +13,17 @@
   <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- <link href="assets/css/nucleo-svg.css" rel="stylesheet" /> -->
   <!-- CSS Files -->
   <link id="pagestyle" href="assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
   <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
     .login-container {
       display: flex;
       flex-direction: column;
@@ -30,13 +37,16 @@
       padding: 20px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       border-radius: 10px;
+
     }
     .login-card img {
       max-width: 100%;
       margin-bottom: 20px;
+      text-align :center;
     }
     .login-card h4 {
       margin-bottom: 10px;
+      text-align :center;
     }
     .login-card p {
       margin-bottom: 20px;
@@ -54,15 +64,7 @@
   </style>
 </head>
 <body class="">
-  <div class="container position-sticky z-index-sticky top-0">
-    <div class="row">
-      <div class="col-12">
-        <!-- Navbar -->
-        <!-- End Navbar -->
-      </div>
-    </div>
-  </div>
-  <main class="main-content mt-0">
+  <main class="main-content">
     <section>
       <div class="page-header min-vh-100">
         <div class="container">
@@ -70,8 +72,9 @@
             <div class="col-12 d-flex flex-column mx-auto">
               <div class="card login-card">
                 <div class="card-body">
-                  <img src="/assets/images/yt.png" alt="Illustration">
-                  <h4 class="font-weight-bolder">Hallo, Selamat datang! Login</h4>
+                  <img src="/assets/images/logolk.png" alt="Illustration">
+                  <h4 class="font-weight-bolder">Halo, Selamat datang !</h4>
+                  <p class="text-muted text-center font-weight-bolder">Silahkan Masuk</p>
                   <form role="form" method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="mb-3">
@@ -91,12 +94,12 @@
                       @enderror
                     </div>
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Login</button>
+                      <button type="submit" class="btn btn-primary" style="background-color:#0046BF;">Masuk</button>
                     </div>
                   </form>
                   <div class="additional-links">
-                    <a href="{{ route('password.request') }}">Lupa Password?</a><br>
-                    <a href="{{ route('register') }}">tidak punya akun?</a>
+                    <a href="{{ route('password.request') }}">Lupa Password ?</a><br>
+                    <a href="{{ route('register') }}">Tidak punya akun ?</a>
                   </div>
                 </div>
               </div>

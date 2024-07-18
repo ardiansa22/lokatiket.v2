@@ -2,37 +2,38 @@
 
 
 @section('content')
-<div class="container-fluid py-4">
-<div class="row">
-        <div class="col-12">
-          <div class="card mb-4">
-            <div class="card-header pb-0">
-              <h6>Authors table</h6>
-            </div>
-            <div class="card-body px-0 pt-0 pb-2">
-              <div class="table-responsive p-0">
-                <table class="table align-items-center mb-0">
-                 <thead>
-                 <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Produk</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Harga</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
-                      <th class="text-secondary opacity-7"></th>
-                    </tr>
-                  <tbody>
-                    <tr>
-                      <td>
-                        
-                      </td>
-                    </tr>
-                  </tbody>
-                 </thead>
-                </table>
+<!-- Recent Sales -->
+<div class="col-12">
+              <div class="card recent-sales overflow-auto">
+                <div class="card-body">
+                  <h5 class="card-title">Wisata Anda</h5>
+
+                  <table class="table table-borderless datatable">
+                    <thead>
+                      <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Wisata</th>
+                        <th scope="col">Deskripsi</th>
+                        <th scope="col">Harga</th>
+                        <th scope="col">Fasilitas</th>
+                      </tr>
+                    </thead>
+                    @foreach ($wisatas as $wisata)
+                    <tbody>
+                      <tr>
+                      <th scope="row">{{++$i}}</th>
+                      <td>{{$wisata->name}}</td>
+                      <td>{{$wisata->description}}</td>
+                      <td>{{$wisata->price}}</td>
+                      <td>{{$wisata->facilities}}</td>
+                      </tr>
+                      @endforeach
+                    </tbody>
+                  </table>
+
+                </div>
+
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-</div>
+            </div><!-- End Recent Sales -->
+
 @endsection

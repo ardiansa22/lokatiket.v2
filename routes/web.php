@@ -73,6 +73,7 @@ Route::group(['middleware' => ['role:vendor']],function(){
             Route::get('/add', [WisataController::class, 'create'])->name('create');
             Route::post('/store', [WisataController::class, 'store'])->name('store');
             Route::get('/profil', [VendorController::class, 'profil'])->name('profil');
+            Route::get('/produk', [VendorController::class, 'produk'])->name('produk');
             Route::get('/wisata/{wisata}', [WisataController::class, 'tampilkan'])->name('show');
             
            

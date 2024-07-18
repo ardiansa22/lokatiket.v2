@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Wisata;
 use Symfony\Component\HttpFoundation\Request;
 use App\Http\Requests\UpdateWisataRequest;
+use Illuminate\Support\Facades\Auth;
 
 class WisataController extends Controller
 {
@@ -17,13 +18,11 @@ class WisataController extends Controller
     {
         return view('vendor.produk.create');
     }
+    public function index()
+    {
+       
+    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
 {
     $request->validate([
@@ -33,9 +32,11 @@ class WisataController extends Controller
         'images' => 'required',
         'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'kategori' => 'required',
+        'facilities' => 'required',
     ]);
-
+    $userId = Auth::id();
     $wisata = new Wisata();
+    $wisata->user_id = $userId;
     $wisata->name = $request->name;
     $wisata->description = $request->description;
     $wisata->price = $request->price;
@@ -54,7 +55,7 @@ class WisataController extends Controller
 
     $wisata->save();
 
-    return redirect()->route('vendor.index')->with('success', 'Data wisata berhasil disimpan');
+    return back()->with('success', 'Wisata berhasil ditambahkan.');
 }
 
     /**

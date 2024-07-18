@@ -1,7 +1,7 @@
 @extends('customer.layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container py-3">
     <div class="visit-country">
         <div class="container">
             <div class="row">
@@ -25,23 +25,23 @@
                                                 <h4>{{ $wisata->name }}</h4>
                                                 <span>{{ $wisata->kategori }}</span>
                                                 <ul class="info">
-                                                    <li><i class="fa fa-money-check" style="color: #007BFF;"></i> {{ $wisata->price }}</li>
+                                                    <li><i class="fa fa-money-check" style="color: #0046BF;"></i> {{ $wisata->price }}</li>
                                                     <li><i class="fa fa-star" style="color: orange;"></i> 5.0</li>
                                                 </ul>
                                                 <p>{{ $wisata->description }}</p>
                                                 <ul class="info">
-                                                    <li><i class="fa-solid fa-square-check" style="color: #007BFF;"></i>Toilet</li>
-                                                    <li><i class="fa-solid fa-square-check" style="color: #007BFF;"></i>Mushola</li>
-                                                    <li><i class="fa-solid fa-square-check" style="color: #007BFF;"></i>Kantin</li>
+                                                    <li><i class="fa-solid fa-square-check" style="color: #0046BF;"></i>Toilet</li>
+                                                    <li><i class="fa-solid fa-square-check" style="color: #0046BF;"></i>Mushola</li>
+                                                    <li><i class="fa-solid fa-square-check" style="color: #0046BF;"></i>Kantin</li>
                                                 </ul>
                                                 <div class="d-flex align-items-center" style="margin-top: 20px;">
-                                                    <button class="btn btn-primary px-3 me-2" style="color: white; background-color:#007BFF;"
+                                                    <button class="btn btn-primary px-3 me-2" style="color: white; background-color:#0046BF;"
                                                         onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                                                         <i class="fas fa-minus"></i>
                                                     </button>
                                                     <input id="quantity" min="0" name="quantity" value="1" type="number"
                                                         class="form-control text-center" style="width: 60px; margin-top:1px;" />
-                                                    <button class="btn btn-primary px-3 ms-2" style="color: white; background-color:#007BFF;"
+                                                    <button class="btn btn-primary px-3 ms-2" style="color: white; background-color:#0046BF;"
                                                         onclick="document.getElementById('quantity').stepUp()">
                                                         <i class="fas fa-plus"></i>
                                                     </button>
@@ -55,7 +55,7 @@
                                                     <div class="">
                                                     <input type="date" name="visit_date">
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Checkout</button>
+                                                    <button type="submit" class="btn btn-primary" style="margin-top: 10px; background-color:#0046BF;">Checkout</button>
                                                 </form>
                                             </div>
                                         </div>
