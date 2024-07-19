@@ -39,7 +39,8 @@
                       <i class="bi bi-currency-dollar"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>{{$totalPrice}}</h6>
+                    <h6>Rp. {{ number_format($totalPrice, 0, ',', '.') }}</h6>
+
                     </div>
                   </div>
                 </div>
@@ -66,27 +67,29 @@
                 <div class="card-body">
                   <h5 class="card-title">Pembelian Tekini <span>| Today</span></h5>
 
-                  <table class="table table-borderless datatable">
+                  <table class="table table-borderless">
                     <thead>
                       <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">No</th>
                         <th scope="col">Wisata</th>
                         <th scope="col">Jumlah</th>
                         <th scope="col">Price</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Tanggal Kunjungan</th>
                         <th scope="col">Tanggal Pesanan</th>
                       </tr>
                     </thead>
                     <tbody>
                       @foreach ($orders as $order)
                       <tr>
-                        <td>1</td>
+                        <th scope="row">{{++$i}}</th>
                         <td>{{$order->wisata->name}}</td>
                         <td>{{$order->quantity}}</td>
                         <td>{{$order->total_price}}</td>
                         <td> <span class="badge {{ $order->status === 'unpaid' ? 'bg-danger' : 'bg-success' }}">
                                                     {{ $order->status }}
                                                 </span></td>
+                        <td>{{$order->visit_date}}</td>
                         <td>{{$order->created_at}}</td>
                       </tr>
                     </tbody>

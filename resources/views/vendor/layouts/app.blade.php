@@ -18,16 +18,16 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="../assets/admin//vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../assets/admin//vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="../assets/admin//vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="../assets/admin//vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="../assets/admin//vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="../assets/admin//vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="../assets/admin//vendor/simple-datatables/style.css" rel="stylesheet">
+  <link href="../assets/admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/admin/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/admin/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../assets/admin/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="../assets/admin/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="../assets/admin/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="../assets/admin/vendor/simple-datatables/style.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="../assets/admin//css/style.css" rel="stylesheet">
+  <link href="../assets/admin/css/style.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: NiceAdmin
@@ -53,22 +53,12 @@
    
 
     <nav class="header-nav ms-auto">
-      <ul class="d-flex align-items-center">
-
-        <li class="nav-item d-block d-lg-none">
-          <a class="nav-link nav-icon search-bar-toggle " href="#">
-            <i class="bi bi-search"></i>
-          </a>
-        </li><!-- End Search Icon-->
-
-        
-        
-
-        
+      <ul class="d-flex align-items-center">   
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
+          <img src="../../../assets/admin/img/userimage.jpeg" alt="Profile" class="rounded-circle">  
+          <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -109,17 +99,17 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-menu-button-wide"></i><span>Produk</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-menu-button-wide"></i><span>Wisata</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <a href="{{route('vendor.produk')}}">
-              <i class="bi bi-circle"></i><span>Produk Saya</span>
+              <i class="bi bi-circle"></i><span>Wisata Saya</span>
             </a>
           </li>
           <li>
             <a href="{{route('vendor.create')}}">
-              <i class="bi bi-circle"></i><span>Tambah Produk</span>
+              <i class="bi bi-circle"></i><span>Tambah Wisata</span>
             </a>
           </li>
           </ul>
@@ -165,17 +155,18 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="../assets/admin//vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="../assets/admin//vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/admin//vendor/chart.js/chart.umd.js"></script>
-  <script src="../assets/admin//vendor/echarts/echarts.min.js"></script>
-  <script src="../assets/admin//vendor/quill/quill.min.js"></script>
-  <script src="../assets/admin//vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="../assets/admin//vendor/tinymce/tinymce.min.js"></script>
-  <script src="../assets/admin//vendor/php-email-form/validate.js"></script>
+  <script src="../assets/admin/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="../assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/admin/vendor/chart.js/chart.umd.js"></script>
+  <script src="../assets/admin/vendor/echarts/echarts.min.js"></script>
+  <script src="../assets/admin/vendor/quill/quill.min.js"></script>
+  <script src="../assets/admin/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="../assets/admin/vendor/tinymce/tinymce.min.js"></script>
+  <script src="../assets/admin/vendor/php-email-form/validate.js"></script>
+  @yield('script')
 
   <!-- Template Main JS File -->
-  <script src="../assets/admin//js/main.js"></script>
+  <script src="../assets/admin/js/main.js"></script>
 
 </body>
 

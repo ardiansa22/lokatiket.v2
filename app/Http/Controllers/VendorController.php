@@ -49,11 +49,10 @@ class VendorController extends Controller
     public function produk()
     {
         $userId = Auth::id();
-        
         $wisatas = Wisata::where('user_id', $userId)->get();
         return view('vendor.produk.index',compact('wisatas'))
         ->with('i', (request()->input('page', 1) - 1) * 5);
-        // return view('vendor.home');
+        
     }
 
 

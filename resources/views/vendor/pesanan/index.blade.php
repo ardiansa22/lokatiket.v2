@@ -8,7 +8,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Wisata Anda</h5>
 
-                  <table class="table table-borderless datatable">
+                  <table class="table table-borderless">
                     <thead>
                       <tr>
                         <th scope="col">No</th>
@@ -29,12 +29,10 @@
                                                     {{ $order->status }}
                                                 </span></td>
                       </tr>
-                      @endforeach
                     </tbody>
+                    @endforeach
                   </table>
-
                 </div>
-
               </div>
             </div><!-- End Recent Sales -->
 

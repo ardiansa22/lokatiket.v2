@@ -6,6 +6,8 @@ use App\Models\Wisata;
 use Symfony\Component\HttpFoundation\Request;
 use App\Http\Requests\UpdateWisataRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
 
 class WisataController extends Controller
 {
@@ -75,31 +77,75 @@ class WisataController extends Controller
      * @param  \App\Models\Wisata  $wisata
      * @return \Illuminate\Http\Response
      */
-    public function edit(Wisata $wisata)
-    {
-        //
+    public function edit($id)
+{
+    $wisata = Wisata::findOrFail($id);
+
+    // Pastikan hanya pemilik wisata yang dapat mengedit
+    if ($wisata->user_id !== Auth::id()) {
+        return redirect()->route('vendor.produk')->with('error', 'Anda tidak memiliki akses untuk mengedit wisata ini.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateWisataRequest  $request
-     * @param  \App\Models\Wisata  $wisata
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateWisataRequest $request, Wisata $wisata)
-    {
-        //
+    return view('vendor.produk.index', compact('wisata'));
+}
+
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'name' => 'required',
+        'description' => 'required',
+        'price' => 'required|numeric',
+       
+        'facilities' => 'required',
+    ]);
+
+    $wisata = Wisata::findOrFail($id);
+
+    // Pastikan hanya pemilik wisata yang dapat mengupdate
+    if ($wisata->user_id !== Auth::id()) {
+        return redirect()->route('vendor.produk')->with('error', 'Anda tidak memiliki akses untuk mengupdate wisata ini.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Wisata  $wisata
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Wisata $wisata)
-    {
-        //
+    $wisata->name = $request->name;
+    $wisata->description = $request->description;
+    $wisata->price = $request->price;
+
+    $wisata->facilities = $request->facilities;
+
+    if($request->hasfile('images')) {
+        $images = [];
+        foreach($request->file('images') as $image) {
+            $name = time() . '_' . $image->getClientOriginalName();
+            $image->storeAs('public/images', $name);
+            $images[] = $name;
+        }
+        $wisata->images = json_encode($images);
     }
+
+    $wisata->save();
+
+    return back()->with('success', 'Wisata berhasil diubah.');
+}
+public function destroy($id)
+{
+    $wisata = Wisata::findOrFail($id);
+
+    // Pastikan hanya pemilik wisata yang dapat menghapus
+    if ($wisata->user_id !== Auth::id()) {
+        return redirect()->route('vendor.produk')->with('error', 'Anda tidak memiliki akses untuk menghapus wisata ini.');
+    }
+
+    // Hapus gambar dari storage
+    $images = json_decode($wisata->images);
+    if ($images) {
+        foreach ($images as $image) {
+            Storage::delete('public/images/' . $image);
+        }
+    }
+
+    $wisata->delete();
+
+    return redirect()->route('vendor.produk')->with('success', 'Wisata berhasil dihapus.');
+}
+    
 }

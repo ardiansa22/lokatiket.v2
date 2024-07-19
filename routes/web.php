@@ -64,7 +64,7 @@ Route::group(['middleware' => ['role:superadmin']], function() {
 });
 
 // VENDOR
-Route::group(['middleware' => ['role:vendor']],function(){
+Route::group(['middleware' => ['role:vendor']], function(){
     Route::prefix('vendor')->group(function(){
         Route::name('vendor.')->group(function(){
             Route::get('/home', [VendorController::class, 'index'])->name('index');
@@ -76,9 +76,11 @@ Route::group(['middleware' => ['role:vendor']],function(){
             Route::get('/produk', [VendorController::class, 'produk'])->name('produk');
             Route::get('/pesanan', [VendorController::class, 'pesanan'])->name('pesanan');
             Route::get('/wisata/{wisata}', [WisataController::class, 'tampilkan'])->name('show');
-            
-           
+
+            // Route untuk edit dan hapus
+            Route::get('/vendor/{id}/edit', [WisataController::class, 'edit'])->name('edit');
+            Route::put('/vendor/{id}', [WisataController::class, 'update'])->name('update');
+            Route::delete('/vendor/{id}', [WisataController::class, 'destroy'])->name('destroy');
         });
     });
-    
-    });
+});

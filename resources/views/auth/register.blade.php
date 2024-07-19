@@ -1,51 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="assets/img/favicon.png">
-  <title>
-    Wedding Go
-  </title>
-  <!--     Fonts and icons     -->
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="/assets/images/logo.png">
+  <title>Lokatiket</title>
+  <!-- Fonts and icons -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
   <link href="assets/css/nucleo-icons.css" rel="stylesheet" />
   <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- <link href="assets/css/nucleo-svg.css" rel="stylesheet" /> -->
   <!-- CSS Files -->
   <link id="pagestyle" href="assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
-</head>
+  <style>
+    body, html {
+      /* height: 100%; */
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .login-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      /* min-height: 100vh; */
+    }
+    .login-card {
+      /* width: 100%; */
+      max-width: 400px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
 
+    }
+    .login-card img {
+      max-width: 100%;
+      margin-bottom: 20px;
+      text-align :center;
+    }
+    .login-card h4 {
+      margin-bottom: 10px;
+      text-align :center;
+    }
+    .login-card p {
+      margin-bottom: 20px;
+    }
+    .login-card .form-control {
+      margin-bottom: 15px;
+    }
+    .login-card .btn-primary {
+      width: 100%;
+    }
+    .login-card .additional-links {
+      margin-top: 15px;
+      text-align: center;
+    }
+  </style>
+</head>
 <body class="">
-  <!-- End Navbar -->
-  <main class="main-content  mt-0">
-    <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signup-cover.jpg'); background-position: top;">
-      <span class="mask bg-gradient-dark opacity-6"></span>
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-5 text-center mx-auto">
-            <h1 class="text-white mb-2 mt-5">Welcome!</h1>
-            <p class="text-lead text-white">Use these awesome forms to login or create new account in your project for free.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
-        <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
-          <div class="card z-index-0">
-          <div class="card-header pb-0 text-start">
-                  <h4 class="font-weight-bolder">Register</h4>
-                  <p class="mb-0">Enter your email and password to sign in</p>
-            </div>
-            <div class="card-body">
-              <form role="form" method="POST" action="{{ route('register') }}">
-                @csrf
+  <main class="main-content">
+    <section>
+      <div class="page-header min-vh-100">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 d-flex flex-column mx-auto">
+              <div class="card login-card">
+                <div class="card-body">
+                  <img src="/assets/images/logolk.png" alt="Illustration">
+                  <p class="text-muted text-center font-weight-bolder">Silahkan Daftar</p>
+                  <form role="form" method="POST" action="{{ route('register') }}">
+                    @csrf
                 <div class="mb-3">
                   <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Name">
                   @error('name')
@@ -75,55 +105,25 @@
                   <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
                 </div>
                 <div class="form-check form-check-info text-start">
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked style="background-color:#0046BF;">
                   <label class="form-check-label" for="flexCheckDefault">
-                    I agree the <a href="javascript:;" class="text-dark font-weight-bolder">Terms and Conditions</a>
+                    I agree the <a href="javascript:;" class="text-dark font-weight-bolder" >Terms and Conditions</a>
                   </label>
                 </div>
                 <div class="text-center">
-                  <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Sign up</button>
+                  <button type="submit" class="btn w-100 my-4 mb-2" style="background-color:#0046BF;color:white;">Sign up</button>
                 </div>
                 <p class="text-sm mt-3 mb-0">Already have an account? <a href="{{ route('login') }}" class="text-dark font-weight-bolder">Sign in</a></p>
               </form>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   </main>
-  <!-- -------- START FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
-  <footer class="footer py-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 mx-auto text-center mb-4 mt-2">
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-            <span class="text-lg fab fa-dribbble"></span>
-          </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-            <span class="text-lg fab fa-twitter"></span>
-          </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-            <span class="text-lg fab fa-instagram"></span>
-          </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-            <span class="text-lg fab fa-pinterest"></span>
-          </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-            <span class="text-lg fab fa-github"></span>
-          </a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-8 mx-auto text-center mt-1">
-          <p class="mb-0 text-secondary">
-            Copyright © <script>
-              document.write(new Date().getFullYear())
-            </script> Soft by Creative Tim.
-          </p>
-        </div>
-      </div>
-    </div>
-  </footer>
+  
   <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
   <!--   Core JS Files   -->
   <script src="assets/js/core/popper.min.js"></script>
@@ -144,5 +144,4 @@
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="assets/js/argon-dashboard.min.js?v=2.0.4"></script>
 </body>
-
 </html>
