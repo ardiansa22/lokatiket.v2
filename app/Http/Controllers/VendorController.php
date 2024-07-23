@@ -32,7 +32,9 @@ class VendorController extends Controller
     // Filter orders based on visit_date
     $filteredOrders = Order::whereIn('wisata_id', $all)
                           ->whereDate('visit_date', $visitDate)
+                          ->where('status', 'paid')
                           ->get();
+
     
     $totalPrice = $orders->where('status', 'paid')->sum('total_price');
     $totalOrder = $orders->count('id');

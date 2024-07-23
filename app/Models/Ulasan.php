@@ -11,7 +11,7 @@ class Ulasan extends Model
 
     // Kolom yang bisa diisi
     protected $fillable = [
-        'user_id', 'wisata_id', 'rating', 'komentar',
+        'user_id', 'wisata_id','order_id', 'rating', 'komentar',
     ];
 
     // Relasi dengan model User
@@ -24,5 +24,9 @@ class Ulasan extends Model
     public function wisata(): BelongsTo
     {
         return $this->belongsTo(Wisata::class);
+    }
+    public function order(): BelongsTo
+    {
+        return $this->belongsTo(Order::class);
     }
 }
