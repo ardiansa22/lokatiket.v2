@@ -54,17 +54,19 @@
             <td>{{$wisata->facilities}}</td>
             <td>{{$wisata->kategori}}</td>
             <td>
+              <button class="btn btn-warning deleteBtn">
               <a href="javascript:void(0)" class="editBtn" 
                  data-id="{{$wisata->id}}" 
                  data-name="{{$wisata->name}}" 
                  data-description="{{$wisata->description}}" 
                  data-price="{{$wisata->price}}"
                  data-facilities="{{$wisata->facilities}}"
-                 style="">Edit</a>
+                 style=""><i class="bi bi-pencil-square"></i></a>
+                 </button>
                  <form action="{{ route('vendor.destroy', $wisata->id) }}" method="POST" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger deleteBtn" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">hapus</button>
                             </form>
             </td>
           </tr>

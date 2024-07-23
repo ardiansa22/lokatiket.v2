@@ -22,7 +22,6 @@
                   </div>
 
                 </div>
-
               </div>
             </div><!-- End Sales Card -->
 
@@ -38,13 +37,29 @@
                     </div>
                     <div class="ps-3">
                     <h6>Rp. {{ number_format($totalPrice, 0, ',', '.') }}</h6>
-
                     </div>
                   </div>
                 </div>
-
               </div>
             </div><!-- End Revenue Card -->
+            
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card revenue-card">
+                <div class="card-body">
+                  <h5 class="card-title">Wisata</h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-tree"></i>
+                    </div>
+                    <div class="ps-3">
+                    <h6>1</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- End Revenue Card -->
+
             <div class="col-12">
                <div class="card recent-sales overflow-auto">
                  <div class="card-body">
@@ -72,7 +87,7 @@
                              <th scope="row">{{ ++$i }}</th>
                              <th scope="row">220102{{ $order->id }}LKTKT</th>
                              <td>{{ $order->wisata->name }}</td>
-                             <td>{{ $order->total_price }}</td>
+                             <td>{{ number_format($order->total_price, 0, ',', '.') }}</td>
                              <td>{{ $order->status }}</td>
                              <td>{{ $order->visit_date }}</td>
                          </tr>
