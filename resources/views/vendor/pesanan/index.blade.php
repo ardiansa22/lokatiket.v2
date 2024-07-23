@@ -6,7 +6,7 @@
 <div class="col-12">
               <div class="card recent-sales overflow-auto">
                 <div class="card-body">
-                  <h5 class="card-title">Wisata Anda</h5>
+                  <h5 class="card-title">Pesanan Saya</h5>
 
                   <table class="table table-borderless">
                     <thead>
@@ -24,7 +24,7 @@
                       <th scope="row">{{++$i}}</th>
                       <td>{{$order->wisata->name}}</td>
                       <td>{{$order->quantity}}</td>
-                      <td>{{$order->total_price}}</td>
+                      <td>{{ number_format($order->total_price, 0, ',', '.') }}</td>
                       <td><span class="badge {{ $order->status === 'unpaid' ? 'bg-danger' : 'bg-success' }}">
                                                     {{ $order->status }}
                                                 </span></td>

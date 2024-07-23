@@ -16,22 +16,33 @@ class VendorController extends Controller
     {
          $this->middleware('permission:vendor-any', ['any']);
     }
-    public function index()
-    {
-        $userId = Auth::id();
-        
-        // Ambil semua wisata yang dikelola oleh pengelola yang sedang login
-        $all = Wisata::where('user_id', $userId)->pluck('id');
-        // Ambil semua pesanan yang terkait dengan wisata yang dikelola oleh pengelola
-        $orders = Order::whereIn('wisata_id', $all)->get(); 
-        $totalPrice = $orders->sum('total_price');
-        $totalOrder = $orders->count('id');
-        $paidOrders = $orders->where('status', 'paid');
-        $wisatas = Wisata::where('user_id', $userId)->get();
-        return view('vendor.home',compact('wisatas','orders','totalPrice','totalOrder','paidOrders'))
+    public function index(Request $request)
+{
+    $userId = Auth::id();
+    
+    // Ambil tanggal kunjungan dari request, default ke tanggal hari ini jika tidak ada
+    $visitDate = $request->input('visit_date', now()->toDateString());
+    
+    // Ambil semua wisata yang dikelola oleh pengelola yang sedang login
+    $all = Wisata::where('user_id', $userId)->pluck('id');
+    
+    // Ambil semua pesanan yang terkait dengan wisata yang dikelola oleh pengelola
+    $orders = Order::whereIn('wisata_id', $all)->get();
+    
+    // Filter orders based on visit_date
+    $filteredOrders = Order::whereIn('wisata_id', $all)
+                          ->whereDate('visit_date', $visitDate)
+                          ->get();
+    
+    $totalPrice = $orders->where('status', 'paid')->sum('total_price');
+    $totalOrder = $orders->count('id');
+    $paidOrders = $orders->where('status', 'paid');
+    $wisatas = Wisata::where('user_id', $userId)->get();
+    
+    return view('vendor.home', compact('wisatas', 'orders', 'filteredOrders', 'totalPrice', 'totalOrder', 'paidOrders', 'visitDate'))
         ->with('i', (request()->input('page', 1) - 1) * 5);
-        // return view('vendor.home');
-    }
+}
+
     public function pesanan()
     {
         $userId = Auth::id();

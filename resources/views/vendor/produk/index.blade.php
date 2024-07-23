@@ -1,5 +1,13 @@
 @extends('vendor.layouts.app')
 
+@section('style')
+<style>
+    .thumbnail {
+        width: 100px;
+        height: auto;
+    }
+</style>
+@endsection
 @section('content')
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -22,14 +30,16 @@
     <div class="card-body">
       <h5 class="card-title">Wisata Anda</h5>
 
-      <table class="table table-borderless">
+      <table class="table table-striped datatable">
         <thead>
           <tr>
             <th scope="col">No</th>
+            <th scope="col">Poto</th>
             <th scope="col">Wisata</th>
             <th scope="col">Deskripsi</th>
             <th scope="col">Harga</th>
             <th scope="col">Fasilitas</th>
+            <th scope="col">Kategori</th>
             <th scope="col">Aksi</th>
           </tr>
         </thead>
@@ -37,10 +47,12 @@
         <tbody>
           <tr>
             <th scope="row">{{++$i}}</th>
+            <td><img src="{{ asset('storage/images/' . json_decode($wisata->images)[0]) }}" alt="Image" class="thumbnail"/></td>
             <td>{{$wisata->name}}</td>
-            <td>{{$wisata->description}}</td>
+            <td style="max-width: 300px; word-wrap: break-word;">{{$wisata->description}}</td>
             <td>{{$wisata->price}}</td>
             <td>{{$wisata->facilities}}</td>
+            <td>{{$wisata->kategori}}</td>
             <td>
               <a href="javascript:void(0)" class="editBtn" 
                  data-id="{{$wisata->id}}" 

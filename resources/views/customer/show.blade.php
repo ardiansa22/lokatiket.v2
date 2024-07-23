@@ -53,7 +53,7 @@
                                                     <input type="hidden" name="quantity" id="hiddenQuantity" value="1">
                                                     <input type="hidden" name="total_price" id="total_price" value="{{ $wisata->price }}">
                                                     <div class="">
-                                                    <input type="date" name="visit_date">
+                                                    <input type="date" name="visit_date" reuired >
                                                     </div>
                                                     <button type="submit" class="btn btn-primary" style="margin-top: 10px; background-color:#0046BF;">Checkout</button>
                                                 </form>
