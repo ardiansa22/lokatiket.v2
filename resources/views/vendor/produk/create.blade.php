@@ -82,9 +82,10 @@
                         <div class="col-sm-10">
                             <select class="form-select" aria-label="Default select example" name="kategori" required>
                                 <option selected>Open this select menu</option>
-                                <option value="1">Gunung</option>
-                                <option value="2">Kawah</option>
-                                <option value="3">Pantai</option>
+                                <option value="1">Alam</option>
+                                <option value="2">Gunung</option>
+                                <option value="3">Kawah</option>
+                                <option value="4">Pantai</option>
                             </select>
                         </div>
                     </div>
@@ -150,7 +151,7 @@
         let formData = new FormData(this);
 
         $.ajax({
-            url: '{{ route('vendor.store') }}',
+            url: '{{ route('vendor.store')}}',
             method: 'POST',
             data: formData,
             contentType: false,

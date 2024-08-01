@@ -24,7 +24,7 @@
                 <a class="nav-link" href="{{ route('customer.wisata.filter', 'Pantai') }}">Pantai</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('customer.wisata.filter', 'Situ') }}">Situ</a>
+                <a class="nav-link" href="{{ route('customer.wisata.filter', 'Kawah') }}">Kawah</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('customer.wisata.filter', 'Gunung') }}">Gunung</a>
