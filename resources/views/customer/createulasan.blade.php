@@ -18,6 +18,7 @@
     <form action="{{ route('customer.ulasanstore') }}" method="POST">
         @csrf
         <input type="hidden" name="wisata_id" value="{{ $wisataId }}">
+        <input type="hidden" name="order_id" value="{{ $orderId }}">
         <input type="hidden" name="rating" id="rating" value="">
 
         <div class="form-group">

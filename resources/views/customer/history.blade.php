@@ -30,7 +30,7 @@
                         </td>
                         <td class="text-end">-Rp. {{ $item->total_price }}</td>
                         <td class="text-end"><a href="/customer/invoice/{{ $item->id }}">Tiket</a></td>
-                        <td class="text-end"><a href="{{ route('customer.ulasan', $item->wisata_id) }}">Ulasan</a></td>
+                        <td class="text-end"><a href="/customer/ulasan/{{$item->wisata_id}}/{{$item->id}}">Ulasan</a></td>
                     </tr>
                 @endforeach
             </tbody>

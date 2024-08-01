@@ -46,7 +46,28 @@
                     <div class="row mb-3">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Fasilitas</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" name="facilities" required style="height: 100px"></textarea>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="fasilitas[]" value="toilet" id="toilet">
+                                <label class="form-check-label" for="toilet">Toilet</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="fasilitas[]" value="mushola" id="mushola">
+                                <label class="form-check-label" for="mushola">Mushola</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="fasilitas[]" value="mesjid" id="mesjid">
+                                <label class="form-check-label" for="mesjid">Mesjid</label>
+                            </div>
+                            <div id="fasilitas-lainnya-group">
+                                <label for="fasilitas_lainnya">Fasilitas Lainnya:</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" id="fasilitas_lainnya" name="fasilitas_lainnya[]">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" id="add-fasilitas-lainnya">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="additional-fasilitas-lainnya"></div>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -68,8 +89,7 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label">Submit Button</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-10 offset-sm-2">
                             <button type="submit" class="btn btn-primary">Tambahkan</button>
                         </div>
                     </div>
@@ -83,6 +103,7 @@
 
 @section('script')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
     document.getElementById('fileInput').addEventListener('change', function(event) {
         const files = event.target.files;
@@ -104,6 +125,25 @@
         }
     });
 
+    document.getElementById('add-fasilitas-lainnya').addEventListener('click', function() {
+        const container = document.getElementById('additional-fasilitas-lainnya');
+        const newInput = document.createElement('div');
+        newInput.classList.add('input-group', 'mb-3');
+        newInput.innerHTML = `
+            <input type="text" class="form-control" name="fasilitas_lainnya[]">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary remove-fasilitas-lainnya" type="button">-</button>
+            </div>
+        `;
+        container.appendChild(newInput);
+    });
+
+    document.getElementById('additional-fasilitas-lainnya').addEventListener('click', function(event) {
+        if (event.target.classList.contains('remove-fasilitas-lainnya')) {
+            event.target.closest('.input-group').remove();
+        }
+    });
+
     $('#uploadForm').submit(function(event) {
         event.preventDefault();
 
@@ -116,9 +156,17 @@
             contentType: false,
             processData: false,
             success: function(response) {
-                // Optionally, you can clear the preview and form here
                 $('#filePreview').empty();
                 $('#uploadForm')[0].reset();
+                $('#additional-fasilitas-lainnya').empty();
+
+                // Tampilkan SweetAlert
+                Swal.fire({
+                    title: 'Berhasil!',
+                    text: 'Wisata berhasil ditambahkan.',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
             },
             error: function(xhr, status, error) {
                 alert('File upload failed');

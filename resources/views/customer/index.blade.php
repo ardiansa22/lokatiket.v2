@@ -138,7 +138,9 @@ https://templatemo.com/tm-580-woox-travel
                 @foreach($wisatas as $wisata)
                 <div class="item">
                   <div class="thumb">
+                    <a href="{{ route('customer.show', $wisata) }}">
                     <img src="{{ asset('storage/images/' . json_decode($wisata->images)[0]) }}" alt="">
+                    </a>
                   </div>
                   <h1>{{$wisata->name}}</h1>
                   <span class="badge text-dark">⭐ {{$wisata->rating_text}}</span>

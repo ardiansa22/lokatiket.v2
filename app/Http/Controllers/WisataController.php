@@ -34,8 +34,10 @@ class WisataController extends Controller
         'images' => 'required',
         'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'kategori' => 'required',
-        'facilities' => 'required',
+        'fasilitas' => 'required|array',
+        'fasilitas_lainnya' => 'array'
     ]);
+
     $userId = Auth::id();
     $wisata = new Wisata();
     $wisata->user_id = $userId;
@@ -43,7 +45,13 @@ class WisataController extends Controller
     $wisata->description = $request->description;
     $wisata->price = $request->price;
     $wisata->kategori = $request->kategori;
-    $wisata->facilities = $request->facilities;
+
+    // Menggabungkan fasilitas checkbox dengan fasilitas lainnya
+    $fasilitas = $request->fasilitas;
+    if ($request->has('fasilitas_lainnya')) {
+        $fasilitas = array_merge($fasilitas, array_filter($request->fasilitas_lainnya));
+    }
+    $wisata->facilities = json_encode($fasilitas);
 
     if($request->hasfile('images')) {
         $images = [];
@@ -59,6 +67,7 @@ class WisataController extends Controller
 
     return back()->with('success', 'Wisata berhasil ditambahkan.');
 }
+
 
     /**
      * Display the specified resource.
