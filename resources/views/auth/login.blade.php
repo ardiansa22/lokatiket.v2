@@ -20,7 +20,7 @@
     body, html {
       height: 100%;
       margin: 0;
-      display: flex;
+      display: flex; 
       align-items: center;
       justify-content: center;
     }
@@ -37,16 +37,15 @@
       padding: 20px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       border-radius: 10px;
-
     }
     .login-card img {
       max-width: 100%;
       margin-bottom: 20px;
-      text-align :center;
+      text-align: center;
     }
     .login-card h4 {
       margin-bottom: 10px;
-      text-align :center;
+      text-align: center;
     }
     .login-card p {
       margin-bottom: 20px;
@@ -60,6 +59,12 @@
     .login-card .additional-links {
       margin-top: 15px;
       text-align: center;
+    }
+    .login-card .mitra-link {
+      margin-top: 20px;
+      text-align: center;
+      font-weight: bold;
+      color: #0046BF;
     }
   </style>
 </head>
@@ -99,7 +104,11 @@
                   </form>
                   <div class="additional-links">
                     <a href="{{ route('password.request') }}">Lupa Password ?</a><br>
-                    <a href="{{ route('register') }}">Tidak punya akun ?</a>
+                    <a href="{{ route('register') }}">Tidak punya akun ?</a><br>
+                  </div>
+                  <div class="mitra-link">
+                    <a href="https://wa.me/<6285523873288>
+">Bergabung Menjadi Mitra</a>
                   </div>
                 </div>
               </div>

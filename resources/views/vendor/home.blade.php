@@ -103,7 +103,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Transaksi Tekini</h5>
 
-                  <table class="table table-striped">
+                  <table class="table table-striped datatable">
                     <thead>
                       <tr>
                         <th scope="col">No</th>
