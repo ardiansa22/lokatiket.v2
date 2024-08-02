@@ -19,6 +19,12 @@ class CustomerController extends Controller
         return view('customer.index', compact('wisatas'));
        
     }
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $results = Wisata::where('name', 'LIKE', "%{$query}%")->get();
+        return response()->json($results);
+    }
     public function tampilkan(Wisata $wisata)
     {
         return view('customer.show', compact('wisata'));

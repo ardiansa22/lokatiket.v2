@@ -46,6 +46,7 @@ Route::middleware(['role:customer', 'verified'])->group(function () {
         Route::get('/ulasan/{wisataId}/{orderId}', [UlasanController::class, 'create'])->name('ulasan');
         Route::post('/ulasan', [UlasanController::class, 'store'])->name('ulasanstore');
         Route::get('/profil', [CustomerController::class, 'profil'])->name('profile');
+        Route::get('/search', [CustomerController::class, 'search'])->name('search');
         
         
             });
