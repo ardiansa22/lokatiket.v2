@@ -30,13 +30,7 @@
   <!-- Template Main CSS File -->
   <link href="../../../assets/admin//css/style.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Updated: Jul 27 2023 with Bootstrap v5.3.1
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  @yield('style')
 </head>
 
 <body>
@@ -100,7 +94,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="{{route('vendor.index')}}">
+        <a class="nav-link " href="{{route('superadmin.users.index')}}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -111,11 +105,6 @@
           <i class="bi bi-menu-button-wide"></i><span>Pengguna</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="{{ route('superadmin.users.index') }}">
-              <i class="bi bi-circle"></i><span>Data Pengguna</span>
-            </a>
-          </li>
           <li>
             <a href="{{ route('superadmin.users.create') }}">
               <i class="bi bi-circle"></i><span>Tambah Pengguna</span>

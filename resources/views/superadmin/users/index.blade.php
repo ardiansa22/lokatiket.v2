@@ -1,5 +1,12 @@
 @extends('layouts.app')
-
+@section('style')
+<style>
+    .thumbnail {
+        width: 100px;
+        height: auto;
+    }
+</style>
+@endsection
 @section('content')
 
 @if ($message = Session::get('success'))
@@ -17,14 +24,14 @@
             <div class="col-xxl-3 col-md-6">
               <div class="card info-card sales-card">
                 <div class="card-body">
-                  <h5 class="card-title">Jumlah Pesanan</h5>
+                  <h5 class="card-title">Jumlah Pesanan <span>| Paid</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                     <i class="bi bi-cart"></i>
                     </div>
                     <div class="ps-3">
-                      <h6></h6>
+                      <h6>{{$totalOrder}}</h6>
                     </div>
                   </div>
 
@@ -40,10 +47,13 @@
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-currency-dollar"></i>
+                      <i class="bi bi-person"></i>
                     </div>
                     <div class="ps-3">
-                    <h6>Rp.</h6>
+                    <h6>{{ $totalUsers }}</h6>
+                    <span class="text-success small pt-1 fw-bold">{{$vendorCount}}</span> <span class="text-muted small pt-2 ps-1">Pengelola ,</span>
+                    <span class="text-success small pt-1 fw-bold">{{$customerCount}}</span> <span class="text-muted small pt-2 ps-1">Customer,</span>
+                    <span class="text-success small pt-1 fw-bold">{{$adminCount}}</span> <span class="text-muted small pt-2 ps-1">Superadmin</span>
                     </div>
                   </div>
                 </div>
@@ -60,7 +70,7 @@
                       <i class="bi bi-tree"></i>
                     </div>
                     <div class="ps-3">
-                    <h6>1</h6>
+                    <h6>{{$totalWisata}}</h6>
                     </div>
                   </div>
                 </div>
@@ -69,14 +79,14 @@
             <div class="col-xxl-3 col-md-6">
               <div class="card info-card revenue-card">
                 <div class="card-body">
-                  <h5 class="card-title">Jumlah Wisata</h5>
+                  <h5 class="card-title">Revenue <span>| Paid</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-tree"></i>
+                      <i class="bi bi-currency-dollar"></i>
                     </div>
                     <div class="ps-3">
-                    <h6>1</h6>
+                    <h6>{{ number_format($totalOrderPaid, 0, ',', '.') }}</h6>
                     </div>
                   </div>
                 </div>
@@ -90,7 +100,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Transaksi Tekini</h5>
 
-                  <table class="table table-striped">
+                  <table class="table table-striped datatable">
                     <thead>
                       <tr>
                         <th scope="col">No</th>
@@ -103,15 +113,74 @@
                       </tr>
                     </thead>
                     <tbody>
-                     
+                      @foreach ($order as $item)
+                      <tr>
+                        <th scope="row">{{++$i}}</th>
+                        <td>{{$item->wisata->name}}</td>
+                        <td>{{$item->quantity}}</td>
+                        <td>{{ number_format($item->total_price, 0, ',', '.') }}</td>
+                        <td> <span class="badge {{ $item->status === 'unpaid' ? 'bg-danger' : 'bg-success' }}">
+                                                    {{ $item->status }}
+                                                </span></td>
+                        <td>{{$item->visit_date}}</td>
+                        <td>{{$item->created_at}}</td>
+                      </tr>
+                      @endforeach
                     </tbody>
-          
                   </table>
                 </div>
               </div>
             </div><!-- End Recent Sales -->
-            <!-- End Recent Sales -->
-            </div>
+           <div class="col-12">
+              <div class="card recent-sales overflow-auto">
+                <div class="card-body">
+                  <h5 class="card-title">Daftar Wisata</h5>
+
+                  <table class="table table-striped datatable">
+                    <thead>
+                      <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Poto</th>
+                        <th scope="col">Wisata</th>
+                        <th scope="col">Deskripsi</th>
+                        <th scope="col">Harga</th>
+                        <th scope="col">Fasilitas</th>
+                        <th scope="col">Kategori</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                      @foreach ($wisata as $item)
+                    <th scope="row">{{ $loop->iteration }}</th>
+                    <td><img src="{{ asset('storage/images/' . json_decode($item->images)[0]) }}" alt="Image" class="thumbnail"/></td>
+                    <td>{{$item->name}}</td>
+                    <td style="max-width: 300px; word-wrap: break-word;">{{$item->description}}</td>
+                    <td>{{$item->price}}</td>
+                    <td>
+                    <td>
+    @php
+        $facilities = json_decode($item->facilities, true);
+    @endphp
+    @if (is_array($facilities))
+        <ul>
+            @foreach($facilities as $facility)
+                <li>{{ $facility }}</li>
+            @endforeach
+        </ul>
+    @else
+        <span>No facilities available</span>
+    @endif
+</td>
+
+
+                    <td>{{$item->kategori}}</td>
+                    </tr>
+                    @endforeach
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div><!-- End Recent Sales -->
         </div><!-- End Left side columns -->
       </div>
 
@@ -133,7 +202,7 @@
         <tbody>
           @foreach ($data as $key => $user)
             <tr>
-              <td>{{ ++$i }}</td>
+              <td>{{ $loop->iteration }}</td>
               <td>{{ $user->name }}</td>
               <td>{{ $user->email }}</td>
               <td>
