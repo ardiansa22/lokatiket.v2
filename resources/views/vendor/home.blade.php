@@ -128,8 +128,8 @@
                         <td>{{$order->visit_date}}</td>
                         <td>{{$order->created_at}}</td>
                       </tr>
+                      @endforeach
                     </tbody>
-                    @endforeach
                   </table>
                 </div>
               </div>

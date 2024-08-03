@@ -28,7 +28,7 @@
   <link href="../../../assets/admin//vendor/simple-datatables/style.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="../../../assets/admin//css/style.css" rel="stylesheet">
+  <link href="../../../assets/admin/css/style.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: NiceAdmin
@@ -90,7 +90,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" style="background-color:#0046BF;">
                                     {{ __('Reset Password') }}
                                 </button>
                             </div>

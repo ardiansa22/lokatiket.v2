@@ -59,5 +59,9 @@ public function ulasans(): HasMany
     {
         return $this->hasMany(Wisata::class);
     }
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
 
 }

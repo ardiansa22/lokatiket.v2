@@ -1,0 +1,85 @@
+public function transactionReport(Request $request)
+    {
+        $query = Order::query();
+
+        if ($request->has('month') && $request->month) {
+            $query->whereMonth('created_at', $request->month);
+        }
+
+        if ($request->has('year') && $request->year) {
+            $query->whereYear('created_at', $request->year);
+        }
+
+        if ($request->has('vendor') && $request->vendor) {
+            $query->whereHas('servicePrice.service', function($q) use ($request) {
+                $q->where('vendor_id', $request->vendor);
+            });
+        } else {
+            if (Auth::user()->hasRole('Vendor')) {
+                $vendorId = Auth::user()->vendor->id;
+                $query->whereHas('servicePrice.service', function($q) use ($vendorId) {
+                    $q->where('vendor_id', $vendorId);
+                });
+            }
+        }
+
+        $paidTransactions = $query->where('status', 'paid')->get();
+        $totalIncome = $paidTransactions->sum('total_price');
+
+        $vendors = Vendor::whereHas('user.roles', function($q) {
+            $q->where('name', 'Vendor');
+        })->get();
+
+        return view('admin.reports.index', compact('paidTransactions', 'totalIncome', 'vendors'));
+    }
+
+    public function exportCsv(Request $request)
+    {
+        $month = $request->input('month', now()->month);
+        $year = $request->input('year', now()->year);
+        $vendorId = $request->input('vendor');
+
+        $query = Order::where('status', 'paid')
+                      ->whereMonth('created_at', $month)
+                      ->whereYear('created_at', $year);
+
+        if ($vendorId) {
+            $query->whereHas('servicePrice.service', function ($query) use ($vendorId) {
+                $query->where('vendor_id', $vendorId);
+            });
+        } else {
+            $query->whereHas('servicePrice.service.vendor', function ($query) {
+                $query->whereHas('user.roles', function ($query) {
+                    $query->where('name', 'Vendor');
+                });
+            });
+        }
+
+        $paidTransactions = $query->get();
+
+        $headers = ['No', 'Tanggal', 'Vendor', 'Layanan', 'Paket', 'Pemasukan'];
+
+        $csv = Writer::createFromFileObject(new \SplTempFileObject());
+
+        $csv->insertOne($headers);
+
+        foreach ($paidTransactions as $index => $transaction) {
+            $csv->insertOne([
+                $index + 1,
+                $transaction->created_at->format('Y-m-d'),
+                $transaction->service->vendor->user->name ?? 'N/A',
+                $transaction->servicePrice->service->name ?? 'N/A',
+                $transaction->packet,
+                $transaction->total_price
+            ]);
+        }
+
+        $response = new StreamedResponse(function () use ($csv) {
+            $csv->output();
+        });
+
+        $response->headers->set('Content-Type', 'text/csv');
+        $response->headers->set('Content-Disposition', 'attachment; filename="transactions.csv"');
+
+        return $response;
+    }

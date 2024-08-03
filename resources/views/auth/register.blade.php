@@ -13,7 +13,7 @@
   <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <!-- <link href="assets/css/nucleo-svg.css" rel="stylesheet" /> -->
+  <link href="assets/css/nucleo-svg.css" rel="stylesheet" /> 
   <!-- CSS Files -->
   <link id="pagestyle" href="assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
   <style>
@@ -105,7 +105,7 @@
                   <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
                 </div>
                 <div class="form-check form-check-info text-start">
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked style="background-color:#0046BF;">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked >
                   <label class="form-check-label" for="flexCheckDefault">
                     I agree the <a href="javascript:;" class="text-dark font-weight-bolder" >Terms and Conditions</a>
                   </label>

@@ -158,19 +158,19 @@
                     <td>{{$item->price}}</td>
                     <td>
                     <td>
-    @php
-        $facilities = json_decode($item->facilities, true);
-    @endphp
-    @if (is_array($facilities))
-        <ul>
-            @foreach($facilities as $facility)
-                <li>{{ $facility }}</li>
-            @endforeach
-        </ul>
-    @else
-        <span>No facilities available</span>
-    @endif
-</td>
+                        @php
+                            $facilities = json_decode($item->facilities, true);
+                        @endphp
+                        @if (is_array($facilities))
+                            <ul>
+                                @foreach($facilities as $facility)
+                                    <li>{{ $facility }}</li>
+                                @endforeach
+                            </ul>
+                        @else
+                            <span>No facilities available</span>
+                        @endif
+                    </td>
 
 
                     <td>{{$item->kategori}}</td>
@@ -227,6 +227,6 @@
   </div>
 </div>
 
-{!! $data->render() !!}
+<!-- {!! $data->render() !!} -->
 
 @endsection
