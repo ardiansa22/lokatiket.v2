@@ -1,85 +1,29 @@
-public function transactionReport(Request $request)
-    {
-        $query = Order::query();
+<link rel="manifest" href="{{route('laravelpwa.manifest')}}">
+<!-- Chrome for Android theme color -->
+<meta name="theme-color" content="#000000">
 
-        if ($request->has('month') && $request->month) {
-            $query->whereMonth('created_at', $request->month);
-        }
+<!-- Add to homescreen for Chrome on Android -->
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="application-name" content="PWA">
+<link rel="icon" sizes="512x512" href="../../../assets/images/icons/512x512.png">
 
-        if ($request->has('year') && $request->year) {
-            $query->whereYear('created_at', $request->year);
-        }
+<!-- Add to homescreen for Safari on iOS -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="PWA">
+<link rel="apple-touch-icon" href="../../../assets/images/icons/512x512.png">
 
-        if ($request->has('vendor') && $request->vendor) {
-            $query->whereHas('servicePrice.service', function($q) use ($request) {
-                $q->where('vendor_id', $request->vendor);
-            });
-        } else {
-            if (Auth::user()->hasRole('Vendor')) {
-                $vendorId = Auth::user()->vendor->id;
-                $query->whereHas('servicePrice.service', function($q) use ($vendorId) {
-                    $q->where('vendor_id', $vendorId);
-                });
-            }
-        }
+<link href="../../../assets/images/icons/640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+<link href="../../../assets/images/icons/750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+<link href="../../../assets/images/icons/1242x2208.png" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
+<link href="../../../assets/images/icons/1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
+<link href="../../../assets/images/icons/828x1792.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+<link href="../../../assets/images/icons/1242x2688.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
+<link href="../../../assets/images/icons/1536x2048.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+<link href="../../../assets/images/icons/1668x2224.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+<link href="../../../assets/images/icons/1668x2388.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+<link href="../../../assets/images/icons/2048x2732.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
 
-        $paidTransactions = $query->where('status', 'paid')->get();
-        $totalIncome = $paidTransactions->sum('total_price');
-
-        $vendors = Vendor::whereHas('user.roles', function($q) {
-            $q->where('name', 'Vendor');
-        })->get();
-
-        return view('admin.reports.index', compact('paidTransactions', 'totalIncome', 'vendors'));
-    }
-
-    public function exportCsv(Request $request)
-    {
-        $month = $request->input('month', now()->month);
-        $year = $request->input('year', now()->year);
-        $vendorId = $request->input('vendor');
-
-        $query = Order::where('status', 'paid')
-                      ->whereMonth('created_at', $month)
-                      ->whereYear('created_at', $year);
-
-        if ($vendorId) {
-            $query->whereHas('servicePrice.service', function ($query) use ($vendorId) {
-                $query->where('vendor_id', $vendorId);
-            });
-        } else {
-            $query->whereHas('servicePrice.service.vendor', function ($query) {
-                $query->whereHas('user.roles', function ($query) {
-                    $query->where('name', 'Vendor');
-                });
-            });
-        }
-
-        $paidTransactions = $query->get();
-
-        $headers = ['No', 'Tanggal', 'Vendor', 'Layanan', 'Paket', 'Pemasukan'];
-
-        $csv = Writer::createFromFileObject(new \SplTempFileObject());
-
-        $csv->insertOne($headers);
-
-        foreach ($paidTransactions as $index => $transaction) {
-            $csv->insertOne([
-                $index + 1,
-                $transaction->created_at->format('Y-m-d'),
-                $transaction->service->vendor->user->name ?? 'N/A',
-                $transaction->servicePrice->service->name ?? 'N/A',
-                $transaction->packet,
-                $transaction->total_price
-            ]);
-        }
-
-        $response = new StreamedResponse(function () use ($csv) {
-            $csv->output();
-        });
-
-        $response->headers->set('Content-Type', 'text/csv');
-        $response->headers->set('Content-Disposition', 'attachment; filename="transactions.csv"');
-
-        return $response;
-    }
+<!-- Tile for Win8 -->
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="../../../assets/images/icons/512x512.png">
