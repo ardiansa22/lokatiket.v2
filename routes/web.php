@@ -11,7 +11,8 @@ use App\Http\Controllers\WisataController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UlasanController;
 use App\Models\Customer;
-
+use App\Exports\OrderExport;
+use Maatwebsite\Excel\Facades\Excel;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -60,6 +61,10 @@ Route::group(['middleware' => ['role:superadmin']], function() {
         Route::name('superadmin.')->group(function() {
             Route::resource('roles', RoleController::class);
             Route::resource('users', UserController::class);
+            // Route::get('/report', [UserController::class, 'report'])->name('report');
+            Route::get('/filterOrders', [UserController::class, 'filterOrders'])->name('report');
+            Route::get('/export-orders', [UserController::class, 'exportCsv'])->name('export');
+            
         });
     });
 });

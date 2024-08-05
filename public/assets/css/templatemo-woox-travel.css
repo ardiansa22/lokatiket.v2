@@ -2199,7 +2199,7 @@ body {
 @media screen and (max-width: 768px) {
   #navbar1 {
     position: fixed;
-    bottom: -5px;
+    bottom: -15px;
     left: 0;
     width: 100%;
     background-color: #0046BF;

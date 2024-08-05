@@ -17,7 +17,7 @@
         <div class="col-xl-8">
 
           <div class="card">
-            <div class="card-body pt-3">
+            <div class="card-body">
               <!-- Bordered Tabs -->
               <ul class="nav nav-tabs nav-tabs-bordered">
 
@@ -65,7 +65,7 @@
 
                   <!-- Profile Edit Form -->
                   <form>
-                    <div class="row mb-3">
+                    <!-- <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                       <div class="col-md-8 col-lg-9">
                         <img src="assets/img/profile-img.jpg" alt="Profile">
@@ -74,7 +74,7 @@
                           <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
 
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
@@ -96,7 +96,7 @@
 
                 </div>
 
-                <div class="tab-pane fade pt-3" id="profile-change-password">
+                <div class="tab-pane fade" id="profile-change-password">
                   <!-- Change Password Form -->
                   <form>
 

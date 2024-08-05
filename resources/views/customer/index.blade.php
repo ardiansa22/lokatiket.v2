@@ -122,10 +122,10 @@
                                     <h4><span>Gunung</span></h4>
                                 </div>
                                 <div class="col-lg-4 col-sm-6 col-6">
-                                    <a href="{{ route('customer.wisata.filter', 'Situ') }}">
+                                    <a href="{{ route('customer.wisata.filter', 'Kawah') }}">
                                         <i class="fa-solid fa-water"></i>
                                     </a>
-                                    <h4><span>Situ</span></h4>
+                                    <h4><span>Kawah</span></h4>
                                 </div>
                                 <div class="col-lg-4 col-sm-6 col-6">
                                     <a href="{{route('customer.explore')}}">

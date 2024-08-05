@@ -105,15 +105,15 @@
                   <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
                 </div>
                 <div class="form-check form-check-info text-start">
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked >
+                  <input class="" type="checkbox" value="" id="flexCheckDefault" required>
                   <label class="form-check-label" for="flexCheckDefault">
-                    I agree the <a href="javascript:;" class="text-dark font-weight-bolder" >Terms and Conditions</a>
+                    Saya setuju <a href="javascript:;" class="text-dark font-weight-bolder" >Kebijakan dan Persyaratan</a>
                   </label>
                 </div>
                 <div class="text-center">
-                  <button type="submit" class="btn w-100 my-4 mb-2" style="background-color:#0046BF;color:white;">Sign up</button>
+                  <button type="submit" class="btn w-100 my-4 mb-2" style="background-color:#0046BF;color:white;">Daftar</button>
                 </div>
-                <p class="text-sm mt-3 mb-0">Already have an account? <a href="{{ route('login') }}" class="text-dark font-weight-bolder">Sign in</a></p>
+                <p class="text-sm mt-3 mb-0">Sudah punya akun? <a href="{{ route('login') }}" class="text-dark font-weight-bolder">Masuk</a></p>
               </form>
                 </div>
               </div>
