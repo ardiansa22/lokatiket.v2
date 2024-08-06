@@ -19,16 +19,17 @@
         <div class="row no-gutters">
             <div class="col-md-8">
                 <div class="product-details mr-2">
-                    <div class="d-flex justify-content-between align-items-center mt-3 p-2 items rounded">
+                    <div class="d-flex justify-content-between align-items-center mt-3 p-2 items">
                     <div class="d-flex flex-row">
                         <div class="ml-2">
-                            <span class="font-weight-bold d-block" style="color: black;">{{ $order->wisata_id }}&nbsp;</span>
+                            
+                            <img src="{{ asset('storage/images/' . json_decode($order->wisata->images)[0]) }}" alt="Product Image" class="img-fluid" style="max-height: 100px; object-fit: cover;">
                             
                         </div>
                     </div>
                     <div class="d-flex flex-row align-items-center">
-                        <span class="d-block" style="color: black;">{{$order->quantity}}</span>
-                        <span class="d-block ml-5 font-weight-bold" style="color: black;">{{ $order->total_price}}</span>
+                        <span class="d-block ml-5 font-weight-bold" style="color: black;">{{ $order->wisata->name }} {{$order->quantity}}x</span>
+                        <span class="d-block ml-5 font-weight-bold" style="color: black;">{{ number_format($order->total_price, 0, ',', '.') }}</span>
                         <!-- <i class="fa fa-trash-o ml-3 text-white-50"></i> -->
                     </div>
                 </div>
@@ -61,7 +62,7 @@
               <li
                 class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                 Products
-                <span>{{ $order->total_price }}</span>
+                <span>{{ number_format($order->total_price, 0, ',', '.') }}</span>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                 Quantity
@@ -72,7 +73,7 @@
                 <div>
                   <strong>Total amount</strong>
                 </div>
-                <span><strong>{{ $order->total_price }}</strong></span>
+                <span><strong>{{ number_format($order->total_price, 0, ',', '.') }}</strong></span>
               </li>
             </ul>
             <button type="btn btn-primary mt3" class="btn btn-primary" id="pay-button">Bayar Sekarang</button>

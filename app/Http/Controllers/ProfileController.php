@@ -1,61 +1,49 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Profile;
 use Illuminate\Http\Request;
+use App\Models\Profile;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-    public function index()
-    {
-        $profiles = Profile::all();
-        return view('customer.profil', compact('profiles'));
-    }
-
-    // public function create()
-    // {
-    //     return view('profiles.create');
-    // }
-
-    public function store(Request $request)
+    public function editImage(Request $request)
     {
         $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'no_telepon' => 'required|string|max:15',
-            'alamat' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        Profile::create($request->all());
+        $user = Auth::user();
 
-        return redirect()->route('profiles.index')->with('success', 'Profile created successfully.');
+        if ($request->hasFile('image')) {
+            // Hapus gambar lama jika ada
+            if ($user->profile && $user->profile->image) {
+                Storage::delete('public/' . $user->profile->image);
+            }
+
+            // Simpan gambar baru
+            $path = $request->file('image')->store('profile_images', 'public');
+
+            // Update profil user
+            $user->profile()->updateOrCreate([], ['image' => $path]);
+        }
+
+        return redirect()->back()->with('success', 'Profile image updated successfully.');
     }
 
-    public function show(Profile $profile)
+    public function removeImage()
     {
-        return view('profiles.show', compact('profile'));
+        $user = Auth::user();
+
+        // Hapus gambar jika ada
+        if ($user->profile && $user->profile->image) {
+            Storage::delete('public/' . $user->profile->image);
+            $user->profile->update(['image' => null]);
+        }
+
+        return redirect()->back()->with('success', 'Profile image removed successfully.');
     }
-
-    public function edit(Profile $profile)
-    {
-        return view('profiles.edit', compact('profile'));
-    }
-
-    public function update(Request $request, Profile $profile)
-    {
-        $request->validate([
-            'no_telepon' => 'required|string|max:15',
-            'alamat' => 'required|string|max:255',
-        ]);
-
-        $profile->update($request->all());
-
-        return redirect()->route('profiles.index')->with('success', 'Profile updated successfully.');
-    }
-
-    public function destroy(Profile $profile)
-    {
-        $profile->delete();
-
-        return redirect()->route('profiles.index')->with('success', 'Profile deleted successfully.');
-    }
+   
 }

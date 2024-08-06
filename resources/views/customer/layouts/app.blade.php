@@ -61,8 +61,10 @@
 
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="../../../assets/css/fontawesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../../../assets/css/templatemo-woox-travel.css">
     <link rel="stylesheet" href="../../../assets/css/show.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 
 
     
@@ -82,6 +84,7 @@
     <link href="../../../assets/admin//vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="../../../assets/admin//vendor/simple-datatables/style.css" rel="stylesheet">
 
+    
     <!-- Template Main CSS File -->
     <link href="../../../assets/admin//css/style.css" rel="stylesheet">
   </head>
@@ -152,6 +155,8 @@
   </script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
   <script>
       $(document).ready(function(){
           $('.image-slider').slick({

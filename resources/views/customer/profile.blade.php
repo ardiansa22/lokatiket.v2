@@ -1,17 +1,35 @@
 @extends('customer.layouts.app')
+@section('style')
+<style>
+  img.rounded-circle {
+    border-radius: 50%;
+    width: 150px; /* Atur sesuai kebutuhan */
+    height: 150px; /* Atur sesuai kebutuhan */
+    object-fit: cover; /* Pastikan gambar tetap proporsional */
+}
 
+</style>
+@endsection
 @section('content')
 <div class="profile">
       <div class="row">
         <div class="col-xl-4">
 
-          <div class="card">
+        <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-              <img src="../../../assets/admin/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-              <h2>{{ Auth::user()->name }}</h2>
+                <img src="{{ Auth::user()->profile && Auth::user()->profile->image ? asset('storage/' . Auth::user()->profile->image) : asset('../../../assets/admin/img/userimage.jpeg') }}" alt="" class="rounded-circle">
+                <div class="row mb-3">
+                    <div class="pt-2">
+                        <form id="upload-form" action="{{ route('customer.upload-image') }}" method="POST" enctype="multipart/form-data" style="display:inline;">
+                            @csrf
+                            <input type="file" name="image" id="image" style="display:none;" onchange="document.getElementById('upload-form').submit();">
+                            <label for="image" class="btn btn-warning btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></label>
+                        </form>
+                    </div>
+                </div>
+                <h2>{{ Auth::user()->name }}</h2>
             </div>
-          </div>
-
+        </div>
         </div>
 
         <div class="col-xl-8">
@@ -33,7 +51,7 @@
                 </li>
 
               </ul>
-              <div class="tab-content pt-2">
+              <div class="tab-content">
 
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
                   <h5 class="card-title">Profile Details</h5>
@@ -61,71 +79,72 @@
 
                 </div>
 
-                <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+                <div class="tab-pane fade profile-edit pt-2" id="profile-edit">
+                <!-- Profile Edit Form -->
+                <form method="POST" action="{{ route('customer.updateprofil', ['id' => Auth::user()->id]) }}">
+                  @csrf
+                  @method('PUT')
+                  <div class="row mb-3">
+                    <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="name" type="text" class="form-control" id="fullName" value="{{ Auth::user()->name }}">
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="email" type="email" class="form-control" id="Email" value="{{ Auth::user()->email }}" disabled>
+                    </div>
+                  </div>
 
-                  <!-- Profile Edit Form -->
-                  <form>
-                    <!-- <div class="row mb-3">
-                      <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
-                      <div class="col-md-8 col-lg-9">
-                        <img src="assets/img/profile-img.jpg" alt="Profile">
-                        <div class="pt-2">
-                          <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
-                          <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                  </div>
+                </form><!-- End Profile Edit Form -->
+              </div>
+
+
+                <!-- Change Password Form -->
+                <div class="tab-pane fade pt-2" id="profile-change-password">
+                    <form action="{{ route('customer.password.update') }}" method="POST">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="row mb-3">
+                            <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
+                            <div class="col-md-8 col-lg-9">
+                                <input name="current-password" type="password" class="form-control" id="currentPassword" required>
+                                @error('current-password')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
-                      </div>
-                    </div> -->
 
-                    <div class="row mb-3">
-                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="fullName" type="text" class="form-control" id="fullName" value="{{ Auth::user()->name }}">
-                      </div>
-                    </div>
-                    <div class="row mb-3">
-                      <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="email" type="email" class="form-control" id="Email" value="{{ Auth::user()->email }}" disabled>
-                      </div>
-                    </div>
+                        <div class="row mb-3">
+                            <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+                            <div class="col-md-8 col-lg-9">
+                                <input name="password" type="password" class="form-control" id="newPassword" required>
+                                @error('password')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
 
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </div>
-                  </form><!-- End Profile Edit Form -->
+                        <div class="row mb-3">
+                            <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
+                            <div class="col-md-8 col-lg-9">
+                                <input name="password_confirmation" type="password" class="form-control" id="renewPassword" required>
+                                @error('password_confirmation')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
 
-                </div>
-
-                <div class="tab-pane fade" id="profile-change-password">
-                  <!-- Change Password Form -->
-                  <form>
-
-                    <div class="row mb-3">
-                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="password" type="password" class="form-control" id="currentPassword">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="newpassword" type="password" class="form-control" id="newPassword">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="renewpassword" type="password" class="form-control" id="renewPassword">
-                      </div>
-                    </div>
-
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Change Password</button>
-                    </div>
-                  </form><!-- End Change Password Form -->
-
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Change Password</button>
+                        </div>
+                    </form>
+                    <!-- End Change Password Form -->
                 </div>
 
               </div><!-- End Bordered Tabs -->
@@ -136,4 +155,23 @@
         </div>
       </div>
 </div>
+@endsection
+@section('script')
+<!-- Include SweetAlert2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    @if(session('success'))
+        Swal.fire({
+            title: 'Success',
+            text: "{{ session('success') }}",
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    @endif
+</script>
+<script>
+    document.getElementById('image').onchange = function() {
+        document.getElementById('upload-form').submit();
+    };
+</script>
 @endsection

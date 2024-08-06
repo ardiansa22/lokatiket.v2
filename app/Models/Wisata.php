@@ -38,7 +38,7 @@ class Wisata extends Model
     {
         $averageRating = $this->average_rating;
         if ($averageRating === null) {
-            return 'Belum ada ulasan';
+            return 'Belum ada Ulasan';
         }
         return number_format($averageRating, 1);
     }

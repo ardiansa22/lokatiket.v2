@@ -10,6 +10,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\WisataController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UlasanController;
+use App\Http\Controllers\ProfileController;
 use App\Models\Customer;
 use App\Exports\OrderExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -48,6 +49,11 @@ Route::middleware(['role:customer', 'verified'])->group(function () {
         Route::post('/ulasan', [UlasanController::class, 'store'])->name('ulasanstore');
         Route::get('/profil', [CustomerController::class, 'profil'])->name('profile');
         Route::get('/search', [CustomerController::class, 'search'])->name('search');
+        Route::put('/updatePassword', [CustomerController::class, 'updatePassword'])->name('password.update');
+        Route::put('/update/{id}', [CustomerController::class, 'updateprofil'])->name('updateprofil');
+
+        Route::post('/image-profile', [ProfileController::class, 'editImage'])->name('upload-image');
+        Route::delete('/image-remove', [ProfileController::class, 'removeImage '])->name('remove-image');
         
         
             });

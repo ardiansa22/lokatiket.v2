@@ -28,7 +28,7 @@
                         <td style="font-size:18px;"><b>{{ $item->wisata->name }}</b>
                             <span class="text-muted" style="display: block; margin-top: 5px; font-size:12px;">{{ $item->created_at }}</span>
                         </td>
-                        <td class="text-end">-Rp. {{ $item->total_price }}</td>
+                        <td class="text-end">-Rp.{{ number_format($item->total_price, 0, ',', '.') }}</td>
                         <td class="text-end"><a href="/customer/invoice/{{ $item->id }}">Tiket</a></td>
                         <td class="text-end"><a href="/customer/ulasan/{{$item->wisata_id}}/{{$item->id}}">Ulasan</a></td>
                     </tr>

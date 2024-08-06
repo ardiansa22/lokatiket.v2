@@ -26,9 +26,9 @@
                             
                         </div>
                     </div>
-                    <div class="d-flex flex-row align-items-center">
+                    <div class="d-flex flex-row align-items-center ml-5">
                         <span class="d-block" style="color: black;">{{$order->quantity}}</span>
-                        <span class="d-block ml-5 font-weight-bold" style="color: black;">{{ $order->total_price}}</span>
+                        <span class="d-block ml-5 font-weight-bold" style="color: black;">{{ number_format($order->total_price, 0, ',', '.') }}</span>
                         <!-- <i class="fa fa-trash-o ml-3 text-white-50"></i> -->
                     </div>
                 </div>
@@ -61,7 +61,7 @@
               <li
                 class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                 Products
-                <span>{{ $order->total_price }}</span>
+                <span>{{ number_format($order->total_price, 0, ',', '.') }}</span>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                 Quantity
@@ -72,7 +72,7 @@
                 <div>
                   <strong>Total amount</strong>
                 </div>
-                <span><strong>{{ $order->total_price }}</strong></span>
+                <span><strong>{{ number_format($order->total_price, 0, ',', '.') }}</strong></span>
               </li>
             </ul>
             <button type="btn btn-primary mt3" class="btn btn-primary" id="pay-button">Bayar Sekarang</button>

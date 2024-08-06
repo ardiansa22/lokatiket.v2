@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Models\Wisata;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
 
 class CustomerController extends Controller
 {
@@ -49,6 +54,42 @@ class CustomerController extends Controller
     {
         
         return view('customer.profile');
+    }
+    public function updateprofil(Request $request, $id)
+{
+    $this->validate($request, [
+        'name' => 'required',
+    ]);
+
+    $user = User::find($id);
+    $user->update(['name' => $request->input('name')]);
+
+    return redirect()->route('customer.profile')
+                    ->with('success', 'User updated successfully');
+}
+
+
+    public function updatePassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'current-password' => 'required',
+            'password' => 'required|confirmed',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $user = Auth::user();
+
+        if (!Hash::check($request->get('current-password'), $user->password)) {
+            return redirect()->back()->withErrors(['current-password' => 'Password lama tidak cocok'])->withInput();
+        }
+
+        $user->password = Hash::make($request->get('password'));
+        $user->save();
+
+        return redirect()->route('customer.profile')->with('success', 'Password berhasil diubah');
     }
 
     

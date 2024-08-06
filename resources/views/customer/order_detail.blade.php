@@ -27,7 +27,7 @@
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                 Harga
-                <span>Rp. {{$order->total_price}}</span>
+                <span>Rp. {{ number_format($order->total_price, 0, ',', '.') }}</span>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                 Status
