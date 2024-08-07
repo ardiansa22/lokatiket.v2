@@ -122,7 +122,7 @@
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="{{route('vendor.pesanan')}}">
+            <a href="{{route('vendor.report')}}">
               <i class="bi bi-circle"></i><span>Pesanan saya</span>
             </a>
           </li>

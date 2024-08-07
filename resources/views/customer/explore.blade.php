@@ -32,7 +32,7 @@
         </ul>
     </nav>
 </div>
-<div class="container">
+<div class="container py-2">
     <div class="row mb-5">
         @foreach($wisatas as $wisata)
         <div class="col-md-4">

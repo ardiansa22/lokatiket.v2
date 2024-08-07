@@ -50,8 +50,19 @@
             <td><img src="{{ asset('storage/images/' . json_decode($wisata->images)[0]) }}" alt="Image" class="thumbnail"/></td>
             <td>{{$wisata->name}}</td>
             <td style="max-width: 300px; word-wrap: break-word;">{{$wisata->description}}</td>
-            <td>{{$wisata->price}}</td>
-            <td>{{$wisata->facilities}}</td>
+            <td>{{ number_format($wisata->price, 0, ',', '.') }}</td>
+            <td>@php
+                                            $facilities = json_decode($wisata->facilities, true);
+                                        @endphp
+                                        @if (is_array($facilities))
+                                            <ul>
+                                                @foreach($facilities as $facility)
+                                                    <li>{{ $facility }}</li>
+                                                @endforeach
+                                            </ul>
+                                        @else
+                                            <span>No facilities available</span>
+                                        @endif</td>
             <td>{{$wisata->kategori}}</td>
             <td>
               <button class="btn btn-warning deleteBtn">
@@ -63,11 +74,7 @@
                  data-facilities="{{$wisata->facilities}}"
                  style=""><i class="bi bi-pencil-square"></i></a>
                  </button>
-                 <form action="{{ route('vendor.destroy', $wisata->id) }}" method="POST" style="display: inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">hapus</button>
-                            </form>
+                
             </td>
           </tr>
         @endforeach

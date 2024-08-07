@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Vendor;
 use App\Models\Order;
-use App\Models\wisata;
+use App\Models\Wisata;
 use App\Http\Requests\StoreVendorRequest;
 use App\Http\Requests\UpdateVendorRequest;
 use Illuminate\Http\Request;
@@ -45,20 +45,20 @@ class VendorController extends Controller
         ->with('i', (request()->input('page', 1) - 1) * 5);
 }
 
-    public function pesanan()
-    {
-        $userId = Auth::id();
+    // public function pesanan()
+    // {
+    //     $userId = Auth::id();
         
-        // Ambil semua wisata yang dikelola oleh pengelola yang sedang login
-        $all = Wisata::where('user_id', $userId)->pluck('id');
-        // Ambil semua pesanan yang terkait dengan wisata yang dikelola oleh pengelola
-        $orders = Order::whereIn('wisata_id', $all)->get();
-        $paidOrders = $orders->where('status', 'paid');
-        $wisatas = Wisata::where('user_id', $userId)->get();
-        return view('vendor.pesanan.index',compact('wisatas','orders','paidOrders'))
-        ->with('i', (request()->input('page', 1) - 1) * 5);
-        // return view('vendor.home');
-    }
+    //     // Ambil semua wisata yang dikelola oleh pengelola yang sedang login
+    //     $all = Wisata::where('user_id', $userId)->pluck('id');
+    //     // Ambil semua pesanan yang terkait dengan wisata yang dikelola oleh pengelola
+    //     $orders = Order::whereIn('wisata_id', $all)->get();
+    //     $paidOrders = $orders->where('status', 'paid');
+    //     $wisatas = Wisata::where('user_id', $userId)->get();
+    //     return view('vendor.pesanan.index',compact('wisatas','orders','paidOrders'))
+    //     ->with('i', (request()->input('page', 1) - 1) * 5);
+    //     // return view('vendor.home');
+    // }
     public function produk()
     {
         $userId = Auth::id();
@@ -75,7 +75,33 @@ class VendorController extends Controller
     }
 
     
+    public function filterOrders(Request $request)
+     {
+        // Ambil input dari request
+        $month = $request->input('month');
+        $year = $request->input('year');
+        $vendorId = Auth::user()->id;
+        // Query untuk memfilter order
+        $ordersQuery = Order::whereHas('wisata', function ($query) use ($vendorId) {
+            if ($vendorId) {
+                $query->whereHas('user', function ($q) use ($vendorId) {
+                    $q->where('id', $vendorId);
+                });
+            }
+        })
+        ->whereYear('created_at', $year)
+        ->whereMonth('created_at', $month)
+        ->where('status', 'paid');
 
+        // Ambil hasil query
+        $orders = $ordersQuery->get();
+        
+        // Hitung total order dan total harga
+        $totalOrders = $ordersQuery->count();
+        $totalPrice = $ordersQuery->sum('total_price');
+
+         return view('vendor.pesanan.index', compact('orders', 'totalPrice'));
+     }
     
    
     public function create()

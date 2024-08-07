@@ -60,6 +60,9 @@
                                 <!-- Pastikan untuk menyesuaikan URL dan parameter sesuai dengan kebutuhan -->
                                 <a href="{{ route('superadmin.export', request()->all()) }}" class="btn btn-success ml-2 mb-2">Export CSV</a>
                             </form>
+                            <div class="container-fluid text-end mt-3 text-success">
+                            <h5>Total Pemasukan: Rp. {{ number_format($totalPrice, 0, ',', '.') }}</h5>
+                        </div>
                         </div>
                         
                         

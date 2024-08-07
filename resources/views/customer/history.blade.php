@@ -81,6 +81,14 @@
                                 <span class="value" style="color:#0046bf;">Rp. {{ number_format($item->total_price, 0, ',', '.') }}</span>
                             </div>
                             <div class="info-item">
+                                <span class="label" style="color:#0046bf;font-weight:bold;">Tanggal Kunjungan</span>
+                                <span class="value" style="color:#0046bf;">{{ $item->visit_date}}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label" style="color:#0046bf;font-weight:bold;">Tanggal Pembelian</span>
+                                <span class="value" style="color:#0046bf;">{{ $item->created_at}}</span>
+                            </div>
+                            <div class="info-item">
                                 <span class="label" style="color:#0046bf;font-weight:bold;">Tiket</span>
                                 <span class="value"><a href="/customer/invoice/{{ $item->id }}"><span class="badge" style="background-color:#FFCB05;">Lihat Tiket</span></a></span>
                             </div>
@@ -94,14 +102,17 @@
                                         <p class="text-muted mt-2">Anda belum mengisi ulasan untuk pesanan ini.</p>
                                     @else
                                         @foreach($item->ulasans as $ulasan)
-                                            <div class="review">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="rating mr-3">{{ $ulasan->rating }}</div>
-                                                    <div>
-                                                        <p class="text-muted">{{ $ulasan->komentar }}</p>
-                                                    </div>
+                                        <div class="review">
+                                            <div class="d-flex align-items-center">
+                                                <div class=" mr-3">
+                                                    @for ($i = 0; $i < $ulasan->rating; $i++)
+                                                        <i class="fa fa-star" style="color:#FFCB05;"></i>
+                                                    @endfor
+                                                    <p class="text-muted">"{{ $ulasan->komentar }}"</p>
                                                 </div>
                                             </div>
+                                        </div>
+
                                         @endforeach
                                     @endif
                                 </span>

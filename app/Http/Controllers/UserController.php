@@ -23,7 +23,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $data = User::orderBy('id','DESC')->paginate(5);
+        $data = User::all();
         // information bar
         $totalUsers = User::count();
         $totalOrder =  Order::where('status', 'paid')->count();

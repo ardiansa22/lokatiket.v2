@@ -2182,17 +2182,17 @@ body {
   flex-direction: column;
   align-items: center;
   text-decoration: none;
-  color: #000;
+  /* color: #000; */
 }
 
 #navbar1 .navbar-nav .nav-item a i {
   font-size: 24px; /* Ukuran ikon */
-  color: #0046BF;
+  /* color: #0046BF; */
 }
 
 #navbar1 .navbar-nav .nav-item a span {
   font-size: 12px; /* Ukuran teks */
-  color: #000; /* Warna teks */
+  
   margin-top: 4px; /* Jarak antara ikon dan teks */
 }
 
@@ -2202,8 +2202,8 @@ body {
     bottom: -15px;
     left: 0;
     width: 100%;
-    background-color: #0046BF;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    /* background-color: #0046BF; */
+    /* box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); */
     display: flex;
     justify-content: center; /* Tengah secara horizontal */
     align-items: center; /* Tengah secara vertikal */
@@ -2229,12 +2229,12 @@ body {
     flex-direction: column;
     align-items: center;
     text-decoration: none;
-    color: #000; /* Warna teks */
+   
   }
 
   #navbar1 .navbar-nav .nav-item a i {
     font-size: 24px; /* Ukuran ikon */
-    color: #0046BF;
+    
   }
 
   #navbar1 .navbar-nav .nav-item a span {
@@ -2310,4 +2310,8 @@ body {
 #navbar2 .nav-link.active {
   border-bottom: 2px solid #0046BF;
   color: black !important;
+}
+#navbar1 .nav-link.active {
+  /* border-color: 2px solid #0046BF; */
+  color: #0046bf !important;
 }

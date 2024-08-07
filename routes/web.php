@@ -93,6 +93,8 @@ Route::group(['middleware' => ['role:vendor']], function(){
             Route::get('/vendor/{id}/edit', [WisataController::class, 'edit'])->name('edit');
             Route::put('/vendor/{id}', [WisataController::class, 'update'])->name('update');
             Route::delete('/vendor/{id}', [WisataController::class, 'destroy'])->name('destroy');
+
+            Route::get('/filterOrders', [VendorController::class, 'filterOrders'])->name('report');
         });
     });
 });
