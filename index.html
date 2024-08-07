@@ -1,112 +1,40 @@
-@extends('layouts.app')
+@extends('customer.layouts.app')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('sona-master/css/font-awesome.min.css') }}" type="text/css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<!-- jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- Bootstrap JS -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-<div class="main-panel">
-    <div class="content-wrapper">
-        <div class="page-header">
-            <h3 class="page-title">
-                <span class="page-title-icon bg-gradient-primary text-white me-2">
-                    <i class="fa fa-bar-chart-o"></i>
-                </span> Laporan
-            </h3>
-            <nav aria-label="breadcrumb">
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">
-                        Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
-                    </li>
-                </ul>
-            </nav>
+<div class="container py-3 text-center">
+    <h5>Riwayat Tiket</h5>
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
         </div>
-        @include('layouts.alert')
+    @endif
 
-        <div class="row">
-            <div class="col-12 grid-margin">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Laporan Transaksi</h4>
-
-                        <div class="container">
-                            <form method="GET" action="{{ route('admin.report') }}" class="form-inline mt-3">
-                                <div class="form-group mb-2">
-                                    <label for="month" class="mr-2">Pilih Bulan:</label>
-                                    <select name="month" id="month" class="form-control">
-                                        @foreach(range(1, 12) as $month)
-                                            <option value="{{ $month }}" {{ request('month') == $month ? 'selected' : '' }}>
-                                                {{ \Carbon\Carbon::create()->month($month)->format('F') }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group mb-2 ml-3">
-                                    <label for="year" class="mr-2">Pilih Tahun:</label>
-                                    <select name="year" id="year" class="form-control">
-                                        @foreach(range(now()->year, now()->year - 10) as $year)
-                                            <option value="{{ $year }}" {{ request('year') == $year ? 'selected' : '' }}>
-                                                {{ $year }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group mb-2 ml-3">
-                                    <label for="vendor" class="mr-2">Pilih Vendor:</label>
-                                    <select name="vendor" id="vendor" class="form-control">
-                                        <option value="">Semua Vendor</option>
-                                        @foreach($vendors as $vendor)
-                                            <option value="{{ $vendor->id }}" {{ request('vendor') == $vendor->id ? 'selected' : '' }}>
-                                                {{ $vendor->user->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <button type="submit" class="btn btn-gradient-primary ml-3 mb-2">Filter</button>
-                                <a href="{{ route('vendor.report.export', request()->all()) }}" class="btn btn-success ml-2 mb-2">Export CSV</a>
-                            </form>
-                        </div>
-                        <div class="container-fluid text-end mt-3 text-success">
-                            <h5>Total Pemasukan: Rp. {{ number_format($totalIncome, 0, ',', '.') }}</h5>
-                        </div>
-                    </div>
-
-                    <div class="table-responsive">
-                        <table id="orders-table" class="table table-striped custom-table">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Tanggal</th>
-                                    <th>Vendor</th>
-                                    <th>Layanan</th>
-                                    <th>Paket</th>
-                                    <th>Pemasukan</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse($paidTransactions as $transaction)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($transaction->created_at)->translatedFormat('d M Y') }}</td>
-                                        <td>{{ $transaction->service->vendor->user->name }}</td>
-                                        <td>{{ $transaction->service->name }}</td>
-                                        <td>{{ $transaction->packet }}</td>
-                                        <td>Rp. {{ number_format($transaction->total_price, 0, ',', '.') }}</td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="6" class="text-center">No transactions found</td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
         </div>
-    </div>
+    @endif
+</div>
+<div class="container">
+    @if($order->isEmpty())
+        <p class="text-center">Tidak ada riwayat pesanan yang ditemukan.</p>
+    @else
+        <table class="table">
+            <tbody>
+                @foreach($order as $key => $item)
+                    <tr>
+                        <td style="font-size: 32px;
+  height: 30px;background-color:#0046BF ;color : #FFCB05; text-align:center;"><i class="fa-solid fa-tree"></i></td>
+                        <td style="font-size:18px;"><b>{{ $item->wisata->name }}</b>
+                            <span class="text-muted" style="display: block; margin-top: 5px; font-size:12px;">{{ $item->created_at }}</span>
+                        </td>
+                        <td class="text-end">-Rp.{{ number_format($item->total_price, 0, ',', '.') }}</td>
+                        <td class="text-end"><a href="/customer/invoice/{{ $item->id }}">Tiket</a></td>
+                        <td class="text-end"><a href="/customer/ulasan/{{$item->wisata_id}}/{{$item->id}}">Ulasan</a></td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @endif
 </div>
 @endsection

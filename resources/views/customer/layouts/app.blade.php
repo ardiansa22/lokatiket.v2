@@ -87,11 +87,43 @@
     
     <!-- Template Main CSS File -->
     <link href="../../../assets/admin//css/style.css" rel="stylesheet">
+    @yield('style')
+    <style>
+        /* Preloader CSS */
+        #preloader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #preloader .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #0046BF;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+    </style>
   </head>
-
 <body>
 
-
+ <!-- Preloader -->
+ <div id="preloader">
+        <div class="spinner"></div>
+  </div>
   <!-- ***** Header Area Start ***** -->
   <nav id="navbar1" class="navbar navbar-expand fixed-bottom" style="background-color: white;">
   <ul class="navbar-nav nav-justified w-100">
@@ -126,7 +158,7 @@
   @yield('content')
 </div>
  
-
+  @yield('footer')
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
@@ -158,6 +190,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 
   <script>
+     // Preloader
+     $(window).on('load', function() {
+                $('#preloader').fadeOut('slow', function() {
+                    $(this).remove();
+                });
+            });
       $(document).ready(function(){
           $('.image-slider').slick({
               infinite: true,

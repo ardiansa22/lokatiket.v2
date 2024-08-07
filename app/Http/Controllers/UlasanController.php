@@ -9,6 +9,15 @@ use Illuminate\Support\Facades\Auth;
 
 class UlasanController extends Controller
 {
+    public function riwayat()
+    {
+        $userId = Auth::id();
+        $orders = Order::where('user_id', $userId)
+                        ->with('wisata', 'ulasan')
+                        ->get();
+
+        return view('customer.riwayat', compact('orders'));
+    }
     public function create($wisataId, $orderId)
     {
         $userId = Auth::id();
@@ -33,6 +42,7 @@ class UlasanController extends Controller
             'wisata_id' => 'required|exists:wisatas,id',
             'order_id' => 'required|exists:orders,id',
             'rating' => 'required|integer|between:1,5',
+            'komentar' => 'required',
         ]);
 
         $userId = Auth::id();
@@ -52,6 +62,7 @@ class UlasanController extends Controller
             'wisata_id' => $request->wisata_id,
             'order_id' => $request->order_id,
             'rating' => $request->rating,
+            'komentar' => $request->komentar,
         ]);
 
         return redirect()->route('customer.riwayat', $request->wisata_id)

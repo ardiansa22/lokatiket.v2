@@ -95,7 +95,11 @@
     </style>
 </head>
 
+
 <body>
+<div id="preloader">
+        <div class="spinner"></div>
+  </div>
     <!-- ***** Header Area Start ***** -->
     <nav id="navbar1" class="navbar navbar-expand fixed-bottom" style="background-color: white;">
         <ul class="navbar-nav nav-justified w-100">
@@ -148,9 +152,9 @@
                     <div class="col-lg-12">
                         <div class="more-info">
                             <div class="row">
-                                <p class="mb-3" style="text-align: left; font-size: 20px; color:black;">Kategori</p>
+                                <p class="mb-3" style="text-align: left; font-size: 20px; color:black; font-weight:bold;">Kategori</p>
                                 <div class="col-lg-4 col-sm-6 col-6">
-                                    <a href="">
+                                    <a href="{{ route('customer.wisata.filter', 'Alam') }}">
                                         <i class="fa-solid fa-tree"></i>
                                     </a>
                                     <h4><span>Alam</span></h4>
@@ -189,7 +193,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <p class="mb-3" style="text-align: left; font-size: 20px; color:black; margin-left:15px;">Rekomendasi</p>
+                        <p class="mt-2" style="text-align: left; font-size: 20px; color:black; margin-left:15px; font-weight:bold;">Rekomendasi</p>
                     </div>
                     <div class="slider-content">
                         <div class="row">
@@ -227,6 +231,11 @@
 
     <script>
         $(document).ready(function() {
+            $(window).on('load', function() {
+                $('#preloader').fadeOut('slow', function() {
+                    $(this).remove();
+                });
+            });
             $('.image-slider').slick({
                 infinite: true,
                 slidesToShow: 1,

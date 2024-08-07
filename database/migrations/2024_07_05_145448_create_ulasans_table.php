@@ -18,6 +18,7 @@ class CreateUlasansTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('wisata_id');
             $table->integer('rating');
+            $table->String('komentar');
             $table->timestamps();
 
 

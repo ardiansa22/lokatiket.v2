@@ -710,7 +710,7 @@ Banner Style
 #section-1 {
   margin-top: 0px;
   height: 100vh;
-  background: url('../images/country-02.jpg') no-repeat center center;
+  background: url('../images/background1.jpg') no-repeat center center;
   background-size: cover;
   display: flex;
   justify-content: center;
@@ -985,13 +985,13 @@ Footer Style
 */
 
 footer {
-  background-color: #0046BF;
+  background-color: #ffff;
   text-align: center;
   padding: 25px 0px;
 }
 
 footer p {
-  color: #fff;
+  color:black;
 }
 
 footer p a {
@@ -2246,17 +2246,21 @@ body {
 
 
 .main-content {
-  padding-bottom: 70px; /* Sesuaikan nilai ini sesuai dengan tinggi navbar Anda */
+  padding-bottom: 100px; /* Sesuaikan nilai ini sesuai dengan tinggi navbar Anda */
 }
 .menu .more-info {
-  background-color: #fff;
+  background-color: #ffff;
   border-radius: 20px;
+  border: 2px solid #ffff; /* Warna border biru */
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   padding: 20px 0;
+  margin-top: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow */
 }
+
 
 .menu .more-info .row {
   width: 100%;

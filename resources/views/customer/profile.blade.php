@@ -1,13 +1,9 @@
 @extends('customer.layouts.app')
 @section('style')
 <style>
-  img.rounded-circle {
-    border-radius: 50%;
-    width: 150px; /* Atur sesuai kebutuhan */
-    height: 150px; /* Atur sesuai kebutuhan */
-    object-fit: cover; /* Pastikan gambar tetap proporsional */
-}
-
+  .profile {
+    padding-bottom:60px;
+  }
 </style>
 @endsection
 @section('content')
@@ -27,12 +23,12 @@
                         </form>
                     </div>
                 </div>
-                <h2>{{ Auth::user()->name }}</h2>
+                <h5>{{ Auth::user()->name }}</h5>
             </div>
         </div>
         </div>
 
-        <div class="col-xl-8">
+        <div class="col-xl-4">
 
           <div class="card">
             <div class="card-body">
@@ -152,6 +148,32 @@
             </div>
           </div>
 
+        </div>
+        <div class="col-xl-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Bantuan</h5>
+              <div class="d-flex justify-content-between mt-3">
+                <!-- Ikon Helpdesk dengan warna merah -->
+                <a href="mailto:support@example.com" class="text-decoration-none">
+                  <i class="fas fa-headset fa-2x text-danger"></i>
+                  <span class="ms-2">Helpdesk</span>
+                </a>
+                <!-- Ikon Media Sosial -->
+                <div>
+                  <a href="https://facebook.com" class="text-decoration-none me-2" target="_blank">
+                    <i class="fab fa-facebook fa-2x"></i>
+                  </a>
+                  <a href="https://twitter.com" class="text-decoration-none me-2" target="_blank">
+                    <i class="fab fa-twitter fa-2x"></i>
+                  </a>
+                  <a href="https://instagram.com" class="text-decoration-none" target="_blank">
+                    <i class="fab fa-instagram fa-2x"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 </div>

@@ -22,7 +22,7 @@ class Order extends Model
     {
         return $this->belongsTo(Wisata::class);
     }
-    public function review(){
+    public function Ulasans(){
         return $this->hasMany(Ulasan::class);
     }
 }
