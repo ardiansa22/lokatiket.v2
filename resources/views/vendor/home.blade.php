@@ -53,7 +53,7 @@
                       <i class="bi bi-tree"></i>
                     </div>
                     <div class="ps-3">
-                    <h6>1</h6>
+                    <h6>{{$totalWisata}}</h6>
                     </div>
                   </div>
                 </div>

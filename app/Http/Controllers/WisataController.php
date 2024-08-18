@@ -35,7 +35,7 @@ class WisataController extends Controller
         'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'kategori' => 'required',
         'fasilitas' => 'required|array',
-        'fasilitas_lainnya' => 'array'
+        'fasilitas_lainnya' => 'array',
     ]);
 
     $userId = Auth::id();
@@ -98,14 +98,17 @@ class WisataController extends Controller
     return view('vendor.produk.index', compact('wisata'));
 }
 
-public function update(Request $request, $id)
+public function updat(Request $request, $id)
 {
     $request->validate([
         'name' => 'required',
         'description' => 'required',
         'price' => 'required|numeric',
-       
-        'facilities' => 'required',
+        'images' => 'required',
+        'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'kategori' => 'required',
+        'fasilitas' => 'required|array',
+        'fasilitas_lainnya' => 'array',
     ]);
 
     $wisata = Wisata::findOrFail($id);
@@ -130,7 +133,7 @@ public function update(Request $request, $id)
         }
         $wisata->images = json_encode($images);
     }
-
+    // dd($wista);
     $wisata->save();
 
     return back()->with('success', 'Wisata berhasil diubah.');
@@ -156,5 +159,77 @@ public function destroy($id)
 
     return redirect()->route('vendor.produk')->with('success', 'Wisata berhasil dihapus.');
 }
+
+public function update(Request $request, $id)
+{
+    // Validasi data input
+    $request->validate([
+        
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric',
+            'facilities' => 'nullable|array',
+            'facilities.*' => 'string|max:255',
+            'fasilitas_lainnya' => 'nullable|array',
+            'fasilitas_lainnya.*' => 'nullable|string|max:255', // Ubah dari array menjadi string
+            'images' => 'nullable|array',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'kategori' => 'required'
+    ]);
+
+    // Cek data request
+    // dd($request->all()); // Dump semua data dari request
+
+    $wisata = Wisata::findOrFail($id);
+
+    // Dump data wisata sebelum di-update
+    // dd($wisata);
+
+    // Update data wisata
+    $wisata->name = $request->input('name');
+    $wisata->description = $request->input('description');
+    $wisata->price = $request->input('price');
     
+    // Gabungkan fasilitas yang di-input dengan fasilitas lainnya
+    $facilities = $request->input('facilities', []);
+    $additionalFacilities = $request->input('fasilitas_lainnya', []);
+    $wisata->facilities = json_encode(array_merge($facilities, $additionalFacilities));
+
+    // Dump fasilitas yang sudah digabungkan
+    // dd($wisata->facilities);
+
+    $wisata->kategori = $request->input('kategori');
+
+    // Handle upload images jika ada file baru yang di-upload
+    if ($request->hasFile('images')) {
+        // Hapus gambar lama jika ada
+        if ($wisata->images) {
+            $oldImages = json_decode($wisata->images);
+            // dd($oldImages); // Dump gambar lama sebelum dihapus
+            foreach ($oldImages as $oldImage) {
+                Storage::delete('public/images/' . $oldImage);
+            }
+        }
+
+        $images = [];
+        foreach ($request->file('images') as $image) {
+            $path = $image->store('public/images');
+            $filename = basename($path);
+            $images[] = $filename;
+        }
+        $wisata->images = json_encode($images);
+
+        // Dump gambar baru yang di-upload
+        // dd($wisata->images);
+    }
+
+    $wisata->save();
+
+    // Dump data wisata setelah disimpan
+    // dd($wisata);
+
+    // Redirect kembali ke halaman list wisata dengan pesan sukses
+    return back()->with('success', 'Wisata berhasil diubah.');
+    
+}
 }

@@ -26,7 +26,7 @@
                 <td>{{ ++$i }}</td>
                 <td>{{ $role->name }}</td>
                 <td>
-                    <a class="btn btn-info" href="{{ route('superadmin.roles.show',$role->id) }}">Show</a>
+                    
                     @can('role-edit')
                         <a class="btn btn-primary" href="{{ route('superadmin.roles.edit',$role->id) }}">Edit</a>
                     @endcan

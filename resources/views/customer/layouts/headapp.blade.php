@@ -74,17 +74,17 @@ if ('serviceWorker' in navigator) {
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-<link href="../../../assets/admin//vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="../../../assets/admin//vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../assets/admin//vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-<link href="../../../assets/admin//vendor/quill/quill.snow.css" rel="stylesheet">
-<link href="../../../assets/admin//vendor/quill/quill.bubble.css" rel="stylesheet">
-<link href="../../../assets/admin//vendor/remixicon/remixicon.css" rel="stylesheet">
-<link href="../../../assets/admin//vendor/simple-datatables/style.css" rel="stylesheet">
+<link href="../../../assets/admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="../../../assets/admin/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../assets/admin/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+<link href="../../../assets/admin/vendor/quill/quill.snow.css" rel="stylesheet">
+<link href="../../../assets/admin/vendor/quill/quill.bubble.css" rel="stylesheet">
+<link href="../../../assets/admin/vendor/remixicon/remixicon.css" rel="stylesheet">
+<link href="../../../assets/admin/vendor/simple-datatables/style.css" rel="stylesheet">
 
 
 <!-- Template Main CSS File -->
-<link href="../../../assets/admin//css/style.css" rel="stylesheet">
+<link href="../../../assets/admin/css/style.css" rel="stylesheet">
 @yield('style')
 <style>
     /* Preloader CSS */

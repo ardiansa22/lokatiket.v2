@@ -38,10 +38,11 @@ class VendorController extends Controller
     
     $totalPrice = $orders->where('status', 'paid')->sum('total_price');
     $totalOrder = $orders->count('id');
+    $totalWisata = $all->count();
     $paidOrders = $orders->where('status', 'paid');
     $wisatas = Wisata::where('user_id', $userId)->get();
     
-    return view('vendor.home', compact('wisatas', 'orders', 'filteredOrders', 'totalPrice', 'totalOrder', 'paidOrders', 'visitDate'))
+    return view('vendor.home', compact('totalWisata','wisatas', 'orders', 'filteredOrders', 'totalPrice', 'totalOrder', 'paidOrders', 'visitDate'))
         ->with('i', (request()->input('page', 1) - 1) * 5);
 }
 

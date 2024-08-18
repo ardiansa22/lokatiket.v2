@@ -3,9 +3,7 @@
     @include('customer.layouts.headapp')
     <body>
         <!-- Preloader -->
-        <div id="preloader">
-            <div class="spinner"></div>
-        </div>
+        @include('customer.layouts.preloader')
         
         <!-- ***** Header Area Start ***** -->
         @include('customer.layouts.navbar')
