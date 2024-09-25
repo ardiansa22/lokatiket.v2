@@ -123,6 +123,7 @@
             <div id="facilities-container">
               <!-- Checkboxes will be dynamically inserted here -->
             </div>
+            <span style="font-size: 12px; color: #0046BF;"><i>*Silahkan isi kembali fasilitas sesuai kebutuhan</i></span>
             <div id="edit-fasilitas-lainnya-group">
               <label for="edit_fasilitas_lainnya">Fasilitas Lainnya:</label>
               <div class="input-group mb-3">
@@ -139,6 +140,7 @@
             <label for="images" class="form-label">Gambar</label>
             <input class="form-control" id="edit-fileInput" type="file" name="images[]" multiple>
             <div id="edit-filePreview" style="margin-top: 10px;"></div>
+            <span style="font-size: 12px; color: #0046BF;"><i>*Kosongkan jika gambar tidak diubah</i></span>
           </div>
 
           <div class="mb-3">
@@ -150,6 +152,7 @@
               <option value="3">Kawah</option>
               <option value="4">Pantai</option>
             </select>
+            <span style="font-size: 12px; color: #0046BF;"><i>*pilih kategori sesuai kebutuhan</i></span>
           </div>
           
           <button type="submit" class="btn btn-primary">Simpan</button>

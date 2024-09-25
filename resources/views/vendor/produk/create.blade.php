@@ -75,6 +75,7 @@
                         <div class="col-sm-10">
                             <input class="form-control" id="fileInput" type="file" name="images[]" multiple required>
                             <div id="filePreview" style="margin-top: 10px;"></div>
+                            <span style="font-size: 12px; color: #0046BF;"><i>*Maximal size 2Mb</i></span>
                         </div>
                     </div>
                     <div class="row mb-3">

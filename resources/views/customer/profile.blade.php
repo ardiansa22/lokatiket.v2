@@ -3,7 +3,15 @@
 <style>
   .profile {
     padding-bottom:60px;
+
   }
+  .rounded-image {
+    width: 100px; /* Ubah ukuran sesuai kebutuhan */
+    height: 100px; /* Ubah ukuran sesuai kebutuhan */
+    object-fit: cover;
+    border-radius: 50%;
+}
+
 </style>
 @endsection
 @section('content')
@@ -13,12 +21,14 @@
 
         <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-                <img src="{{ Auth::user()->profile && Auth::user()->profile->image ? asset('storage/' . Auth::user()->profile->image) : asset('../../../assets/admin/img/userimage.jpeg') }}" alt="" class="rounded-circle">
+                <img class="rounded-image" src="{{ Auth::user()->profile && Auth::user()->profile->image ? asset('storage/' . Auth::user()->profile->image) : asset('../../../assets/admin/img/userimage.jpeg') }}" alt="">
+                <span style="font-size: 12px; color: #0046BF;"><i>*Maximal size 5Mb</i></span>
                 <div class="row mb-3">
                     <div class="pt-2">
                         <form id="upload-form" action="{{ route('customer.upload-image') }}" method="POST" enctype="multipart/form-data" style="display:inline;">
                             @csrf
                             <input type="file" name="image" id="image" style="display:none;" onchange="document.getElementById('upload-form').submit();">
+                            
                             <label for="image" class="btn btn-warning btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></label>
                         </form>
                     </div>
@@ -155,7 +165,7 @@
               <h5 class="card-title">Bantuan</h5>
               <div class="d-flex justify-content-between mt-3">
                 <!-- Ikon Helpdesk dengan warna merah -->
-                <a href="mailto:support@example.com" class="text-decoration-none">
+                <a href="mailto:  infolokatiket@gmail.com" class="text-decoration-none">
                   <i class="fas fa-headset fa-2x text-danger"></i>
                   <span class="ms-2">Helpdesk</span>
                 </a>
@@ -167,7 +177,7 @@
                   <a href="https://twitter.com" class="text-decoration-none me-2" target="_blank">
                     <i class="fab fa-twitter fa-2x"></i>
                   </a>
-                  <a href="https://instagram.com" class="text-decoration-none" target="_blank">
+                  <a href="https://www.instagram.com/lokatiket.id?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="text-decoration-none" target="_blank">
                     <i class="fab fa-instagram fa-2x"></i>
                   </a>
                 </div>
@@ -181,16 +191,23 @@
 @section('script')
 <!-- Include SweetAlert2 JS -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+
 <script>
     @if(session('success'))
         Swal.fire({
             title: 'Success',
             text: "{{ session('success') }}",
             icon: 'success',
-            confirmButtonText: 'OK'
+            confirmButtonText: 'OK',
+            customClass: {
+                confirmButton: 'btn-success'
+            }
         });
     @endif
 </script>
+
 <script>
     document.getElementById('image').onchange = function() {
         document.getElementById('upload-form').submit();
