@@ -13,6 +13,7 @@ use App\Http\Controllers\UlasanController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Customer;
 use App\Exports\OrderExport;
+use App\Http\Controllers\WishlistController;
 use Maatwebsite\Excel\Facades\Excel;
 /*
 |--------------------------------------------------------------------------
@@ -28,14 +29,20 @@ use Maatwebsite\Excel\Facades\Excel;
 Route::get('/', function () {
     return view('auth.login');
 });
+
+// routes/web.php
+Route::get('/map', [WisataController::class, 'map'])->name('wisata.map');
+        Route::get('/menu', [CustomerController::class, 'menu'])->name('menu');
+
   
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Auth::routes(['verify' => true]);
+Auth::routes();
 
-Route::middleware(['role:customer', 'verified'])->group(function () {
+Route::middleware(['role:customer'])->group(function () {
      Route::prefix('customer')->group(function(){
         Route::name('customer.')->group(function(){
+
         Route::get('/', [CustomerController::class, 'index'])->name('index');
         Route::get('/wisata/{wisata}', [CustomerController::class, 'tampilkan'])->name('show');
         Route::get('/explore', [CustomerController::class, 'explore'])->name('explore');
@@ -43,7 +50,7 @@ Route::middleware(['role:customer', 'verified'])->group(function () {
         Route::get('/kategori/{kategori}', [CustomerController::class, 'filterByCategory'])->name('wisata.filter');
         Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout');
         // Route::get('/detail', [CustomerController::class, 'riwayat'])->name('riwayat');
-        Route::get('/invoice/{id}', [OrderController::class, 'invoice'])->name('riwayat');
+        // Route::get('/invoice/{id}', [OrderController::class, 'invoice'])->name('riwayat');
         Route::get('/history', [OrderController::class, 'history'])->name('riwayat');
         Route::get('/ulasan/{wisataId}/{orderId}', [UlasanController::class, 'create'])->name('ulasan');
         Route::post('/ulasan', [UlasanController::class, 'store'])->name('ulasanstore');
@@ -54,6 +61,9 @@ Route::middleware(['role:customer', 'verified'])->group(function () {
 
         Route::post('/image-profile', [ProfileController::class, 'editImage'])->name('upload-image');
         Route::delete('/image-remove', [ProfileController::class, 'removeImage '])->name('remove-image');
+        Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+    Route::post('/wishlist/{wisataId}', [WishlistController::class, 'store'])->name('wishlist.store');
+    Route::delete('/wishlist/{wisataId}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
         
         
             });

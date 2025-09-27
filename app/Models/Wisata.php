@@ -42,4 +42,8 @@ class Wisata extends Model
         }
         return number_format($averageRating, 1);
     }
+    public function wishlistedBy()
+{
+    return $this->belongsToMany(User::class, 'whislists', 'wisata_id', 'user_id')->withTimestamps();
+}
 }

@@ -21,6 +21,7 @@ class CustomerController extends Controller
     }
     public function index()
     {   $wisatas = Wisata::all();
+        $userWishlist = auth()->check() ? auth()->user()->wishlist->pluck('id')->toArray() : [];
         return view('customer.index', compact('wisatas'));
        
     }
@@ -37,7 +38,8 @@ class CustomerController extends Controller
     public function explore()
     {
        $wisatas = Wisata::with('ulasans')->get();
-        return view('customer.explore', compact('wisatas'));
+       $userWishlist = auth()->check() ? auth()->user()->wishlist->pluck('id')->toArray() : [];
+        return view('customer.explore', compact('wisatas','userWishlist'));
     }
     public function filterByCategory($kategori)
     {
@@ -155,8 +157,9 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Customer $customer)
+    public function menu(Customer $customer)
     {
-        //
+        return view('customer.menu');
     }
+    
 }

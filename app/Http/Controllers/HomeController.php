@@ -31,7 +31,7 @@ class HomeController extends Controller
         }elseif($user->roles[0]['name'] == 'vendor'){
             return redirect()->route('vendor.index');
         }elseif($user->roles[0]['name'] == 'customer'){
-            return redirect()->route('customer.index');
+            return redirect()->route('menu');
         }
         return view('home');
     }

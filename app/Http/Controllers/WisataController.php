@@ -11,10 +11,10 @@ use Illuminate\Support\Facades\Storage;
 
 class WisataController extends Controller
 {
-    function __construct()
-    {
-         $this->middleware('permission:vendor-any', ['any']);
-    }
+    // function __construct()
+    // {
+    //      $this->middleware('permission:vendor-any', ['any']);
+    // }
     
     public function create()
     {
@@ -232,4 +232,11 @@ public function update(Request $request, $id)
     return back()->with('success', 'Wisata berhasil diubah.');
     
 }
+// app/Http/Controllers/WisataController.php
+public function map()
+{
+    $wisata = Wisata::all(['id','name','latitude','longitude']);
+    return view('customer.map', compact('wisata'));
+}
+
 }

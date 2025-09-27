@@ -1,19 +1,6 @@
 @extends('customer.layouts.app')
 
 @section('content')
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <link rel="stylesheet" href="../../../assets/css/card.css">
-</head>
-<body>
-    
-
-
 <div class="container">
     <nav id="navbar2" class="navbar navbar-expand" style="background-color: white;">
         <ul class="navbar-nav nav-justified w-100">
@@ -32,22 +19,61 @@
         </ul>
     </nav>
 </div>
-<div class="container py-2">
-    <div class="row mb-5">
+
+<div class="container py-4">
+    <div class="row g-4">
         @foreach($wisatas as $wisata)
-        <div class="col-md-4">
-            <div class="card">
-            <img src="{{ asset('storage/images/' . json_decode($wisata->images)[0]) }}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h3 class="card-title" style="font-size:20px;">{{$wisata->name}}</h3>
-                    <p class="card-text" style="font-size: 16px;">Garut ,Jawabarat</p>
-                    <div class="d-flex align-items-center justify-content-between">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card position-relative h-100 shadow-sm">
+                @php
+                    $images = json_decode($wisata->images, true);
+                @endphp
+
+                @if (!empty($images) && isset($images[0]))
+                    <img src="{{ asset('storage/images/' . $images[0]) }}" 
+                         class="card-img-top img-fluid" 
+                         alt="{{ $wisata->name }}" 
+                         style="object-fit: cover; height: 200px;">
+                @else
+                    <img src="{{ asset('images/default.jpg') }}" 
+                         class="card-img-top img-fluid" 
+                         alt="default" 
+                         style="object-fit: cover; height: 200px;">
+                @endif
+
+                {{-- Tombol Wishlist (Love) --}}
+                @auth
+                    <form action="{{ in_array($wisata->id, $userWishlist) 
+                        ? route('customer.wishlist.destroy', $wisata->id) 
+                        : route('customer.wishlist.store', $wisata->id) }}" 
+                        method="POST" 
+                        class="position-absolute top-0 end-0 m-2">
+                        @csrf
+                        @if(in_array($wisata->id, $userWishlist))
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-link p-0">
+                                <i class="bi bi-heart-fill text-danger fs-4"></i>
+                            </button>
+                        @else
+                            <button type="submit" class="btn btn-link p-0">
+                                <i class="bi bi-heart text-dark fs-4"></i>
+                            </button>
+                        @endif
+                    </form>
+                @endauth
+
+                <div class="card-body d-flex flex-column">
+                    <h3 class="card-title fs-5">{{$wisata->name}}</h3>
+                    <p class="card-text text-muted mb-2">Garut, Jawa Barat</p>
+                    <div class="d-flex align-items-center justify-content-between mt-auto">
                         <div class="rating">
                             <span class="badge text-dark" style="font-size: 14px; background-color :#FFCB05;">
                                 {{$wisata->rating_text}}
                             </span>
                         </div>
-                        <a href="{{ route('customer.show', $wisata) }}" class="btn" style="background-color: #0046BF;">View Detail</a>
+                        <a href="{{ route('customer.show', $wisata) }}" class="btn btn-sm text-white" style="background-color: #0046BF;">
+                            View Detail
+                        </a>
                     </div>
                 </div>
             </div>
@@ -55,7 +81,4 @@
         @endforeach
     </div>
 </div>
-
-</body>
-</html>
 @endsection

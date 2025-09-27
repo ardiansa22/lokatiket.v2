@@ -2,15 +2,15 @@
   
 namespace App\Models;
   
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
   
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable 
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
   
@@ -63,5 +63,10 @@ public function ulasans(): HasMany
     {
         return $this->hasOne(Profile::class);
     }
+    public function wishlist()
+{
+    return $this->belongsToMany(Wisata::class, 'whislists', 'user_id', 'wisata_id')->withTimestamps();
+}
+
 
 }

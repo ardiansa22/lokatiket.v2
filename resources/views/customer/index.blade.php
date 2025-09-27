@@ -110,7 +110,17 @@
                                     <div class="item">
                                         <div class="thumb">
                                             <a href="{{ route('customer.show', $wisata) }}">
-                                                <img src="{{ asset('storage/images/' . json_decode($wisata->images)[0]) }}" alt="">
+                                                @php
+                                                    $images = json_decode($wisata->images, true);
+                                                @endphp
+
+                                                @if (!empty($images) && isset($images[0]))
+                                                    <img src="{{ asset('storage/images/' . $images[0]) }}" class="card-img-top" alt="...">
+                                                @else
+                                                    <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="default">
+                                                @endif
+
+
                                             </a>
                                         </div>
                                         <h1>{{$wisata->name}}</h1>
