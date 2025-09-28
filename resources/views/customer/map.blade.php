@@ -14,7 +14,7 @@
     <style>
         /* Variabel Warna */
         :root {
-            --primary-blue: #0A3D62; /* Biru Tua */
+            --primary-blue: #0046bf; /* Biru Tua */
             --secondary-orange: #FF8F00; /* Oranye */
             --light-bg: #F8F9FA;
             --dark-text: #212529;
@@ -102,8 +102,10 @@
             Temukan destinasi wisata yang paling dekat dari lokasi Anda. Rencanakan perjalanan Anda dengan mudah dan praktis!
         </p>
     </div>
+    
 
     <div id="map"></div>
+    
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 
@@ -152,5 +154,6 @@
                 .replace(/'/g,"&#039;");
         }
     </script>
+    
 </body>
 </html>

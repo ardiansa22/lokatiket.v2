@@ -13,6 +13,7 @@ use App\Http\Controllers\UlasanController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Customer;
 use App\Exports\OrderExport;
+use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\WishlistController;
 use Maatwebsite\Excel\Facades\Excel;
 /*
@@ -64,6 +65,8 @@ Route::middleware(['role:customer'])->group(function () {
         Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
     Route::post('/wishlist/{wisataId}', [WishlistController::class, 'store'])->name('wishlist.store');
     Route::delete('/wishlist/{wisataId}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
+    Route::get('/chatbot', [ChatbotController::class, 'index']);
+Route::post('/chatbot/send', [ChatbotController::class, 'send'])->name('chatbot.send');
         
         
             });

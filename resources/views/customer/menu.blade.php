@@ -9,7 +9,7 @@
     <style>
         /* Palet Warna */
         :root {
-            --primary-blue: #0A3D62; /* Biru Tua Primer */
+            --primary-blue: #0046bf; /* Biru Tua Primer */
             --secondary-orange: #FF8F00; /* Oranye Sekunder */
             --light-bg: #F8F9FA; /* Latar Belakang Cerah */
             --dark-text: #212529; /* Teks Gelap */
@@ -158,7 +158,6 @@
     </style>
 </head>
 <body>
-
     <div class="header-section">
         <div class="header-logo">
             <img src="/assets/images/logolk.png" alt="Lokatiket Logo"> 
@@ -186,8 +185,8 @@
             </div>
             <span class="icon-label">Tiket & Informasi</span>
         </a>
-
     </div>
+    
 
 </body>
 </html>

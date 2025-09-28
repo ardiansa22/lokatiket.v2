@@ -65,6 +65,7 @@ if ('serviceWorker' in navigator) {
 <link rel="stylesheet" href="../../../assets/css/templatemo-woox-travel.css">
 <link rel="stylesheet" href="../../../assets/css/show.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 
 
@@ -131,6 +132,7 @@ if ('serviceWorker' in navigator) {
         
         @yield('footer')
 
+        @include('customer.layouts.chatbot')
         @include('customer.layouts.scriptapp')
         @yield('script')
     </body>
