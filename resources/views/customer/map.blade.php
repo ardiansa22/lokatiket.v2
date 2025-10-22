@@ -131,7 +131,7 @@
         locations.forEach(loc => {
             if (!loc.latitude || !loc.longitude) return;
             L.marker([loc.latitude, loc.longitude])
-                .bindPopup(`<strong>${escapeHtml(loc.name)}</strong><br><a href="customer/wisata/${loc.id}" style="color:var(--secondary-orange); font-weight:600;">Lihat Detail</a>`) // Menambah link detail
+                .bindPopup(`<strong>${escapeHtml(loc.name)}</strong><br><a href="wisata/${loc.id}" style="color:var(--secondary-orange); font-weight:600;">Lihat Detail</a>`) // Menambah link detail
                 .addTo(markers);
         });
 

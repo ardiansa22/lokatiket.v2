@@ -206,7 +206,6 @@
                                 </div>
                             </form>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -233,7 +232,6 @@
             }
         });
     @endif
-    
     // Logika form upload tetap sama
     document.getElementById('image').onchange = function() {
         document.getElementById('upload-form').submit();

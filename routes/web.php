@@ -48,7 +48,6 @@ Route::middleware(['role:customer'])->group(function () {
         Route::name('customer.')->group(function(){
 
         Route::get('/', [CustomerController::class, 'index'])->name('index');
-        Route::get('/wisata/{wisata}', [CustomerController::class, 'tampilkan'])->name('show');
         
         Route::get('/order', [CustomerController::class, 'summary'])->name('summary');
         Route::get('/kategori/{kategori}', [CustomerController::class, 'filterByCategory'])->name('wisata.filter');
