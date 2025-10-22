@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Wisata extends Model
 {
-    protected $fillable = ['user_id','name', 'description', 'price', 'kategori', 'facilities', 'images'];
+    protected $fillable = ['user_id','name', 'description', 'price', 'kategori', 'facilities', 'images', 'latitude', 'longitude', 'google_maps_link'];
 
     protected $casts = [
         'images' => 'array',

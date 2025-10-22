@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddLatitudeLongitudeToWisatasTable extends Migration
+class AddCoordinatesToWisatasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class AddLatitudeLongitudeToWisatasTable extends Migration
     public function up()
     {
         Schema::table('wisatas', function (Blueprint $table) {
-            $table->decimal('latitude', 10, 8)->nullable()->after('kategori');
-            $table->decimal('longitude', 11, 8)->nullable()->after('latitude');
+            $table->string('google_maps_link')->nullable()->after('longitude');
         });
     }
 
@@ -27,7 +26,7 @@ class AddLatitudeLongitudeToWisatasTable extends Migration
     public function down()
     {
         Schema::table('wisatas', function (Blueprint $table) {
-             $table->dropColumn(['latitude', 'longitude']);
+            $table->dropColumn(['google_maps_link']);
         });
     }
 }

@@ -52,7 +52,7 @@
             $('#search-results').show();
             $('#search-results ul').empty();
             $.each(data, function(index, wisata) {
-              $('#search-results ul').append('<li><a href="' + "{{ route('customer.show', '') }}" + '/' + wisata.id + '">' + wisata.name + '</a></li>');
+              $('#search-results ul').append('<li><a href="' + "{{ route('show', '') }}" + '/' + wisata.id + '">' + wisata.name + '</a></li>');
             });
           }
         });

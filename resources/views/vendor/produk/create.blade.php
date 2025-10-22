@@ -11,11 +11,13 @@
         </ul>
     </div>
 @endif
+
 @if (session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
     </div>
 @endif
+
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
@@ -25,24 +27,31 @@
                 <!-- General Form Elements -->
                 <form id="uploadForm" action="{{ route('vendor.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    {{-- Nama Wisata --}}
                     <div class="row mb-3">
                         <label for="inputText" class="col-sm-2 col-form-label">Nama</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="name" required>
                         </div>
                     </div>
+
+                    {{-- Deskripsi --}}
                     <div class="row mb-3">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Deskripsi</label>
                         <div class="col-sm-10">
                             <textarea class="form-control" name="description" required style="height: 100px"></textarea>
                         </div>
                     </div>
+
+                    {{-- Harga --}}
                     <div class="row mb-3">
                         <label for="inputNumber" class="col-sm-2 col-form-label">Harga</label>
                         <div class="col-sm-10">
                             <input type="number" class="form-control" name="price" required>
                         </div>
                     </div>
+
+                    {{-- Fasilitas --}}
                     <div class="row mb-3">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Fasilitas</label>
                         <div class="col-sm-10">
@@ -70,6 +79,8 @@
                             <div id="additional-fasilitas-lainnya"></div>
                         </div>
                     </div>
+
+                    {{-- Gambar --}}
                     <div class="row mb-3">
                         <label for="inputNumber" class="col-sm-2 col-form-label">Gambar</label>
                         <div class="col-sm-10">
@@ -78,18 +89,45 @@
                             <span style="font-size: 12px; color: #0046BF;"><i>*Maximal size 2Mb</i></span>
                         </div>
                     </div>
+
+                    {{-- Kategori --}}
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Kategori</label>
                         <div class="col-sm-10">
                             <select class="form-select" aria-label="Default select example" name="kategori" required>
-                                <option selected>Open this select menu</option>
-                                <option value="1">Alam</option>
-                                <option value="2">Gunung</option>
-                                <option value="3">Kawah</option>
-                                <option value="4">Pantai</option>
+                                <option selected disabled>Pilih kategori wisata</option>
+                                <option value="Gunung">Gunung</option>
+                                <option value="Pantai">Pantai</option>
+                                <option value="Kawah">Kawah</option>
                             </select>
                         </div>
                     </div>
+
+                    {{-- 🆕 Latitude --}}
+                    <div class="row mb-3">
+                        <label for="latitude" class="col-sm-2 col-form-label">Latitude</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="latitude" name="latitude" placeholder="-7.1234567">
+                        </div>
+                    </div>
+
+                    {{-- 🆕 Longitude --}}
+                    <div class="row mb-3">
+                        <label for="longitude" class="col-sm-2 col-form-label">Longitude</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="longitude" name="longitude" placeholder="108.1234567">
+                        </div>
+                    </div>
+
+                    {{-- 🆕 Google Maps Link --}}
+                    <div class="row mb-3">
+                        <label for="google_maps_link" class="col-sm-2 col-form-label">Link Google Maps</label>
+                        <div class="col-sm-10">
+                            <input type="url" class="form-control" id="google_maps_link" name="google_maps_link" placeholder="https://maps.google.com/?q=-7.1234567,108.1234567">
+                        </div>
+                    </div>
+
+                    {{-- Submit --}}
                     <div class="row mb-3">
                         <div class="col-sm-10 offset-sm-2">
                             <button type="submit" class="btn btn-primary">Tambahkan</button>
@@ -100,80 +138,4 @@
         </div>
     </div>
 </div>
-
-@endsection
-
-@section('script')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<script>
-    document.getElementById('fileInput').addEventListener('change', function(event) {
-        const files = event.target.files;
-        const previewContainer = document.getElementById('filePreview');
-        previewContainer.innerHTML = '';
-        
-        if (files) {
-            Array.from(files).forEach(file => {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.style.maxWidth = '150px';
-                    img.style.marginRight = '10px';
-                    previewContainer.appendChild(img);
-                };
-                reader.readAsDataURL(file);
-            });
-        }
-    });
-
-    document.getElementById('add-fasilitas-lainnya').addEventListener('click', function() {
-        const container = document.getElementById('additional-fasilitas-lainnya');
-        const newInput = document.createElement('div');
-        newInput.classList.add('input-group', 'mb-3');
-        newInput.innerHTML = `
-            <input type="text" class="form-control" name="fasilitas_lainnya[]">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary remove-fasilitas-lainnya" type="button">-</button>
-            </div>
-        `;
-        container.appendChild(newInput);
-    });
-
-    document.getElementById('additional-fasilitas-lainnya').addEventListener('click', function(event) {
-        if (event.target.classList.contains('remove-fasilitas-lainnya')) {
-            event.target.closest('.input-group').remove();
-        }
-    });
-
-    $('#uploadForm').submit(function(event) {
-        event.preventDefault();
-
-        let formData = new FormData(this);
-
-        $.ajax({
-            url: '{{ route('vendor.store')}}',
-            method: 'POST',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function(response) {
-                $('#filePreview').empty();
-                $('#uploadForm')[0].reset();
-                $('#additional-fasilitas-lainnya').empty();
-
-                // Tampilkan SweetAlert
-                Swal.fire({
-                    title: 'Berhasil!',
-                    text: 'Wisata berhasil ditambahkan.',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                });
-            },
-            error: function(xhr, status, error) {
-                alert('File upload failed');
-            }
-        });
-    });
-</script>
 @endsection

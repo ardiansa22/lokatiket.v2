@@ -152,7 +152,14 @@
                                 @foreach ($wisata as $item)
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
-                                    <td><img src="{{ asset('storage/images/' . json_decode($item->images)[0]) }}" alt="Image" class="thumbnail" /></td>
+                                    <td>
+                                        @php
+                                            $images = json_decode($item->images, true);
+                                            $imagePath = isset($images[0]) ? asset('storage/images/' . $images[0]) : asset('images/default.jpg');
+                                        @endphp
+                                        <img src="{{ $imagePath }}" alt="Image" class="thumbnail" />
+                                    </td>
+
                                     <td>{{ $item->name }}</td>
                                     <td style="max-width: 300px; word-wrap: break-word;">{{ $item->description }}</td>
                                     <td>{{ $item->price }}</td>

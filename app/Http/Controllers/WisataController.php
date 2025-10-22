@@ -27,6 +27,7 @@ class WisataController extends Controller
 
     public function store(Request $request)
 {
+    // dd($request->all());
     $request->validate([
         'name' => 'required',
         'description' => 'required',
@@ -36,6 +37,9 @@ class WisataController extends Controller
         'kategori' => 'required',
         'fasilitas' => 'required|array',
         'fasilitas_lainnya' => 'array',
+        'latitude' => 'required|numeric',
+        'longitude' => 'required|numeric',
+        'google_maps_link' => 'required|url',
     ]);
 
     $userId = Auth::id();
@@ -45,6 +49,9 @@ class WisataController extends Controller
     $wisata->description = $request->description;
     $wisata->price = $request->price;
     $wisata->kategori = $request->kategori;
+    $wisata->latitude = $request->latitude;
+    $wisata->longitude = $request->longitude;
+    $wisata->google_maps_link = $request->google_maps_link;
 
     // Menggabungkan fasilitas checkbox dengan fasilitas lainnya
     $fasilitas = $request->fasilitas;
@@ -68,13 +75,6 @@ class WisataController extends Controller
     return back()->with('success', 'Wisata berhasil ditambahkan.');
 }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Wisata  $wisata
-     * @return \Illuminate\Http\Response
-     */
     public function show(Wisata $wisata)
     {
         //
@@ -109,6 +109,9 @@ public function updat(Request $request, $id)
         'kategori' => 'required',
         'fasilitas' => 'required|array',
         'fasilitas_lainnya' => 'array',
+        'latitude' => 'nullable|numeric',
+        'longitude' => 'nullable|numeric',
+        'google_maps_link' => 'nullable|url',
     ]);
 
     $wisata = Wisata::findOrFail($id);
@@ -121,8 +124,11 @@ public function updat(Request $request, $id)
     $wisata->name = $request->name;
     $wisata->description = $request->description;
     $wisata->price = $request->price;
-
     $wisata->facilities = $request->facilities;
+    $wisata->kategori = $request->kategori;
+    $wisata->latitude = $request->latitude;
+    $wisata->longitude = $request->longitude;
+    $wisata->google_maps_link = $request->google_maps_link;
 
     if($request->hasfile('images')) {
         $images = [];

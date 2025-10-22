@@ -17,7 +17,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{{route('customer.explore')}}">
+      <a class="nav-link" href="{{route('explore')}}">
         <i class="fa-solid fa-globe" style="font-size: 26px;"></i>
         <span>Jelajah</span>
       </a>
@@ -85,7 +85,7 @@
                                     <h4><span>Kawah</span></h4>
                                 </div>
                                 <div class="col-lg-4 col-sm-6 col-6">
-                                    <a href="{{route('customer.explore')}}">
+                                    <a href="{{route('explore')}}">
                                         <i class="fa-solid fa-border-all"></i>
                                     </a>
                                     <h4><span>Semua</span></h4>
@@ -109,7 +109,7 @@
                                     @foreach($wisatas as $wisata)
                                     <div class="item">
                                         <div class="thumb">
-                                            <a href="{{ route('customer.show', $wisata) }}">
+                                            <a href="{{ route('show', $wisata) }}">
                                                 @php
                                                     $images = json_decode($wisata->images, true);
                                                 @endphp
@@ -179,7 +179,7 @@
                             $('#search-results').show();
                             $('#search-results ul').empty();
                             $.each(data, function(index, wisata) {
-                                $('#search-results ul').append('<li><a href="' + "{{ route('customer.show', '') }}" + '/' + wisata.id + '">' + wisata.name + '</a></li>');
+                                $('#search-results ul').append('<li><a href="' + "{{ route('show', '') }}" + '/' + wisata.id + '">' + wisata.name + '</a></li>');
                             });
                         }
                     });

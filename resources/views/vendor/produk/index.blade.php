@@ -69,16 +69,19 @@
             </td>
             <td>{{ $wisata->kategori }}</td>
             <td>
-            <button class="btn btn-warning editBtn" 
-                    data-id="{{ $wisata->id }}" 
-                    data-name="{{ $wisata->name }}" 
-                    data-description="{{ $wisata->description }}" 
-                    data-price="{{ $wisata->price }}"
-                    data-facilities="{{ json_encode($wisata->facilities) }}"
-                    data-images="{{ json_encode($wisata->images) }}"
-                    data-kategori="{{ $wisata->kategori }}">
-                <i class="bi bi-pencil-square"></i>
-            </button>
+              <button class="btn btn-warning editBtn" 
+                      data-id="{{ $wisata->id }}" 
+                      data-name="{{ $wisata->name }}" 
+                      data-description="{{ $wisata->description }}" 
+                      data-price="{{ $wisata->price }}"
+                      data-facilities="{{ json_encode($wisata->facilities) }}"
+                      data-images="{{ json_encode($wisata->images) }}"
+                      data-kategori="{{ $wisata->kategori }}"
+                      data-latitude="{{ $wisata->latitude }}"
+                      data-longitude="{{ $wisata->longitude }}"
+                      data-maps_link="{{ $wisata->maps_link }}">
+                  <i class="bi bi-pencil-square"></i>
+              </button>
             </td>
           </tr>
         @endforeach
@@ -154,6 +157,22 @@
             </select>
             <span style="font-size: 12px; color: #0046BF;"><i>*pilih kategori sesuai kebutuhan</i></span>
           </div>
+          <div class="mb-3">
+            <label for="latitude" class="form-label">Latitude</label>
+            <input type="text" class="form-control" id="latitude" name="latitude" placeholder="-7.123456" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="longitude" class="form-label">Longitude</label>
+            <input type="text" class="form-control" id="longitude" name="longitude" placeholder="108.654321" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="maps_link" class="form-label">Link Google Maps</label>
+            <input type="url" class="form-control" id="maps_link" name="maps_link" placeholder="https://goo.gl/maps/..." required>
+            <span style="font-size: 12px; color: #0046BF;"><i>*Masukkan link Google Maps lokasi wisata</i></span>
+          </div>
+
           
           <button type="submit" class="btn btn-primary">Simpan</button>
         </form>
@@ -168,19 +187,26 @@
 <script>
 $(document).ready(function() {
   $('.editBtn').on('click', function() {
-    var id = $(this).data('id');
-    var name = $(this).data('name');
-    var description = $(this).data('description');
-    var price = $(this).data('price');
-    var facilities = JSON.parse($(this).data('facilities'));
-    var images = $(this).data('images');
-    var kategori = $(this).data('kategori');
+  var id = $(this).data('id');
+  var name = $(this).data('name');
+  var description = $(this).data('description');
+  var price = $(this).data('price');
+  var facilities = JSON.parse($(this).data('facilities'));
+  var images = $(this).data('images');
+  var kategori = $(this).data('kategori');
+  var latitude = $(this).data('latitude');
+  var longitude = $(this).data('longitude');
+  var maps_link = $(this).data('maps_link');
 
-    $('#wisataId').val(id);
-    $('#name').val(name);
-    $('#description').val(description);
-    $('#price').val(price);
-    $('#kategori').val(kategori);
+  $('#wisataId').val(id);
+  $('#name').val(name);
+  $('#description').val(description);
+  $('#price').val(price);
+  $('#kategori').val(kategori);
+  $('#latitude').val(latitude);
+  $('#longitude').val(longitude);
+  $('#maps_link').val(maps_link);
+
 
     // Fill facilities checkboxes
     var facilitiesContainer = $('#facilities-container');

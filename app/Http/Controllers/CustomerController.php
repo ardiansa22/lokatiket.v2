@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Hash;
 
 class CustomerController extends Controller
 {
-    function __construct()
-    {
-         $this->middleware('permission:customer-any', ['any']);
-    }
+    // function __construct()
+    // {
+    //      $this->middleware('permission:customer-any', ['any']);
+    // }
     public function index()
     {   $wisatas = Wisata::all();
         $userWishlist = auth()->check() ? auth()->user()->wishlist->pluck('id')->toArray() : [];
