@@ -11,7 +11,8 @@
     <nav id="navbar1" class="navbar navbar-expand fixed-bottom" style="background-color: white;">
   <ul class="navbar-nav nav-justified w-100">
     <li class="nav-item">
-      <a class="nav-link" href="{{route('customer.index')}}">
+      <a class="nav-link" href="{{ auth()->check() ? route('customer.index') : route('login') }}">
+        
         <i class="fa-solid fa-house" style="font-size: 26px;"></i>
         <span>Beranda</span>
       </a>
@@ -61,25 +62,25 @@
                             <div class="row">
                                 <p class="mb-3" style="text-align: left; font-size: 20px; color:black; font-weight:bold;">Kategori</p>
                                 <div class="col-lg-4 col-sm-6 col-6">
-                                    <a href="{{ route('customer.wisata.filter', 'Alam') }}">
+                                    <a href="{{ route('wisata.filter', 'Alam') }}">
                                         <i class="fa-solid fa-tree"></i>
                                     </a>
                                     <h4><span>Alam</span></h4>
                                 </div>
                                 <div class="col-lg-4 col-sm-6 col-6">
-                                    <a href="{{ route('customer.wisata.filter', 'Pantai') }}">
+                                    <a href="{{ route('wisata.filter', 'Pantai') }}">
                                         <i class="fa-solid fa-umbrella-beach"></i>
                                     </a>
                                     <h4><span>Pantai</span></h4>
                                 </div>
                                 <div class="col-lg-4 col-sm-6 col-6">
-                                    <a href="{{ route('customer.wisata.filter', 'Gunung') }}">
+                                    <a href="{{ route('wisata.filter', 'Gunung') }}">
                                         <i class="fa-solid fa-mountain"></i>
                                     </a>
                                     <h4><span>Gunung</span></h4>
                                 </div>
                                 <div class="col-lg-4 col-sm-6 col-6">
-                                    <a href="{{ route('customer.wisata.filter', 'Kawah') }}">
+                                    <a href="{{ route('wisata.filter', 'Kawah') }}">
                                         <i class="fa-solid fa-water"></i>
                                     </a>
                                     <h4><span>Kawah</span></h4>

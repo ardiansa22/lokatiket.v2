@@ -177,7 +177,7 @@
             <span class="icon-label">Peta Wisata</span>
         </a>
 
-        <a href="{{ route('explore') }}" class="menu-item">
+        <a href="{{ route('index') }}" class="menu-item">
             <div class="icon-box">
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 18H6V4h12v16zM12 7.5c-2.3 0-3.5 1.7-3.5 3.5 0 .7.3 1.3.8 1.8l2.7 3.3c.3.3.7.3 1 0l2.7-3.3c.5-.5.8-1.1.8-1.8 0-1.8-1.2-3.5-3.5-3.5zm0 5.5c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.7 1.5-1.5 1.5z"/>

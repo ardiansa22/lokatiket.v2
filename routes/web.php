@@ -40,6 +40,8 @@ Route::get('/menu', [CustomerController::class, 'menu'])->name('menu');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/explore', [CustomerController::class, 'explore'])->name('explore');
 Route::get('/wisata/{wisata}', [CustomerController::class, 'tampilkan'])->name('show');
+Route::get('/beranda', [CustomerController::class, 'index'])->name('index');
+Route::get('/kategori/{kategori}', [CustomerController::class, 'filterByCategory'])->name('wisata.filter');
 
 Auth::routes();
 
@@ -50,7 +52,7 @@ Route::middleware(['role:customer'])->group(function () {
         Route::get('/', [CustomerController::class, 'index'])->name('index');
         
         Route::get('/order', [CustomerController::class, 'summary'])->name('summary');
-        Route::get('/kategori/{kategori}', [CustomerController::class, 'filterByCategory'])->name('wisata.filter');
+        
         Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout');
         // Route::get('/detail', [CustomerController::class, 'riwayat'])->name('riwayat');
         // Route::get('/invoice/{id}', [OrderController::class, 'invoice'])->name('riwayat');
