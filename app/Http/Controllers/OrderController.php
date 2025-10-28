@@ -35,10 +35,12 @@ class OrderController extends Controller
         \Midtrans\Config::$isSanitized = true;
         // Set 3DS transaction for credit card to true
         \Midtrans\Config::$is3ds = true;
+        $prefix = 'ORD-'; // Definisikan prefix yang Anda inginkan
+$midtrans_order_id = $prefix . $order->id;
 
         $params = array(
             'transaction_details' => array(
-                'order_id' => $order->id,
+                'order_id' => $midtrans_order_id,
                 'gross_amount' => $order->total_price,
             ),
             'customer_details' => array(

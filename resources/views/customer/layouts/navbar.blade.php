@@ -20,9 +20,16 @@
     <!-- Pesanan (hanya login, kalau tidak → login) -->
     <li class="nav-item">
       <a class="nav-link" 
-         href="{{ auth()->check() ? route('customer.riwayat') : route('login') }}">
+         href="{{ auth()->check() ? route('customer.riwayat-history') : route('login') }}">
         <i class="fa-solid fa-bell" style="font-size: 26px;"></i>
         <span>Pesanan</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" 
+         href="{{ auth()->check() ? route('customer.riwayat-history') : route('login') }}">
+        <i class="fa-solid fa-heart" style="font-size: 26px;"></i>
+        <span>Favorit</span>
       </a>
     </li>
 

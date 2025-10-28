@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Ulasan;
 use App\Models\Wisata;
 use Illuminate\Http\Request;

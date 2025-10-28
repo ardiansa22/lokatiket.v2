@@ -24,13 +24,14 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{{route('customer.riwayat')}}">
+      <a class="nav-link" href="{{route('customer.riwayat-history')}}">
         <i class="fa-solid fa-bell" style="font-size: 26px;"></i>
         <span>Pesanan</span>
       </a>
     </li>
+
     <li class="nav-item">
-      <a class="nav-link" href="{{route('customer.profile')}}">
+      <a class="nav-link" href="{{ auth()->check() ? route('customer.profile') : route('login') }}">
         <i class="fa-solid fa-user" style="font-size: 26px;"></i>
         <span>Profil</span>
       </a>

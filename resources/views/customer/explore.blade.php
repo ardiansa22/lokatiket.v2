@@ -98,28 +98,28 @@
             
             <li class="nav-item">
                 <a class="nav-link {{ request()->segment(3) == 'Alam' ? 'active' : '' }}" 
-                   href="{{ auth()->check() ? route('customer.wisata.filter', 'Alam') : route('login') }}">
+                   href="{{ auth()->check() ? route('wisata.filter', 'Alam') : route('login') }}">
                    <i class="fas fa-tree me-1"></i> Alam
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link {{ request()->segment(3) == 'Pantai' ? 'active' : '' }}" 
-                   href="{{ auth()->check() ? route('customer.wisata.filter', 'Pantai') : route('login') }}">
+                   href="{{ auth()->check() ? route('wisata.filter', 'Pantai') : route('login') }}">
                    <i class="fas fa-water me-1"></i> Pantai
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link {{ request()->segment(3) == 'Kawah' ? 'active' : '' }}" 
-                   href="{{ auth()->check() ? route('customer.wisata.filter', 'Kawah') : route('login') }}">
+                   href="{{ auth()->check() ? route('wisata.filter', 'Kawah') : route('login') }}">
                    <i class="fas fa-volcano me-1"></i> Kawah
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link {{ request()->segment(3) == 'Gunung' ? 'active' : '' }}" 
-                   href="{{ auth()->check() ? route('customer.wisata.filter', 'Gunung') : route('login') }}">
+                   href="{{ auth()->check() ? route('wisata.filter', 'Gunung') : route('login') }}">
                    <i class="fas fa-mountain me-1"></i> Gunung
                 </a>
             </li>

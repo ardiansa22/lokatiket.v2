@@ -54,9 +54,9 @@ Route::middleware(['role:customer'])->group(function () {
         Route::get('/order', [CustomerController::class, 'summary'])->name('summary');
         
         Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout');
-        // Route::get('/detail', [CustomerController::class, 'riwayat'])->name('riwayat');
-        // Route::get('/invoice/{id}', [OrderController::class, 'invoice'])->name('riwayat');
-        Route::get('/history', [OrderController::class, 'history'])->name('riwayat');
+        Route::get('/detail', [CustomerController::class, 'riwayat'])->name('riwayat-detail');
+        Route::get('/invoice/{id}', [OrderController::class, 'invoice'])->name('riwayat-invoice');
+        Route::get('/history', [OrderController::class, 'history'])->name('riwayat-history');
         Route::get('/ulasan/{wisataId}/{orderId}', [UlasanController::class, 'create'])->name('ulasan');
         Route::post('/ulasan', [UlasanController::class, 'store'])->name('ulasanstore');
         Route::get('/profil', [CustomerController::class, 'profil'])->name('profile');
