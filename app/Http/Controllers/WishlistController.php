@@ -10,7 +10,7 @@ class WishlistController extends Controller
     public function index()
     {
         $wishlist = auth()->user()->wishlist;
-        return view('wishlist.index', compact('wishlist'));
+        return view('customer.wishlist', compact('wishlist'));
     }
 
     public function store($wisataId)

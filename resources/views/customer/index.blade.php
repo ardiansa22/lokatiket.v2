@@ -29,6 +29,13 @@
         <span>Pesanan</span>
       </a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" 
+         href="{{ auth()->check() ? route('customer.wishlist.index') : route('login') }}">
+        <i class="fa-solid fa-heart" style="font-size: 26px;"></i>
+        <span>Favorit</span>
+      </a>
+    </li>
 
     <li class="nav-item">
       <a class="nav-link" href="{{ auth()->check() ? route('customer.profile') : route('login') }}">

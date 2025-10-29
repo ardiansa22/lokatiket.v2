@@ -67,12 +67,10 @@ Route::middleware(['role:customer'])->group(function () {
         Route::post('/image-profile', [ProfileController::class, 'editImage'])->name('upload-image');
         Route::delete('/image-remove', [ProfileController::class, 'removeImage '])->name('remove-image');
         Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
-    Route::post('/wishlist/{wisataId}', [WishlistController::class, 'store'])->name('wishlist.store');
-    Route::delete('/wishlist/{wisataId}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
-    Route::get('/chatbot', [ChatbotController::class, 'index']);
-Route::post('/chatbot/send', [ChatbotController::class, 'send'])->name('chatbot.send');
-        
-        
+        Route::post('/wishlist/{wisataId}', [WishlistController::class, 'store'])->name('wishlist.store');
+        Route::delete('/wishlist/{wisataId}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
+        Route::get('/chatbot', [ChatbotController::class, 'index']);
+        Route::post('/chatbot/send', [ChatbotController::class, 'send'])->name('chatbot.send');
             });
         });
     });
