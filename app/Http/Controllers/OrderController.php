@@ -5,6 +5,7 @@ use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {
@@ -62,37 +63,78 @@ $midtrans_order_id = $prefix . $order->id;
         return view('customer.order_summary', compact('snapToken','order'));
     }
 
+    // public function callback(Request $request)
+    // {
+    //     $serverKey = config('midtrans.server_key');
+    //     $hashed = hash("sha512", $request->order_id . $request->status_code . $request->gross_amount . $serverKey);
+    
+    //     if ($hashed == $request->signature_key) {
+    //         if ($request->transaction_status == 'settlement' | $request->transaction_status == 'capture') {
+    //             $order = Order::find($request->order_id);
+    
+    //             // Handle payment status based on payment type
+    //             switch ($request->payment_type) {
+    //                 case 'credit_card':
+    //                     // Handle credit card payment status
+    //                     $order->update(['status' => 'Paid']);
+    //                     break;
+    //                 case 'bank_transfer':
+    //                     // Handle bank transfer payment status
+    //                     $order->update(['status' => 'Paid']); // Update status as pending, for example
+    //                     break;
+    //                 case 'qris':
+    //                     // Handle QRIS payment status
+    //                     $order->update(['status' => 'Paid']); // Assuming QRIS payments are marked as Paid upon settlement
+    //                     break;
+    //                 // Add cases for other payment types as needed
+    //                 default:
+    //                     // Handle unrecognized payment types
+    //                     break;
+    //             }
+    //         }
+    //     }
+    // }
     public function callback(Request $request)
-    {
-        $serverKey = config('midtrans.server_key');
-        $hashed = hash("sha512", $request->order_id . $request->status_code . $request->gross_amount . $serverKey);
-    
-        if ($hashed == $request->signature_key) {
-            if ($request->transaction_status == 'settlement' | $request->transaction_status == 'capture') {
-                $order = Order::find($request->order_id);
-    
-                // Handle payment status based on payment type
-                switch ($request->payment_type) {
-                    case 'credit_card':
-                        // Handle credit card payment status
-                        $order->update(['status' => 'Paid']);
-                        break;
-                    case 'bank_transfer':
-                        // Handle bank transfer payment status
-                        $order->update(['status' => 'Paid']); // Update status as pending, for example
-                        break;
-                    case 'qris':
-                        // Handle QRIS payment status
-                        $order->update(['status' => 'Paid']); // Assuming QRIS payments are marked as Paid upon settlement
-                        break;
-                    // Add cases for other payment types as needed
-                    default:
-                        // Handle unrecognized payment types
-                        break;
-                }
-            }
-        }
+{
+    Log::info("MIDTRANS CALLBACK", $request->all());
+
+    $serverKey = config('midtrans.server_key');
+
+    // Validasi signature sesuai Midtrans
+    $expectedSignature = hash(
+        'sha512',
+        $request->order_id .
+        $request->status_code .
+        $request->gross_amount .   // string format "15000.00"
+        $serverKey
+    );
+
+    if ($expectedSignature !== $request->signature_key) {
+        Log::error("MIDTRANS INVALID SIGNATURE");
+        return response()->json(['message' => 'Invalid signature'], 403);
     }
+
+    // Ambil angka ID dari ORD-208
+    $orderId = str_replace('ORD-', '', $request->order_id);
+    $order = Order::find($orderId);
+
+    if (!$order) {
+        Log::error("ORDER NOT FOUND", ['order_id' => $orderId]);
+        return response()->json(['message' => 'Order not found'], 404);
+    }
+
+    // Status berhasil
+    if ($request->transaction_status === 'capture' || $request->transaction_status === 'settlement') {
+        $order->update([
+            'status' => 'paid'
+        ]);
+
+        Log::info("ORDER UPDATED TO PAID", ['order_id' => $orderId]);
+    }
+
+    return response()->json(['message' => 'success'], 200);
+}
+
     public function history()
     {
         $order = Order::where('user_id', Auth::id())
