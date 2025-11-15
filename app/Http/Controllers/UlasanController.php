@@ -17,7 +17,7 @@ class UlasanController extends Controller
                         ->with('wisata', 'ulasan')
                         ->get();
 
-        return view('customer.riwayat', compact('orders'));
+        return view('customer.ulasan', compact('orders'));
     }
     public function create($wisataId, $orderId)
     {
@@ -66,7 +66,7 @@ class UlasanController extends Controller
             'komentar' => $request->komentar,
         ]);
 
-        return redirect()->route('customer.riwayat', $request->wisata_id)
+        return redirect()->route('customer.ulasan', $request->wisata_id)
                          ->with('success', 'Ulasan berhasil ditambahkan.');
     }
 }
