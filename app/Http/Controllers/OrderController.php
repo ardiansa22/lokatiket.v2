@@ -17,57 +17,51 @@ class OrderController extends Controller
 
 
     public function checkout(Request $request)
-{
-    
-    $request->validate([
-        'user_id' => 'required',
-        'wisata_id' => 'required',
-        'quantity' => 'required|numeric',
-        'visit_date' => 'required',
-        'total_price' => 'required',
-    ]);
+    {
+        $request->validate([
+            'user_id' => 'required',
+            'wisata_id' => 'required',
+            'quantity' => 'required|numeric',
+            'visit_date' => 'required',
+            'total_price' => 'required',
+        ]);
+        $request->request->add(['status' => 'unpaid']);
+        $order = Order::create($request->all());
 
-    // Convert numeric fields to integer
-    $request->merge([
-        'quantity' => (int) $request->quantity,
-        'total_price' => (int) $request->total_price,
-        'status' => 'unpaid'
-    ]);
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = config('midtrans.server_key');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+        $prefix = 'ORD-'; // Definisikan prefix yang Anda inginkan
+$midtrans_order_id = $prefix . $order->id;
 
-    $order = Order::create($request->all());
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => $midtrans_order_id,
+                'gross_amount' => $order->total_price,
+            ),
+            'customer_details' => array(
+                'first_name' => $order->user->name,
+                'email' => Auth::user()->email,
+            ),
+            'item_details' => array(
+                array(
+                    'id' => $order->wisata_id,
+                    'name' => $order->wisata->name,
+                    'quantity' => $order->quantity,
+                    'price' => $order->wisata->price,
+                )
+            ),
+        );
+        
 
-    // Midtrans setup
-    \Midtrans\Config::$serverKey = config('midtrans.server_key');
-    \Midtrans\Config::$isProduction = false;
-    \Midtrans\Config::$isSanitized = true;
-    \Midtrans\Config::$is3ds = true;
-
-    // Order ID
-    $midtrans_order_id = 'ORD-' . $order->id;
-
-    $params = [
-        'transaction_details' => [
-            'order_id' => $midtrans_order_id,
-            'gross_amount' => (int) $order->total_price,  // FIX
-        ],
-        'customer_details' => [
-            'first_name' => $order->user->name,
-            'email' => Auth::user()->email,
-        ],
-        'item_details' => [
-            [
-                'id' => (int) $order->wisata_id,
-                'name' => $order->wisata->name,
-                'quantity' => (int) $order->quantity,  // FIX
-                'price' => (int) $order->wisata->price, // FIX
-            ]
-        ],
-    ];
-
-    $snapToken = \Midtrans\Snap::getSnapToken($params);
-
-    return view('customer.order_summary', compact('snapToken', 'order'));
-}
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+        return view('customer.order_summary', compact('snapToken','order'));
+    }
 
     // public function callback(Request $request)
     // {
@@ -100,96 +94,28 @@ class OrderController extends Controller
     //         }
     //     }
     // }
-//     public function callback(Request $request)
-// {
-//     Log::info("MIDTRANS CALLBACK", $request->all());
-
-//     $serverKey = config('midtrans.server_key');
-
-//     // Validasi signature sesuai Midtrans
-//     $expectedSignature = hash(
-//         'sha512',
-//         $request->order_id .
-//         $request->status_code .
-//         $request->gross_amount .   // string format "15000.00"
-//         $serverKey
-//     );
-
-//     if ($expectedSignature !== $request->signature_key) {
-//         Log::error("MIDTRANS INVALID SIGNATURE");
-//         return response()->json(['message' => 'Invalid signature'], 403);
-//     }
-
-//     // Ambil angka ID dari ORD-208
-//     $orderId = str_replace('ORD-', '', $request->order_id);
-//     $order = Order::find($orderId);
-
-//     if (!$order) {
-//         Log::error("ORDER NOT FOUND", ['order_id' => $orderId]);
-//         return response()->json(['message' => 'Order not found'], 404);
-//     }
-
-//     // Status berhasil
-//     if ($request->transaction_status === 'capture' || $request->transaction_status === 'settlement') {
-//         $order->update([
-//             'status' => 'paid'
-//         ]);
-
-//         Log::info("ORDER UPDATED TO PAID", ['order_id' => $orderId]);
-//     }
-
-//     return response()->json(['message' => 'success'], 200);
-// }
-public function callback(Request $request)
+    public function callback(Request $request)
 {
-    $rawJson = $request->getContent();
-
-    // Jika body callback kosong (Midtrans retry/heartbeat)
-    if (empty($rawJson)) {
-        Log::info("MIDTRANS EMPTY CALLBACK", []);
-        return response()->json(['status' => 'ok'], 200);
-    }
-
-    // Decode JSON
-    $raw = json_decode($rawJson, true);
-
-    // Jika JSON invalid
-    if (!is_array($raw)) {
-        Log::error("MIDTRANS INVALID JSON", ['raw' => $rawJson]);
-        return response()->json(['message' => 'Invalid JSON'], 400);
-    }
-
-    Log::info("MIDTRANS RAW CALLBACK", ['raw' => $rawJson]);
-    Log::info("MIDTRANS PARSED CALLBACK", ['parsed' => $raw]);
+    Log::info("MIDTRANS CALLBACK", $request->all());
 
     $serverKey = config('midtrans.server_key');
 
-    // Safety: cek key wajib ada
-    if (!isset($raw['order_id'], $raw['status_code'], $raw['gross_amount'], $raw['signature_key'])) {
-        Log::error("MIDTRANS MISSING KEYS", ['parsed' => $raw]);
-        return response()->json(['message' => 'Invalid payload'], 400);
-    }
-
-    // Hitung signature
+    // Validasi signature sesuai Midtrans
     $expectedSignature = hash(
         'sha512',
-        $raw['order_id'] .
-        $raw['status_code'] .
-        $raw['gross_amount'] .
+        $request->order_id .
+        $request->status_code .
+        $request->gross_amount .   // string format "15000.00"
         $serverKey
     );
 
-    // Cek signature
-    if ($expectedSignature !== $raw['signature_key']) {
-        Log::error("MIDTRANS INVALID SIGNATURE", [
-            'expected' => $expectedSignature,
-            'received' => $raw['signature_key']
-        ]);
+    if ($expectedSignature !== $request->signature_key) {
+        Log::error("MIDTRANS INVALID SIGNATURE");
         return response()->json(['message' => 'Invalid signature'], 403);
     }
 
-    // Ambil ID order di database
-    $orderId = str_replace('ORD-', '', $raw['order_id']);
+    // Ambil angka ID dari ORD-208
+    $orderId = str_replace('ORD-', '', $request->order_id);
     $order = Order::find($orderId);
 
     if (!$order) {
@@ -197,21 +123,17 @@ public function callback(Request $request)
         return response()->json(['message' => 'Order not found'], 404);
     }
 
-    // Update status payment
-    if (in_array($raw['transaction_status'], ['capture','settlement'])) {
+    // Status berhasil
+    if ($request->transaction_status === 'capture' || $request->transaction_status === 'settlement') {
         $order->update([
             'status' => 'paid'
         ]);
 
-        Log::info("ORDER UPDATED TO PAID", [
-            'order_id' => $orderId
-        ]);
+        Log::info("ORDER UPDATED TO PAID", ['order_id' => $orderId]);
     }
 
     return response()->json(['message' => 'success'], 200);
 }
-
-
 
     public function history()
     {
