@@ -17,51 +17,57 @@ class OrderController extends Controller
 
 
     public function checkout(Request $request)
-    {
-        $request->validate([
-            'user_id' => 'required',
-            'wisata_id' => 'required',
-            'quantity' => 'required|numeric',
-            'visit_date' => 'required',
-            'total_price' => 'required',
-        ]);
-        $request->request->add(['status' => 'unpaid']);
-        $order = Order::create($request->all());
+{
+    dd($request->all());
+    $request->validate([
+        'user_id' => 'required',
+        'wisata_id' => 'required',
+        'quantity' => 'required|numeric',
+        'visit_date' => 'required',
+        'total_price' => 'required',
+    ]);
 
-        // Set your Merchant Server Key
-        \Midtrans\Config::$serverKey = config('midtrans.server_key');
-        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-        \Midtrans\Config::$isProduction = false;
-        // Set sanitization on (default)
-        \Midtrans\Config::$isSanitized = true;
-        // Set 3DS transaction for credit card to true
-        \Midtrans\Config::$is3ds = true;
-        $prefix = 'ORD-'; // Definisikan prefix yang Anda inginkan
-$midtrans_order_id = $prefix . $order->id;
+    // Convert numeric fields to integer
+    $request->merge([
+        'quantity' => (int) $request->quantity,
+        'total_price' => (int) $request->total_price,
+        'status' => 'unpaid'
+    ]);
 
-        $params = array(
-            'transaction_details' => array(
-                'order_id' => $midtrans_order_id,
-                'gross_amount' => $order->total_price,
-            ),
-            'customer_details' => array(
-                'first_name' => $order->user->name,
-                'email' => Auth::user()->email,
-            ),
-            'item_details' => array(
-                array(
-                    'id' => $order->wisata_id,
-                    'name' => $order->wisata->name,
-                    'quantity' => $order->quantity,
-                    'price' => $order->wisata->price,
-                )
-            ),
-        );
-        
+    $order = Order::create($request->all());
 
-        $snapToken = \Midtrans\Snap::getSnapToken($params);
-        return view('customer.order_summary', compact('snapToken','order'));
-    }
+    // Midtrans setup
+    \Midtrans\Config::$serverKey = config('midtrans.server_key');
+    \Midtrans\Config::$isProduction = false;
+    \Midtrans\Config::$isSanitized = true;
+    \Midtrans\Config::$is3ds = true;
+
+    // Order ID
+    $midtrans_order_id = 'ORD-' . $order->id;
+
+    $params = [
+        'transaction_details' => [
+            'order_id' => $midtrans_order_id,
+            'gross_amount' => (int) $order->total_price,  // FIX
+        ],
+        'customer_details' => [
+            'first_name' => $order->user->name,
+            'email' => Auth::user()->email,
+        ],
+        'item_details' => [
+            [
+                'id' => (int) $order->wisata_id,
+                'name' => $order->wisata->name,
+                'quantity' => (int) $order->quantity,  // FIX
+                'price' => (int) $order->wisata->price, // FIX
+            ]
+        ],
+    ];
+
+    $snapToken = \Midtrans\Snap::getSnapToken($params);
+
+    return view('customer.order_summary', compact('snapToken', 'order'));
+}
 
     // public function callback(Request $request)
     // {
