@@ -18,7 +18,7 @@ class OrderController extends Controller
 
     public function checkout(Request $request)
 {
-    dd($request->all());
+    
     $request->validate([
         'user_id' => 'required',
         'wisata_id' => 'required',
