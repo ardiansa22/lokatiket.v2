@@ -136,16 +136,35 @@ $midtrans_order_id = $prefix . $order->id;
 // }
 public function callback(Request $request)
 {
-    // RAW JSON langsung dari Midtrans
     $rawJson = $request->getContent();
+
+    // Jika body callback kosong (Midtrans retry/heartbeat)
+    if (empty($rawJson)) {
+        Log::info("MIDTRANS EMPTY CALLBACK", []);
+        return response()->json(['status' => 'ok'], 200);
+    }
+
+    // Decode JSON
     $raw = json_decode($rawJson, true);
 
+    // Jika JSON invalid
+    if (!is_array($raw)) {
+        Log::error("MIDTRANS INVALID JSON", ['raw' => $rawJson]);
+        return response()->json(['message' => 'Invalid JSON'], 400);
+    }
+
     Log::info("MIDTRANS RAW CALLBACK", ['raw' => $rawJson]);
-    Log::info("MIDTRANS PARSED CALLBACK", $raw);
+    Log::info("MIDTRANS PARSED CALLBACK", ['parsed' => $raw]);
 
     $serverKey = config('midtrans.server_key');
 
-    // Hitung signature berdasarkan RAW data, bukan parsed data
+    // Safety: cek key wajib ada
+    if (!isset($raw['order_id'], $raw['status_code'], $raw['gross_amount'], $raw['signature_key'])) {
+        Log::error("MIDTRANS MISSING KEYS", ['parsed' => $raw]);
+        return response()->json(['message' => 'Invalid payload'], 400);
+    }
+
+    // Hitung signature
     $expectedSignature = hash(
         'sha512',
         $raw['order_id'] .
@@ -154,6 +173,7 @@ public function callback(Request $request)
         $serverKey
     );
 
+    // Cek signature
     if ($expectedSignature !== $raw['signature_key']) {
         Log::error("MIDTRANS INVALID SIGNATURE", [
             'expected' => $expectedSignature,
@@ -162,7 +182,7 @@ public function callback(Request $request)
         return response()->json(['message' => 'Invalid signature'], 403);
     }
 
-    // Ambil angka ID dari ORD-xxx
+    // Ambil ID order di database
     $orderId = str_replace('ORD-', '', $raw['order_id']);
     $order = Order::find($orderId);
 
@@ -171,19 +191,20 @@ public function callback(Request $request)
         return response()->json(['message' => 'Order not found'], 404);
     }
 
-    // Update status jika payment sukses
-    if ($raw['transaction_status'] === 'capture' ||
-        $raw['transaction_status'] === 'settlement') {
-
+    // Update status payment
+    if (in_array($raw['transaction_status'], ['capture','settlement'])) {
         $order->update([
             'status' => 'paid'
         ]);
 
-        Log::info("ORDER UPDATED TO PAID", ['order_id' => $orderId]);
+        Log::info("ORDER UPDATED TO PAID", [
+            'order_id' => $orderId
+        ]);
     }
 
     return response()->json(['message' => 'success'], 200);
 }
+
 
 
     public function history()
