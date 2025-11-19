@@ -20,11 +20,17 @@ class CustomerController extends Controller
     //      $this->middleware('permission:customer-any', ['any']);
     // }
     public function index()
-    {   $wisatas = Wisata::all();
-        $userWishlist = auth()->check() ? auth()->user()->wishlist->pluck('id')->toArray() : [];
-        return view('customer.index', compact('wisatas'));
-       
-    }
+{
+    // Mengambil semua data wisata dan mengurutkannya dari yang paling baru (DESC berdasarkan created_at)
+    $wisatas = Wisata::latest()->get();
+    
+    // Baris ini tidak digunakan di view 'customer.index' saat ini,
+    // tetapi jika Anda berniat menggunakannya, biarkan saja.
+    $userWishlist = auth()->check() ? auth()->user()->wishlist->pluck('id')->toArray() : [];
+    
+    // Pastikan Anda mem-passing variabel $wisatas ke view
+    return view('customer.index', compact('wisatas', 'userWishlist'));
+}
     public function search(Request $request)
     {
         $query = $request->input('query');
@@ -32,9 +38,23 @@ class CustomerController extends Controller
         return response()->json($results);
     }
     public function tampilkan(Wisata $wisata)
-    {
-        return view('customer.show', compact('wisata'));
+{
+    // 1. Inisialisasi variabel $userWishlist
+    $userWishlist = [];
+
+    // 2. Cek apakah pengguna sedang login
+    if (Auth::check()) {
+        // 3. Ambil semua ID wisata yang telah ditambahkan ke wishlist oleh user ini.
+        // Asumsi: Anda memiliki relasi 'wishlists' pada model User.
+        // Jika Anda menggunakan Model Wishlist langsung, sesuaikan query ini.
+        
+        // PLUCK akan mengambil hanya kolom 'wisata_id'
+        $userWishlist = Auth::user()->wishlist()->pluck('wisata_id')->toArray();
     }
+    
+    // 4. Kirim kedua variabel ke view
+    return view('customer.show', compact('wisata', 'userWishlist'));
+}
     public function explore()
     {
        $wisatas = Wisata::with('ulasans')->get();

@@ -94,28 +94,76 @@ $midtrans_order_id = $prefix . $order->id;
     //         }
     //     }
     // }
-    public function callback(Request $request)
+//     public function callback(Request $request)
+// {
+//     Log::info("MIDTRANS CALLBACK", $request->all());
+
+//     $serverKey = config('midtrans.server_key');
+
+//     // Validasi signature sesuai Midtrans
+//     $expectedSignature = hash(
+//         'sha512',
+//         $request->order_id .
+//         $request->status_code .
+//         $request->gross_amount .   // string format "15000.00"
+//         $serverKey
+//     );
+
+//     if ($expectedSignature !== $request->signature_key) {
+//         Log::error("MIDTRANS INVALID SIGNATURE");
+//         return response()->json(['message' => 'Invalid signature'], 403);
+//     }
+
+//     // Ambil angka ID dari ORD-208
+//     $orderId = str_replace('ORD-', '', $request->order_id);
+//     $order = Order::find($orderId);
+
+//     if (!$order) {
+//         Log::error("ORDER NOT FOUND", ['order_id' => $orderId]);
+//         return response()->json(['message' => 'Order not found'], 404);
+//     }
+
+//     // Status berhasil
+//     if ($request->transaction_status === 'capture' || $request->transaction_status === 'settlement') {
+//         $order->update([
+//             'status' => 'paid'
+//         ]);
+
+//         Log::info("ORDER UPDATED TO PAID", ['order_id' => $orderId]);
+//     }
+
+//     return response()->json(['message' => 'success'], 200);
+// }
+public function callback(Request $request)
 {
-    Log::info("MIDTRANS CALLBACK", $request->all());
+    // RAW JSON langsung dari Midtrans
+    $rawJson = $request->getContent();
+    $raw = json_decode($rawJson, true);
+
+    Log::info("MIDTRANS RAW CALLBACK", ['raw' => $rawJson]);
+    Log::info("MIDTRANS PARSED CALLBACK", $raw);
 
     $serverKey = config('midtrans.server_key');
 
-    // Validasi signature sesuai Midtrans
+    // Hitung signature berdasarkan RAW data, bukan parsed data
     $expectedSignature = hash(
         'sha512',
-        $request->order_id .
-        $request->status_code .
-        $request->gross_amount .   // string format "15000.00"
+        $raw['order_id'] .
+        $raw['status_code'] .
+        $raw['gross_amount'] .
         $serverKey
     );
 
-    if ($expectedSignature !== $request->signature_key) {
-        Log::error("MIDTRANS INVALID SIGNATURE");
+    if ($expectedSignature !== $raw['signature_key']) {
+        Log::error("MIDTRANS INVALID SIGNATURE", [
+            'expected' => $expectedSignature,
+            'received' => $raw['signature_key']
+        ]);
         return response()->json(['message' => 'Invalid signature'], 403);
     }
 
-    // Ambil angka ID dari ORD-208
-    $orderId = str_replace('ORD-', '', $request->order_id);
+    // Ambil angka ID dari ORD-xxx
+    $orderId = str_replace('ORD-', '', $raw['order_id']);
     $order = Order::find($orderId);
 
     if (!$order) {
@@ -123,8 +171,10 @@ $midtrans_order_id = $prefix . $order->id;
         return response()->json(['message' => 'Order not found'], 404);
     }
 
-    // Status berhasil
-    if ($request->transaction_status === 'capture' || $request->transaction_status === 'settlement') {
+    // Update status jika payment sukses
+    if ($raw['transaction_status'] === 'capture' ||
+        $raw['transaction_status'] === 'settlement') {
+
         $order->update([
             'status' => 'paid'
         ]);
@@ -134,6 +184,7 @@ $midtrans_order_id = $prefix . $order->id;
 
     return response()->json(['message' => 'success'], 200);
 }
+
 
     public function history()
     {

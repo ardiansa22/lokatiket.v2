@@ -8,6 +8,7 @@
         border-radius: 15px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         overflow: hidden;
+        position: relative; /* Untuk positioning tombol wishlist */
     }
 
     /* Gambar Slider */
@@ -16,6 +17,7 @@
         height: 100%;
         overflow: hidden;
         border-radius: 15px 0 0 15px; /* Pojok membulat di sisi kiri */
+        position: relative;
     }
 
     .image-slider img {
@@ -123,6 +125,47 @@
         border: 1px solid #ced4da;
         border-radius: 0.25rem;
     }
+
+    /* Styling tombol wishlist */
+    .wishlist-btn {
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        z-index: 10;
+        transition: all 0.3s ease;
+        border: none;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+
+    .wishlist-btn:hover {
+        background-color: rgba(255, 255, 255, 1);
+        transform: scale(1.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .wishlist-btn i {
+        font-size: 1.3rem;
+        transition: color 0.3s ease;
+    }
+
+    .wishlist-btn .fas.fa-heart {
+        color: #dc3545; /* Merah untuk wishlist aktif */
+    }
+
+    .wishlist-btn .far.fa-heart {
+        color: #6c757d; /* Abu-abu untuk wishlist non-aktif */
+    }
+
+    .wishlist-btn:hover .far.fa-heart {
+        color: #dc3545; /* Berubah merah saat hover */
+    }
     
     /* Responsivitas untuk mobile */
     @media (max-width: 991.98px) {
@@ -147,6 +190,17 @@
         .facilities-list li {
             width: 100%; /* 1 kolom di mobile */
         }
+
+        .wishlist-btn {
+            width: 40px;
+            height: 40px;
+            top: 10px;
+            right: 10px;
+        }
+
+        .wishlist-btn i {
+            font-size: 1.2rem;
+        }
     }
     
     @media (min-width: 992px) {
@@ -161,6 +215,27 @@
 @section('content')
 <div class="container py-4">
     <div class="card detail-card">
+        {{-- Tombol Wishlist --}}
+        @auth
+        <form action="{{ in_array($wisata->id, $userWishlist ?? []) 
+                ? route('customer.wishlist.destroy', $wisata->id) 
+                : route('customer.wishlist.store', $wisata->id) }}" 
+            method="POST" 
+            class="position-absolute top-0 end-0 m-3">
+            @csrf
+            @if(in_array($wisata->id, $userWishlist ?? []))
+                @method('DELETE')
+                <button type="submit" class="btn wishlist-btn" title="Hapus dari Wishlist">
+                    <i class="fas fa-heart"></i> {{-- Ikon terisi --}}
+                </button>
+            @else
+                <button type="submit" class="btn wishlist-btn" title="Tambahkan ke Wishlist">
+                    <i class="far fa-heart"></i> {{-- Ikon outline --}}
+                </button>
+            @endif
+        </form>
+        @endauth
+
         <div class="row g-0 detail-item-row">
             {{-- Kolom Kiri: Gambar Slider --}}
             <div class="col-lg-5 col-md-12">
