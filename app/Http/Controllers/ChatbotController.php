@@ -21,6 +21,7 @@ class ChatbotController extends Controller
             'session_id' => $request->input('session_id') ?? session()->getId(),
         ]);
 
+        
         return $response->json();
     }
 }
