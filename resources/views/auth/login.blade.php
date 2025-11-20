@@ -154,8 +154,7 @@
                     <a href="{{ route('register') }}">Tidak punya akun ?</a><br>
                   </div>
                   <div class="mitra-link">
-                    <a href="https://wa.me/<6285523873288>
-">Bergabung Menjadi Mitra</a>
+                    <a href="https://wa.me/6289663852991">Bergabung Menjadi Mitra</a>
                   </div>
                 </div>
               </div>
